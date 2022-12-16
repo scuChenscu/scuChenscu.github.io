@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="小程序多模块数据统计解决方案, 杂记">
+    <meta name="keywords" content="Java单例设计模式（懒汉式：DoubleCheck+volatile）, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>小程序多模块数据统计解决方案 | 杂记</title>
+    <title>Java单例设计模式（懒汉式：DoubleCheck+volatile） | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -425,12 +425,12 @@ mjx-container[display="true"] + br {
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">小程序多模块数据统计解决方案</h1>
+                    <h1 class="description center-align post-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</h1>
                 </div>
             </div>
         </div>
@@ -546,12 +546,12 @@ mjx-container[display="true"] + br {
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                                <span class="chip bg-color">微信小程序</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/JavaScript/">
-                                <span class="chip bg-color">JavaScript</span>
+                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                <span class="chip bg-color">设计模式</span>
                             </a>
                         
                     </div>
@@ -579,7 +579,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-03
+                    2020-04-21
                 </div>
                 
 
@@ -603,131 +603,90 @@ mjx-container[display="true"] + br {
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="小程序多模块数据统计解决方案"><a href="#小程序多模块数据统计解决方案" class="headerlink" title="小程序多模块数据统计解决方案"></a>小程序多模块数据统计解决方案</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>微信小程序端新员工入职信息采集，主要有以下几点：</p>
+                <h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>即某个类在整个系统只能有一个实例对象可被获取和使用的代码模式；例如代表JVM运行环境的Runtime类</p>
+<h2 id="单例模式要素"><a href="#单例模式要素" class="headerlink" title="单例模式要素"></a>单例模式要素</h2><ol>
+<li>私有静态引用指向自己的实例</li>
+<li>私有的构造方法</li>
+<li>返回实例对象的公有静态方法</li>
+</ol>
+<p>饿汉式单例模式：直接创建对象，不存在线程安全问题<br>懒汉式单例模式：延迟创建对象，需要时再创建，节省空间</p>
+<h2 id="懒汉式：DoubleCheck-volatile"><a href="#懒汉式：DoubleCheck-volatile" class="headerlink" title="懒汉式：DoubleCheck+volatile"></a>懒汉式：DoubleCheck+volatile</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
+	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
+	<span class="token comment">// 2.私有的构造方法</span>
+	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
+	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1.调用Singleton的getInstance静态方法</span>
+<span class="token class-name">Singleton</span> singleton <span class="token operator">=</span> <span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 2.创建实例对象</span>
+singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 3.返回实例对象</span>
+<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+<span class="token comment">// 此后，每次调用getInstance方法都直接返回该实例对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>类加载时，初始化静态成员变量singleton1<br>调用getInstance静态方法，在栈中创建引用变量singleton2<br>同时，第一次getInstance方法会执行new Singleton()，在堆中创建一个实例对象singleton3</p>
+<p>三者关系<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170033468.png" alt="变量关系"><br>堆区中只会存在一个singleton实例对象，此后每次调用getInstance方法实际上都是返回该对象。</p>
+<h2 id="DoubleCheck的作用"><a href="#DoubleCheck的作用" class="headerlink" title="DoubleCheck的作用"></a>DoubleCheck的作用</h2><p>第一次：判断singleton是否已经实例化，如果是，直接返回，否则，执行实例化。<br>第二次：对Singleton.class加锁后，再次判断singleton是否实例化，因为在并发场景下，该线程在判断singleton==null之后和加锁之前，其他线程已经实例化，所以需要再次判断。</p>
+<h2 id="Java对象实例化"><a href="#Java对象实例化" class="headerlink" title="Java对象实例化"></a>Java对象实例化</h2><ol>
+<li>确认类元信息是否存在；即在JVM内存的元数据区检查需要创建的类元信息是否存在，若不存在，则在双亲委派模式下查找对应的.class文件。如果没有找到文件，抛出ClassNotFoundException异常，如果找到，则进行类加载，并生成对应的Class类对象。</li>
+<li>分配对象内存；计算对象占用空间大小，如果实例成员变量是引用变量，仅需要分配4个字节的引用变量空间，接着在堆中划分一块内存给新对象。</li>
+<li>设定默认值；即为成员变量设定各种形式的零值。</li>
+<li>设置对象头；设置新对象的哈希码、GC信息、锁信息、对象所属的类元信息等。</li>
+<li><p>执行init方法；初始化成员变量，执行实例化代码块，调用类的构造方法，并把堆内对象的首地址赋值给引用变量。</p>
+<h2 id="volatile的作用"><a href="#volatile的作用" class="headerlink" title="volatile的作用"></a>volatile的作用</h2></li>
+</ol>
+<p>volatile解决多线程共享变量的可见性问题。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
+	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
+	<span class="token comment">// 2.私有的构造方法</span>
+	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
+	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+				<span class="token punctuation">}</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果不使用volatile关键字，使用方在调用getInstance方法时，有可能会得到未初始化完成的对象。<br>因为对java编译器而言，初始化singleton实例和将对象地址写入singleton字段非原子操作，且两个阶段的执行顺序是未定义的。</p>
+<p>  （1）初始化singleton实例<br> （2）静态成员变量singleton指向该地址，即将堆地址赋值给singleton字段</p>
+<p> 假设某线程执行new singleton()时，先执行（2），此时，另一个线程调用getInstance方法，singleton!=null，会直接返回一个不正确的singleton单例对象，因为此时（1）还没有执行成功，即对象里面的成员变量没有完成赋值，还是默认值。<br> volatile关键字修饰目标属性，这样singleton限制了编译器对它的读写操作进行指令重排，确定对象实例化后才返回引用。</p>
+<h2 id="字节码分析"><a href="#字节码分析" class="headerlink" title="字节码分析"></a>字节码分析</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/* new determines the size in bytes of instances of the given class and allocates memory 
+the new instance from the garbage collected heap. The fields of the instance are set to the
+initial value 0, or null. Next, a reference to the new object is pushed onto the operand
+stack 
+*/</span>
+<span class="token constant">NEW</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span>
+<span class="token comment">/* This pops the top single-word value off the operand stack, and then pushes that value 
+twice
+*/</span>
+<span class="token constant">DUP</span>
+<span class="token comment">// The main use of invokespecial is to invoke an object's instance initialization method</span>
+<span class="token constant">INVOKESPECIAL</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token generics"><span class="token punctuation">&lt;</span>init<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
+<span class="token comment">// Pops objectref off the stack and stores it in local variable</span>
+<span class="token constant">ASTORE</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
-<li>项目是从0到1，在开发过程面临需求变动、方案的合理性考量，信息模版由前端来规定，将整个userInfo对象转化为字符串形式上上传到后端。</li>
-<li>在最初的设计中，将用户信息数据划分为多个模块，每个模块由一个page负责管理，最后在主页面进行所有模块数据完整度进行统计，完整度达到100%才能提交信息</li>
-<li>对于用户角色不同，对整个信息模板的结构有所不同，给数据统计带来了不小的挑战</li>
+<li>为对象分配内存空间，初始化成员变量值为0或者NULL；将对象堆首地址赋值给引用变量，压栈；</li>
+<li>复制栈顶地址，即先pop一次，然后再push两次，对于此步操作的意义，网上的解释是：一般实例化一个对象后紧接着会使用它，将引用变量存回局部变量表的同时保留一份在栈上；</li>
+<li>调用对象的实例初始化方法，即为对象的成员变量赋值；</li>
+<li>将对象引用从栈中取出，存入局部变量表。</li>
 </ol>
-<h2 id="面临主要问题"><a href="#面临主要问题" class="headerlink" title="面临主要问题"></a>面临主要问题</h2><ol>
-<li>前后端模板合并</li>
-<li>根据不同的用户角色渲染不同的模板结构</li>
-<li>数据完整度的统计</li>
-</ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h4 id="相关技术点"><a href="#相关技术点" class="headerlink" title="相关技术点"></a>相关技术点</h4><ul>
-<li>小程序生命周期，onload</li>
-<li>小程序data</li>
-<li>store机制</li>
-<li>js的import</li>
-<li>深浅拷贝</li>
-<li>对象遍历</li>
-<li>小程序的page</li>
-</ul>
-<h4 id="微信小程序页面page实例的生命周期"><a href="#微信小程序页面page实例的生命周期" class="headerlink" title="微信小程序页面page实例的生命周期"></a>微信小程序<strong>页面page实例</strong>的生命周期</h4><p>我们先来讨论一波微信小程序页面page的生命周期，此处要注意区分小程序的生命周期和page实例的生命周期</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254324.png" alt="page生命周期"></p>
-<p>从上图我们可以看出，page实例执行顺序是：</p>
-<p>onLoad -&gt; onShow -&gt; onReady</p>
-<p>然后之后的page显示与隐藏（切换page，切换到后台）执行onShow函数和onHide函数，最后page销毁，执行onUnload函数</p>
-<p>现在，提出两个问题：</p>
-<ol>
-<li><p>三个函数是严格地串行执行吗，即是onLoad函数执行完毕再去执行onShow函数吗，显然不是。（JS的异步编程）</p>
-</li>
-<li><p>网上说onLoad函数只执行一次，具体是什么意思呢？</p>
-</li>
-</ol>
-<p>对于第一个问题，我只能说，懂得都懂，不懂的也不方便解释太多。</p>
-<p>对于第二个问题，严格上讲，在一个page实例的整个生命周期，onLoad函数只会执行一次。忽略前半句话，很容易让同学们产生误解。</p>
-<p>通过上面这句话，我们可以理解到，一个page实例从最开始的onLoad走到最后的onUnload，一个完整生命周期走完，页面从创建走到销毁。</p>
-<p>但是，如果我再次打开这个页面呢？显然，onLoad函数会再次执行，但是，这个page实例已经不再是之前的page实例了，他是上一个page实例销毁之后，重新创建的page实例，他们几乎一样，但是却是两个实例。</p>
-<p>那一个page实例什么时候会执行onUnload函数呢？</p>
-<p>这个时候，就不得不谈，微信小程序的页面栈，以及页面路由方式，当然，我才懒得谈呢。</p>
-<p>我们只需要知道一点：小程序的页面栈是有深度限制的，也就是， 当小程序的页面堆栈满了之后，就无法打开新的页面，只能进行回退，或者调用其他的某些路由进行页面出栈、清栈，或者直接把小程序关了，万事大吉！</p>
-<p>这个时候，聪明的同学们已经知道了，出栈、清栈，不就是调用page的onUnload函数嘛，你瞧我这小脑瓜，真聪明！</p>
-<p>经过本人的严格测试，小程序页面栈最多支持10个page，与官方说法一致</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254456.png" alt="小程序页面栈"></p>
-<p>在打开10个page后，再尝试通过wx.navigateTo()函数路由到新的page，小程序没有反应。</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254639.png" alt="页面路由和生命周期函数"></p>
-<p>针对小程序官方网站的页面路由规则，我进行了实验验证，得出结论：</p>
-<ol>
-<li><p>小程序页面栈深度最大值为10，此时navigateTo会失效；navigateTo失效很容易理解，因为他只是onHide当前页面，并没有销毁页面，所以下一个页面无法onLoad是理所当然的；redirectTo有效，因为redirectTo销毁了当前页面，onLoad新的页面。</p>
-</li>
-<li><p>如果一个页面已经在页面栈中，我们再navigateTo到该页面，会堆栈吗？答案是会的，有图有真相。</p>
-</li>
-</ol>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254723.png" alt="页面堆栈"></p>
-<p>好了，谈完page实例的生命周期。</p>
-<p>谈上面的内容，主要想说明什么呢？</p>
-<p>只是想说明一点：不要妄图利用onLoad函数来控制对某个引用对象的一次性操作。（那为什么要这么做呢，因为项目的业务场景，让我想这么干，我们将之称为：奇技淫巧）</p>
-<p>其实还想谈一谈，小程序的双线程、MVVM模型，可惜，我不会，就不谈了。</p>
-<p>下面，谈一谈，小程序page中的js文件的变量</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// page.js</span>
-<span class="token comment">// 小程序规定app.json注册的page，只负责page的渲染</span>
-<span class="token comment">// 所以在小程序page的js文件中，Page函数外部声明对象实际上没什么意义</span>
-<span class="token comment">// 因为该变量即使export，别的页面也无法获取使用</span>
-<span class="token comment">// (除非保证声明变量的page先被加载，调用该变量的page后加载)</span>
-<span class="token comment">// 按我的理解，这是一种按需/执行上下文时加载，节省资源</span>
-<span class="token comment">// 毕竟我不是专业前端，我瞎说的</span>
-<span class="token keyword">const</span> object1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
-<span class="token comment">// Page(Object object) 注册小程序中的一个页面。</span>
-<span class="token comment">// 接受一个 Object 类型参数，</span>
-<span class="token comment">// 其指定页面的初始数据、生命周期回调、事件处理函数等。</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token literal-property property">object2</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">object3</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token comment">// 正确示例</span>
-<span class="token comment">// page1</span>
-<span class="token comment">// page1.js</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> object <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token comment">// page1.wxml</span>
-<span class="token operator">&lt;</span>navigator open<span class="token operator">-</span>type<span class="token operator">=</span><span class="token string">"navigateTo"</span> url<span class="token operator">=</span><span class="token string">"/pages/2/2"</span><span class="token operator">&gt;</span>跳转<span class="token operator">&lt;</span><span class="token operator">/</span>navigator<span class="token operator">&gt;</span>
-
-<span class="token comment">// page2.js</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> object <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../1/1'</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-   <span class="token function-variable function">onLoad</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token comment">// 正常执行</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token comment">// 错误示例</span>
-<span class="token comment">// page1</span>
-<span class="token comment">// page1.js</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> object <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../2/2'</span>
-<span class="token comment">// page1.wxml</span>
-<span class="token operator">&lt;</span>navigator open<span class="token operator">-</span>type<span class="token operator">=</span><span class="token string">"navigateTo"</span> url<span class="token operator">=</span><span class="token string">"/pages/2/2"</span><span class="token operator">&gt;</span>跳转<span class="token operator">&lt;</span><span class="token operator">/</span>navigator<span class="token operator">&gt;</span>
-
-<span class="token comment">// page2.js</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> object <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-   <span class="token function-variable function">onLoad</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span>
-    <span class="token comment">// 报错：Error: APP-SERVICE-Engine:Please do not register multiple Pages in pages/2/2.js</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>请问，在一个page的js文件中，object1，object2，object3区别在哪？</p>
-<p>显然，object1对象与page无关，它的作用域是整个js文件，它的生命周期与该js文件的生命周期一致，不管page如何onLoad，unLoad。</p>
-<p>object2，object3的作用域是page内，它们的生命周期与page的生命周期一致。</p>
-<p>object3在data对象中，小程序规定：数据只有在data中，才能进行数据绑定，用于页面渲染。</p>
-<p>而对于object1，object2，object3的修改：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">  <span class="token function">modifyData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    object1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment">// 直接修改，注意上文object1声明为const，此处只是举例</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>object2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// 通过this获取对象，直接修改</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token comment">// 通过setData操作修改</span>
-      object3
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>综上，如果不是非常特殊的业务场景，我们尽量不要在page的js文件内部、Page()函数外部声明变量</p>
-<ol>
-<li>如果是page需要的变量，在Page()函数内部，data对象外部声明该变量；</li>
-<li>如果是全局变量，额外新建js文件，export该变量；</li>
-</ol>
-<p>思想：按需加载、各司其职！</p>
-<p>还想讲一讲js文件export变量，但是懒得写了，就这样吧</p>
+<p>如果不使用volatile关键字，步骤1中的”将对象堆首地址赋值给引用变量“和步骤3中的“为对象的成员变量赋值”可能指令重排，无法保证返回正确的对象。</p>
 
                 
             </div>
@@ -754,7 +713,7 @@ mjx-container[display="true"] + br {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/">http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/</a>
+                    <a href="http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -792,12 +751,12 @@ mjx-container[display="true"] + br {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                                    <span class="chip bg-color">微信小程序</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/JavaScript/">
-                                    <span class="chip bg-color">JavaScript</span>
+                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                                    <span class="chip bg-color">设计模式</span>
                                 </a>
                             
                         </div>
@@ -971,24 +930,24 @@ mjx-container[display="true"] + br {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/08/17/ean-13-shang-pin-tiao-ma/">
+                <a href="/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="EAN-13商品条码">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="小程序多模块数据统计解决方案">
                         
-                        <span class="card-title">EAN-13商品条码</span>
+                        <span class="card-title">小程序多模块数据统计解决方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            无聊 + 好奇心，本文主要是关于我们日常生活中很常见的商品条形码的基础知识。
+                            这是之前实习的时候参与的微信小程序项目，主要是关于新员工入职信息采集模块。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-17
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-03
                         </span>
                         <span class="publish-author">
                             
@@ -998,8 +957,8 @@ mjx-container[display="true"] + br {
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A7%91%E6%99%AE/" class="post-category">
-                                    科普
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                    研发
                                 </a>
                             
                             
@@ -1009,8 +968,12 @@ mjx-container[display="true"] + br {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%95%86%E5%93%81%E6%9D%A1%E7%A0%81/">
-                        <span class="chip bg-color">商品条码</span>
+                    <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
+                        <span class="chip bg-color">微信小程序</span>
+                    </a>
+                    
+                    <a href="/tags/JavaScript/">
+                        <span class="chip bg-color">JavaScript</span>
                     </a>
                     
                 </div>
@@ -1021,7 +984,7 @@ mjx-container[display="true"] + br {
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
                 <a href="/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">
@@ -1059,6 +1022,7 @@ mjx-container[display="true"] + br {
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     

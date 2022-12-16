@@ -261,4 +261,33 @@
     
   </entry>
   
+  <entry>
+    <title>Java单例设计模式（懒汉式：DoubleCheck+volatile）</title>
+    <link href="http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/"/>
+    <id>http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/</id>
+    <published>2020-04-20T16:32:05.000Z</published>
+    <updated>2022-12-16T16:38:30.109Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;单例设计模式&quot;&gt;&lt;a href=&quot;#单例设计模式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="Java" scheme="http://example.com/tags/Java/"/>
+    
+    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
 </feed>

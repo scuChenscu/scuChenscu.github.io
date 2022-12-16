@@ -367,7 +367,7 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">9</a></span>
+    <span class="count"><a href="/">10</a></span>
     <span class="name">文章</span>
 </div>
 
@@ -381,7 +381,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">11</a></span>
+    <span class="count"><a href="/tags">13</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -397,7 +397,7 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">9</a></span>
+    <span class="count"><a href="/">10</a></span>
     <span class="name">文章</span>
 </div>
 
@@ -411,7 +411,7 @@
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">11</a></span>
+    <span class="count"><a href="/tags">13</a></span>
     <span class="name">标签</span>
 </div>
 
@@ -597,7 +597,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"技术","value":7},{"name":"README","value":1},{"name":"hexo","value":1},{"name":"研发","value":4},{"name":"科普","value":1},{"name":"算法","value":2}],
+                data: [{"name":"技术","value":8},{"name":"README","value":1},{"name":"hexo","value":1},{"name":"科普","value":1},{"name":"研发","value":5},{"name":"算法","value":2}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -621,7 +621,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["商品条码","README","hexo","kafka","AES","微信小程序","JavaScript","神经网络","高并发","redis"]
+                data: ["商品条码","Java","设计模式","README","hexo","kafka","AES","redis","源码","微信小程序"]
             }
         ],
         yAxis: [
@@ -810,6 +810,14 @@
             
             
             
+            
+            
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                <span class="chip center-align waves-effect waves-light chip-default">设计模式</span>
+            </a>
+            
+            
+            
             <a href="/tags/README/">
                 <span class="chip center-align waves-effect waves-light chip-default">README</span>
             </a>
@@ -834,6 +842,18 @@
             
             
             
+            <a href="/tags/redis/">
+                <span class="chip center-align waves-effect waves-light chip-default">redis</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                <span class="chip center-align waves-effect waves-light chip-default">源码</span>
+            </a>
+            
+            
+            
             <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
                 <span class="chip center-align waves-effect waves-light chip-default">微信小程序</span>
             </a>
@@ -850,18 +870,6 @@
             
             <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
                 <span class="chip center-align waves-effect waves-light chip-default">高并发</span>
-            </a>
-            
-            
-            
-            <a href="/tags/redis/">
-                <span class="chip center-align waves-effect waves-light chip-default">redis</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E6%BA%90%E7%A0%81/">
-                <span class="chip center-align waves-effect waves-light chip-default">源码</span>
             </a>
             
             
@@ -1208,6 +1216,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
