@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>杂记</title>
+  
+  <subtitle>让那暴风，柔和地吹。</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-12-16T04:21:00.797Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>肥肥大大只丶</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分布式消息系统-Kafka</title>
+    <link href="http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/"/>
+    <id>http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/</id>
+    <published>2022-12-16T04:12:34.000Z</published>
+    <updated>2022-12-16T04:21:00.797Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;分布式消息系统-Kafka&quot;&gt;&lt;a href=&quot;#分布式消息系统-Kafka&quot; class=&quot;headerlink&quot; title=&quot;分布式消息系统-Kafka&quot;&gt;&lt;/a&gt;分布式消息系统-Kafka&lt;/h2&gt;&lt;h4 id=&quot;Kafka简介&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="kafka" scheme="http://example.com/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2022/12/15/hello-world/"/>
+    <id>http://example.com/2022/12/15/hello-world/</id>
+    <published>2022-12-15T13:45:25.460Z</published>
+    <updated>2022-12-16T03:45:10.249Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="hexo" scheme="http://example.com/categories/hexo/"/>
+    
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>README</title>
+    <link href="http://example.com/2022/12/14/readme/"/>
+    <id>http://example.com/2022/12/14/readme/</id>
+    <published>2022-12-14T14:57:30.000Z</published>
+    <updated>2022-12-16T03:46:03.715Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;一直以来就很想搭建一个博客，在博客上分享自己的一些经历、思考或者是技术上的沉淀。&lt;/p&gt;
+&lt;p&gt;但是很懒，不想亲自从0开始搭建，又没有找到满意的模板，就搁置了。&lt;/p&gt;
+&lt;p&gt;今天在检索Generalizable Approximate</summary>
+        
+      
+    
+    
+    
+    <category term="README" scheme="http://example.com/categories/README/"/>
+    
+    
+    <category term="README" scheme="http://example.com/tags/README/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于Redis的POI搜索</title>
+    <link href="http://example.com/2022/09/16/ji-yu-redis-de-poi-sou-suo/"/>
+    <id>http://example.com/2022/09/16/ji-yu-redis-de-poi-sou-suo/</id>
+    <published>2022-09-16T06:59:46.000Z</published>
+    <updated>2022-12-16T07:12:52.660Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;基于Redis的POI搜索&quot;&gt;&lt;a href=&quot;#基于Redis的POI搜索&quot; class=&quot;headerlink&quot; title=&quot;基于Redis的POI搜索&quot;&gt;&lt;/a&gt;基于Redis的POI搜索&lt;/h1&gt;&lt;h2 id=&quot;Redis&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="redis" scheme="http://example.com/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>西安防疫一码通平台的故障分析及优化设计报告</title>
+    <link href="http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/"/>
+    <id>http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/</id>
+    <published>2021-12-30T06:18:32.000Z</published>
+    <updated>2022-12-16T06:23:42.589Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;西安防疫一码通平台的故障分析及优化设计&quot;&gt;&lt;a href=&quot;#西安防疫一码通平台的故障分析及优化设计&quot; class=&quot;headerlink&quot; title=&quot;西安防疫一码通平台的故障分析及优化设计&quot;&gt;&lt;/a&gt;西安防疫一码通平台的故障分析及优化设计&lt;/h2&gt;&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="高并发" scheme="http://example.com/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
+  
+</feed>

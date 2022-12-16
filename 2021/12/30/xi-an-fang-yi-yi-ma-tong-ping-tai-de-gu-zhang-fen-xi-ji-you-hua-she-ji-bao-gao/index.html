@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="README, 杂记">
+    <meta name="keywords" content="西安防疫一码通平台的故障分析及优化设计报告, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>README | 杂记</title>
+    <title>西安防疫一码通平台的故障分析及优化设计报告 | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -318,7 +318,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">README</h1>
+                    <h1 class="description center-align post-title">西安防疫一码通平台的故障分析及优化设计报告</h1>
                 </div>
             </div>
         </div>
@@ -434,8 +434,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/README/">
-                                <span class="chip bg-color">README</span>
+                            <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                                <span class="chip bg-color">高并发</span>
                             </a>
                         
                     </div>
@@ -446,8 +446,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/README/" class="post-category">
-                                README
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                研发
                             </a>
                         
                     </div>
@@ -459,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-14
+                    2021-12-30
                 </div>
                 
 
@@ -483,14 +487,75 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>一直以来就很想搭建一个博客，在博客上分享自己的一些经历、思考或者是技术上的沉淀。</p>
-<p>但是很懒，不想亲自从0开始搭建，又没有找到满意的模板，就搁置了。</p>
-<p>今天在检索Generalizable Approximate Partitionin论文时，看到了一位老哥的<a target="_blank" rel="noopener" href="https://muyuuuu.github.io/">博客</a></p>
-<p>他是基于hexo搭建的，然后部署在github上，hexo的主题尚不能满足我的需求，所以打算像这位老哥一样，基于hexo去定制自己的博客，这个不强求吧，主要还是得先丰富内容。</p>
-<p>以后尽可能地在博客上输出，不管是什么方面，就当是为自己的过去留下痕迹。</p>
-<p>还有一点就是相比于CSDN、微信公众号等等平台，自己的博客更加自由，我很少在CSDN上写博客，一是不想灌水、二是害怕学而不精、误人子弟；在自己的博客就不需要顾虑太多东西，错了就以后慢慢填坑嘛</p>
-<p>除了技术，也希望可以在博客上分享一下生活、或者是看法，在这里就是我的天地，不需要顾虑太多东西，😂</p>
-<p>加油加油加油</p>
+                <h2 id="西安防疫一码通平台的故障分析及优化设计"><a href="#西安防疫一码通平台的故障分析及优化设计" class="headerlink" title="西安防疫一码通平台的故障分析及优化设计"></a>西安防疫一码通平台的故障分析及优化设计</h2><h4 id="事件背景"><a href="#事件背景" class="headerlink" title="事件背景"></a>事件背景</h4><p>2021年12月中旬，西安疫情爆发，西安政府根据疫情防控形势，要求西安公共场所加大了扫码查验力度，同时开展多轮全员核酸检测，西安一码通使用需求激增。12月20日，西安市要求市民上班需持48小时内核酸检测阴性报告，该政策进一步将西安一码通的高使用频率集中在某一个时间点，该日早上7:40分左右，西安一码通用户访问量激增，每秒访问量达到以往峰值的10倍以上，最终致使包括一码通在内的部分应用系统不可用。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419924.jpeg" alt="西安市个人电子识别码" style="zoom: 33%;">
+
+<p>2022年1月4日上午，西安一码通再次因为平台访问量过大，系统无法正常展码，严重影响了防疫期间的核酸检测工作。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419926.png" alt="陕西发布" style="zoom: 33%;">
+
+<p>整起事件总而言之，西安一码通在面对千万级别的访问量，半个月内出现了两次系统故障。</p>
+<h4 id="故障原因"><a href="#故障原因" class="headerlink" title="故障原因"></a>故障原因</h4><ul>
+<li><p><strong>直接原因</strong></p>
+<p>因防疫需求激增的系统访问量，超过系统预期可承载的吞吐量。</p>
+</li>
+<li><p><strong>最终原因</strong></p>
+<p>官方公布：因流量过载、系统架构应对高并发不足，最终导致<strong>防火墙拦截数据</strong>无法返回的系统性故障。</p>
+</li>
+<li><p><strong>根本原因</strong></p>
+<p><strong>第一次系统故障</strong>：（1）系统架构设计初期对系统的并发量的误判，没有足够的前瞻性；（2）疫情突如其来，系统上线是燃眉之急，导致系统架构设计考虑不够周全，没有充分的时间去做好应对高并发的准备和预案；所以，激增的访问量导致了第一次系统故障。</p>
+<p><strong>第二次系统故障</strong>：（1）开发和运维人员为了尽快修复故障，只能采取一些治标不治本的方法（协调资源、扩容和限流等），但是缺乏高可用设计的系统架构，投入再多的资源也没有办法被高效利用，根本性的问题没有得到解决，所以系统很快就出现了第二次崩溃；（2）第一次系统故障的修复工作是紧急的系统需求变更，工作人员在处理故障后没有能够做好回归测试，导致系统产生了新的漏洞，该漏洞导致了第二次系统故障。</p>
+<p>总而言之，西安一码通故障的根本原因是<strong>系统不具备高并发下的高可用性</strong>；据数据显示，西安一码通注册用户达到4695.2万人，日均扫码量超800万人次，系统的主要需求是用户数据的读写；也就是说，西安一码通应当是一个<strong>在面对千万级别数据读写的高并发访问量下仍能保证关键服务高可用的系统。</strong></p>
+</li>
+</ul>
+<h4 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h4><p>根据官方公布的公示信息统计，西安一码通系统由多家企业共同搭建，主要包括阿里云提供政务云和短信服务；西安东软系统集成有限公司提供软件开发和运营维护服务；安恒信息技术股份有限公司提供部分安全项目服务；美林数据股份有限公司提供引擎软件产品及相关服务；中译语通科技（陕西）有限公司提供大数据可视化服务；而在政务云平台中，北京启明星辰信息安全技术有限公司提供部分网络安全服务；阿里云提供政务云平台的私有云建设服务等。结合调研结果、相关领域技术人员的看法、自身使用体会和基于专业知识水平的分析，认为西安一码通的整体系统架构如下：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419936.png" alt="系统架构"></p>
+<p>如上图所示，西安一码通系统可以认为是一种更加偏向于Browser/Server的架构，即浏览器/服务器端架构，是由微信小程序或者Browser客户端、Web应用服务器端和数据库端构成所谓的三层架构；其客户端主要依托在微信小程序或者是Web浏览器等程序，主要负责界面展示、数据可视化和部分简单业务逻辑处理等；服务器端依托在阿里政务云上，主要负责核心业务逻辑的处理；客户端与服务器端的交互是请求-响应模式，即客户端向服务器端发送读写请求，服务器端接收请求后与数据库端进行交互，最终响应客户端的请求。</p>
+<h4 id="优化设计"><a href="#优化设计" class="headerlink" title="优化设计"></a>优化设计</h4><p>通过前文对西安一码通系统架构的分析，可以将系统拆解为以下部分：前端、接入层、后端、后端与数据库交互层、数据库端，可以使用一些常用的高并发设计对各部分进行优化，从而提高整个系统的性能和可用性。</p>
+<ul>
+<li><p><strong>负载均衡</strong></p>
+<p>负载均衡主要是指将大量的作业请求或者其他形式的负载合理地分配到多个操作单元上执行；负载均衡策略具有以下好处：（1）带有负载平衡的多个冗余组件取代单一组件，可以提高系统的可靠性和可用性；（2）避免集群中部分服务器压力过大，另一些服务器比较空闲，可以优化资源使用、避免系统过载；（3）合理的负载均衡策略可以最大化系统的吞吐率、最小化响应时间，解决互联网架构中的高并发的问题。常见的负载均衡系统有：（1）DNS负载均衡：DNS 负载均衡的本质是：<strong>DNS 解析同一个域名可以返回不同的 IP 地址</strong>，实现地理级别的负载均衡；（2）硬件负载均衡：通过单独的硬件设备来实现负载均衡功能，这类设备和路由器、交换机类似，可以理解为一个用于负载均衡的基础网络设备；（3）软件负载均衡：通过负载均衡软件来实现负载均衡功能，常见的有 Nginx 和 LVS。</p>
+<p>因为西安一码通的服务器端是依托在阿里政务云上，阿里云是完全具备实现以上三种负载均衡系统的条件，所以在成本条件允许的情况下，系统可以实现三层的负载均衡：</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419937.png" alt="负载均衡" style="zoom: 40%;">
+
+<p>此外，西安一码通对并发和实时性要求较高的需求是<strong>用户个人健康信息查询</strong>的读请求，而像<strong>用户个人行程记录、用户核酸检测结果同步</strong>的写请求对实时性的要求不高，并且并发量不大，所以系统的数据库端可以使用读写分离架构实现负载均衡，将系统的数据访问压力分担到数据库集群的多个节点，主库负责写请求，从库负责读请求，通过主从复制同步数据，在这个过程中数据只需要保证最终一致性即可，基本上不会损耗系统的可用性：</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419941.png" alt="读写分离" style="zoom:40%;"></li>
+<li><p>缓存机制</p>
+<p>缓存就是数据交换的缓冲区，将经常被访问的数据复制到应用程序附近的快速存储，可以在很大程度上降低整个系统的网络请求和IO传输，加速访问。提高系统的性能。</p>
+<p>西安一码通整个系统架构可以在多处使用缓存提高系统性能。应用层的微信小程序提供数据缓存的函数接口，开发人员使用得当的话，可以将部分数据缓存在用户本地，实现零传输成本。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419940.png" alt="微信小程序数据缓存函数"></p>
+<p>对于前端所需要的一些HTML/CSS文件和图片等其它类型的静态资源，可以使用CDN（Content Delivery Network，内容分发网络）管理，加速访问的同时可以节省骨干网络带宽，减少网络拥塞，避免业务服务器过载。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419003.png" alt="CDN" style="zoom:50%;">
+
+<p>疫情期间，西安一码通有大量的读写请求，如果这些请求全部都需要访问数据库，会带来巨大的IO，而且展码之类的读请求也是无法忍受高延迟，为了加速访问，可以在系统后端和数据库端中引入缓存机制。</p>
+<p>目前主流的服务器端在业务实现上还是以Java为主，服务器端可以根据HashMap自定义实现本地缓存或者基于Guava Cache实现本地缓存，此类缓存的实现较为简单，适用于一些比较简单的业务场景，用于存储少量的静态对象等。</p>
+<p>西安一码通注册用户接近5000万人，日均扫码量超800万人次，用户数据主要包括基本个人信息、一码通信息、状态信息等，数据以文本为主，所以每个用户需要的缓存量在10KB以内，则总的缓存容量至少要在100GB以上，可以考虑使用分布式缓存集群，如Redis的Cluster模式：</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419011.png" alt="Redis的Cluster模式" style="zoom: 67%;">
+
+<p>分布式缓存集群不仅可以提供更大缓存容量，并且在对数据合理分片后以及设计合理的路由算法，亦可以实现负载均衡，同时将数据的访问速度降低到毫秒级别，对系统的性能有很大的提升。此外，分布式缓存数据通过异步复制，不能保证数据的强一致性，需要在服务层的业务逻辑实现中保证实时性数据的一致性或者是使用额外数据访问中间件。</p>
+</li>
+<li><p>服务拆分</p>
+<p>西安一码通属于一个中大型系统，对系统服务模块化拆分（权限、用户、业务等）可以让系统运行得更加稳定。在高并发场景下，通过熔断策略保证非核心业务不正常的情况下，主要业务流程不受影响。例如从西安一码通拆分出核酸报告和个人电子码等多个子服务，这样即使核酸报告服务故障，依然能保证个人电子码的正常访问，实现故障隔离，也便于工作人员定位故障发生点。服务拆分后，每个服务都要有自己的数据库了，即使其他服务的数据库挂了，也不会影响到自己的数据库的正常运行，避免数据库单点故障问题，提高系统的稳定性。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419424.png" alt="服务拆分" style="zoom:50%;">
+
+<p>服务拆分后，网关鉴权这类的服务，会被其他不同模块依赖的服务，即每个用户都需要登录后才能查询电子码、核酸结果等的信息。可以将该类服务独立出来，在系统的接入层进行统一的认证鉴权，一旦进入网关，服务之间的调用就是可信的，且只需要一次登录即可访问所有子服务。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419502.png" alt="单点登录" style="zoom:50%;">
+
+<p>另外对于拆分后的分布式系统中，可以考虑使用二进制的 RPC 协议来代替传统的 HTTPS + JSON 格式的协议来实现子服务之间的调用，减少了网络开销、提高速度。</p>
+</li>
+<li><p>性能优化</p>
+<p>西安一码通系统服务端可能需要某些客户端请求做一些附属的事情，如根据用户的位置信息生成行程记录，但这些事情用户并不需要立即取得这些事情的处理结果。在核酸检测的高峰期，这种情况就比较适合用异步的方式处理，通常会引入消息队列实现异步，此外消息队列也具有限流削峰的效果，防止系统过载宕机，此前的西安一码通就是由于未能做好限流处理，导致高并发下的流量触发了系统的过载保护，拒绝了客户端的请求，造成关键服务不可用。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161419680.png" alt="消息队列解耦" style="zoom: 67%;"></li>
+<li><p>过载保护</p>
+<p>即使是系统具备应对高并发的能力，也要做好过载预防，防患于未然。系统过载可能导致服务器宕机，系统设计时要尽可能预防过载，并且要考虑过载发生时如何尽可能不让系统发生性能雪崩：（1）流量控制：限制系统的最大并发连接数，避免过载；（2）重试频率控制，系统过载时，由于请求发生延时，前端通常会发起重试，如果重试频率过大，则必然造成服务器雪崩；因此可以通过限制请求的访问频率，避免过载或服务器雪崩；（3）服务降级，在系统过载时，快速拒绝非核心业务的服务请求，或者提供降级处理方案；（4）监控报警，提前在代码中埋点，监控系统自身状态，当系统负载达到警戒值时，系统除了自身要采取相应措施外，还应该反馈给服务器端、客户端以及相关的负责人员。</p>
+</li>
+<li><p>体验优化</p>
+<p>当系统变慢或者异常的时候，需要安抚用户的情绪，所以要在客户端进行一些用户体验优化的设计，比如（1）增加客户端的数据缓存；（2）用户急速操作时不要频繁提交请求，而是友好地提示用户稍后再试等。</p>
+</li>
+<li><p>系统监控</p>
+<p>系统监控是提高故障处理能力和保障服务质量必需的一环。合理地使用系统监控可以收集到许多有效信息，为故障排查提供有力依据，还能及时发现系统潜在问题和错误。</p>
+</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>西安防疫一码通平台故障的根本原因现有的系统架构不足以支撑千万级别的高并发流量。可以通过负载均衡、缓存引入和服务拆分等方式进行优化系统，提高系统的可用性。在实际的项目中，通常是以最低的成本换取最大的系统性能，所以需要在项目开展初期做好需求分析，提出良好的系统设计方案，在控制成本和满足需求之间做出平衡。</p>
 
                 
             </div>
@@ -517,7 +582,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/12/14/readme/">http://example.com/2022/12/14/readme/</a>
+                    <a href="http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/">http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -555,8 +620,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/README/">
-                                    <span class="chip bg-color">README</span>
+                                <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                                    <span class="chip bg-color">高并发</span>
                                 </a>
                             
                         </div>
@@ -730,55 +795,6 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/12/15/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/hexo/" class="post-category">
-                                    hexo
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hexo/">
-                        <span class="chip bg-color">hexo</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2022/09/16/ji-yu-redis-de-poi-sou-suo/">
                     <div class="card-image">
                         
@@ -795,9 +811,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -819,6 +835,60 @@
                     
                     <a href="/tags/redis/">
                         <span class="chip bg-color">redis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="西安防疫一码通平台的故障分析及优化设计报告">
+                        
+                        <span class="card-title">西安防疫一码通平台的故障分析及优化设计报告</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                    研发
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                        <span class="chip bg-color">高并发</span>
                     </a>
                     
                 </div>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="README, 杂记">
+    <meta name="keywords" content="分布式消息系统-Kafka, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>README | 杂记</title>
+    <title>分布式消息系统-Kafka | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -313,12 +313,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">README</h1>
+                    <h1 class="description center-align post-title">分布式消息系统-Kafka</h1>
                 </div>
             </div>
         </div>
@@ -434,8 +434,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/README/">
-                                <span class="chip bg-color">README</span>
+                            <a href="/tags/kafka/">
+                                <span class="chip bg-color">kafka</span>
                             </a>
                         
                     </div>
@@ -446,8 +446,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/README/" class="post-category">
-                                README
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                技术
+                            </a>
+                        
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                研发
                             </a>
                         
                     </div>
@@ -459,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-14
+                    2022-12-16
                 </div>
                 
 
@@ -483,14 +487,132 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>一直以来就很想搭建一个博客，在博客上分享自己的一些经历、思考或者是技术上的沉淀。</p>
-<p>但是很懒，不想亲自从0开始搭建，又没有找到满意的模板，就搁置了。</p>
-<p>今天在检索Generalizable Approximate Partitionin论文时，看到了一位老哥的<a target="_blank" rel="noopener" href="https://muyuuuu.github.io/">博客</a></p>
-<p>他是基于hexo搭建的，然后部署在github上，hexo的主题尚不能满足我的需求，所以打算像这位老哥一样，基于hexo去定制自己的博客，这个不强求吧，主要还是得先丰富内容。</p>
-<p>以后尽可能地在博客上输出，不管是什么方面，就当是为自己的过去留下痕迹。</p>
-<p>还有一点就是相比于CSDN、微信公众号等等平台，自己的博客更加自由，我很少在CSDN上写博客，一是不想灌水、二是害怕学而不精、误人子弟；在自己的博客就不需要顾虑太多东西，错了就以后慢慢填坑嘛</p>
-<p>除了技术，也希望可以在博客上分享一下生活、或者是看法，在这里就是我的天地，不需要顾虑太多东西，😂</p>
-<p>加油加油加油</p>
+                <h2 id="分布式消息系统-Kafka"><a href="#分布式消息系统-Kafka" class="headerlink" title="分布式消息系统-Kafka"></a>分布式消息系统-Kafka</h2><h4 id="Kafka简介"><a href="#Kafka简介" class="headerlink" title="Kafka简介"></a>Kafka简介</h4><p>Kafka是最初由Linkedin公司开发，是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统或<strong>消息系统</strong>，常见可以用于web/nginx日志、访问日志，消息服务等等，Linkedin于2010年贡献给了Apache基金会并成为顶级开源项目。</p>
+<h4 id="消息系统"><a href="#消息系统" class="headerlink" title="消息系统"></a>消息系统</h4><p>消息系统是解决业务系统或应用系统之间异步通信的中间件，生产者发送包含事件的消息给消息系统，然后消息系统将消息推送给消费者或由消费者从消息系统拉取消息。</p>
+<h5 id="消息系统的作用"><a href="#消息系统的作用" class="headerlink" title="消息系统的作用"></a>消息系统的作用</h5><ul>
+<li><strong>解耦</strong>，消息系统在业务系统处理过程中间插入了一个隐含的、基于数据的接口层，两边业务系统的处理过程都要实现这一接口。这允许你独立的扩展或修改两边业务系统的处理过程，只要确保它们遵守同样的接口约束。</li>
+<li><strong>异步</strong>，很多时候，用户不想也不需要立即处理消息。消息队列提供了异步处理机制，允许用户把消息放入队列，但并不立即处理它，然后在需要的时候再去获取消息消费它们。</li>
+<li><strong>削峰</strong>，在访问量剧增的情况下，应用仍然需要继续发挥作用，但是这样的突发流量并不常见；如果为以能处理这类峰值访问为标准来投入资源随时待命无疑是巨大的浪费。使用消息队列能够使关键组件顶住突发的访问压力，而不会因为突发的超负荷的请求而完全崩溃。</li>
+<li><strong>冗余</strong>，有些情况下，处理数据的过程会失败。除非数据被持久化，否则将造成丢失。消息队列把数据进行持久化到它们已经被完全处理，通过这一方式规避了数据丢失风险。许多消息队列所采用的“插入-获取-删除”范式中，在把一个消息从队列中删除之前，需要你的处理系统明确的指出该消息已经被处理完毕，从而确保你的数据被安全的保存直到你使用完毕。</li>
+<li><strong>缓冲</strong>，在任何重要的系统中，都会有需要不同的处理时间的元素。例如，加载一张图片比应用过滤器花费更少的时间。消息队列通过一个缓冲层来帮助任务最高效率的执行———写入队列的处理会尽可能的快速。该缓冲有助于控制和优化数据流经过系统的速度。</li>
+<li>顺序保证、可扩展性、可恢复性等等。</li>
+</ul>
+<h4 id="Kafka相关术语"><a href="#Kafka相关术语" class="headerlink" title="Kafka相关术语"></a>Kafka相关术语</h4><h5 id="Kafka节点"><a href="#Kafka节点" class="headerlink" title="Kafka节点"></a>Kafka节点</h5><ul>
+<li><strong>Broker</strong>：消息中间件处理结点，一个Kafka节点就是一个broker，多个broker可以组成一个Kafka集群；</li>
+<li><strong>Topic</strong>：类别消息，是一个逻辑概念，例如page view日志、click日志等都可以以topic的形式存在，Kafka集群能够同时负责多个topic的分发；</li>
+<li><strong>Partition</strong>：topic物理上的分组，一个topic可以分为多个partition，每个partition是一个有序的队列，比如关于topic是某页面的click日志，可以根据北京、上海和成都等地区来划分不同的partition；</li>
+<li><strong>Replicas</strong>：partition 的副本，保障 partition 的高可用；</li>
+<li><strong>Segment</strong>：partition物理上由多个segment组成；</li>
+<li><strong>offset</strong>：每个partition都由一系列有序的、不可变的消息组成，这些消息被连续的追加到partition中；partition中的每个消息都有一个连续的序列号叫做offset，用于partition唯一标识一条消息。</li>
+</ul>
+<h5 id="Kafka集群"><a href="#Kafka集群" class="headerlink" title="Kafka集群"></a>Kafka集群</h5><ul>
+<li><strong>Producer</strong>：生产者，即消息发送者，负责 push 消息到 Kafka 集群中的 broker中；</li>
+<li><strong>Consumer</strong>：消费者，从 Kafka 集群的 broker 中 pull 消息、消费消息；</li>
+<li><strong>Consumer group</strong>：high-level consumer API 中，每个 consumer 都属于一个 consumer-group，每条消息只能被 consumer-group 中的一个 Consumer 消费，但可以被多个 consumer-group 消费；</li>
+<li><strong>Leader</strong>：replicas 中的一个角色， producer 和 consumer 只跟 leader 交互；</li>
+<li><strong>Follower</strong>：replicas 中的一个角色，从 leader 中复制数据，作为副本，一旦 leader 挂掉，会从它的 followers 中选举出一个新的 leader 继续提供服务；</li>
+<li><strong>Controller</strong>：Kafka 集群中的其中一个服务器，用来进行 leader election 以及 各种 fail over；</li>
+<li><strong>ZooKeeper</strong>：Kafka 通过 ZooKeeper 来存储集群的 meta 信息等。</li>
+</ul>
+<h4 id="Kafka架构"><a href="#Kafka架构" class="headerlink" title="Kafka架构"></a>Kafka架构</h4><p>如下图所示，基于 Kafka-ZooKeeper 的分布式消息队列系统总体架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及一个 ZooKeeper 集群。Kafka通过 ZooKeeper 管理集群配置、选举 Leader 以及在 consumer group 发生变化时进行 Rebalance（即消费者负载均衡）。Producer 使用 push模式将消息发布到 broker，Consumer 使用 pull模式从 broker 订阅并消费消息。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212392.png" alt="Kafka架构" style="zoom:50%;">
+
+<p>如下图所示，许多个的brokers组成一个kafka集群，每一个 Topic 被分为多个 Partitions，即物理分区；出于负载均衡考虑，同一个 Topic 的 Partitions 分别存储于 Kafka 集群的多个 broker 上，不同的broker会作为不同 Topic 的 Partitions的leader，Producer 可以通过随机或者 hash 等方式，将消息平均发送到多个 partition 上，以实现负载均衡。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212551.png" alt="kafka架构" style="zoom:67%;">
+
+<h4 id="Kafka读写机制"><a href="#Kafka读写机制" class="headerlink" title="Kafka读写机制"></a>Kafka读写机制</h4><h5 id="Topic和Partitions"><a href="#Topic和Partitions" class="headerlink" title="Topic和Partitions"></a>Topic和Partitions</h5><p>Kafka将 topic 划分成多个 partition，每个 partition 在存储层面是 append log 文件。任何发布到此 partition 的消息都会被追加到log文件的尾部，每条消息在文件中的位置称为 offset（偏移量），offset 为一个 long 型的数字，它唯一标记一条消息。 Kafka 机制中，producer push 来的消息是追加（append）到 partition 中的，这是一种顺序写磁盘的机制，效率远高于随机写内存，如下图所示：</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212709.png" alt="顺序写" style="zoom: 33%;">
+
+<p>Kafka会根据一定的算法将partition均匀分布到不同的 broker（服务器）上，当 producer 发布消息时，producer 客户端也会根据一定的算法选定目标 partition，将消息推送到目标partition，目标partition再将消息同步到其他brokers相应的partition，partiton 机制可以极大地提高吞吐量，并且使得系统具备良好的水平扩展能力。</p>
+<h5 id="Kafka-文件存储机制"><a href="#Kafka-文件存储机制" class="headerlink" title="Kafka 文件存储机制"></a>Kafka 文件存储机制</h5><p>Kafka 消息是以 topic 进行分类， topic 在物理层面以 partition 为分组，一个 partition 由多个 segment 组成。</p>
+<h6 id="partition文件存储方式"><a href="#partition文件存储方式" class="headerlink" title="partition文件存储方式"></a>partition文件存储方式</h6><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212410.png" alt="partition文件存储方式" style="zoom: 33%;">
+
+<ul>
+<li>每个partition(目录)相当于一个巨型文件被平均分配到多个大小相等segment(段)数据文件中。但每个段segment file消息数量不一定相等，这种特性方便快速删除old segment file，有效提高磁盘利用率。</li>
+<li>每个partition只需要支持顺序读写即可，Kafka往磁盘上写数据时，就是追加数据，没有随机写的操作，如果一个服务器磁盘达到一定的个数，磁盘也达到一定转数，往磁盘里面顺序写（追加写）数据的速度和写内存的速度差不多。</li>
+</ul>
+<h6 id="partition中segment文件存储结构"><a href="#partition中segment文件存储结构" class="headerlink" title="partition中segment文件存储结构"></a>partition中segment文件存储结构</h6><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212706.png" alt="segment文件存储结构" style="zoom:50%;">
+
+<ul>
+<li>segment file：由index file和data file两部分一一对应组成，分别表示为“.index”索引文件和“.log”数据文件；</li>
+<li>segment文件命名规则：partition全局的第一个segment从0开始，后续每个segment文件名为上一个segment文件最后一条消息的offset值。</li>
+</ul>
+<p>索引文件存储大量元数据，数据文件存储大量消息，索引文件中元数据指向对应数据文件中message的物理偏移地址。segment index file采取稀疏索引存储方式，它减少索引文件大小，通过mmap可以直接内存操作，稀疏索引为数据文件的每个对应message设置一个元数据指针，它比稠密索引节省了更多的存储空间，但查找起来需要消耗更多的时间。</p>
+<h5 id="Kafka页缓存和零拷贝机制"><a href="#Kafka页缓存和零拷贝机制" class="headerlink" title="Kafka页缓存和零拷贝机制"></a>Kafka页缓存和零拷贝机制</h5><p><strong>页缓存</strong>可以加速数据I/O：写数据时首先写缓存，将写入的页标记为dirty，然后向外部存储flush，也就是缓存写机制中的write-back或者write-through；读数据时首先读取缓存，若未命中，再去外部存储读取，并且将读取来的数据也加入缓存。</p>
+<p><strong>零拷贝</strong>是指数据不需要经由应用程序，直接从磁盘文件复制到网卡。零拷贝大大提高了应用程序的性能，减少了内核和用户模式之间的上下文切换。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212226.png" alt="page cache和零拷贝机制" style="zoom:50%;">
+
+<h6 id="写message"><a href="#写message" class="headerlink" title="写message"></a>写message</h6><ul>
+<li>消息从Java堆转入page cache(即物理内存)。</li>
+<li>由异步线程刷盘，消息从page cache刷入磁盘。</li>
+</ul>
+<h6 id="读message"><a href="#读message" class="headerlink" title="读message"></a>读message</h6><ul>
+<li>消息直接从page cache转入socket发送出去。</li>
+<li>当从page cache没有找到相应数据时，此时会产生磁盘IO，从磁盘Load消息到page cache，然后直接从socket发出去。</li>
+</ul>
+<p>Kafka主要利用了顺序读写、Page Cache和零拷贝机制保证了它的高性能。</p>
+<h4 id="Kafka消息顺序性"><a href="#Kafka消息顺序性" class="headerlink" title="Kafka消息顺序性"></a>Kafka消息顺序性</h4><ol>
+<li><p>全局有序：一个Topic下的所有消息都需要按照生产顺序消费；</p>
+<ul>
+<li>1个Topic只能对应1个Partition</li>
+<li>对应的consumer使用单线程或者保证消费顺序的线程模型</li>
+</ul>
+</li>
+<li><p>局部有序：一个Topic下的消息，只需要满足同一业务字段的要按照生产顺序消费。例如：Topic消息是订单的流水表，包含订单orderId，业务要求同一个orderId的消息需要按照生产顺序进行消费。</p>
+<ul>
+<li><p>要满足局部有序，只需要在发消息的时候指定Partition Key，Kafka对其进行Hash计算，根据计算结果决定放入哪个Partition。这样Partition Key相同的消息会放在同一个Partition。此时，Partition的数量仍然可以设置多个，提升Topic的整体吞吐量。如下图所示，在不增加partition数量的情况下想提高消费速度，可以考虑再次hash唯一标识（例如订单orderId）到不同的线程上，多个消费者线程并发处理消息（依旧可以保证局部有序）。</p>
+<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212505.png" alt="kafka消息顺序性" style="zoom:50%;"></li>
+</ul>
+</li>
+</ol>
+<h4 id="Kafka的特性"><a href="#Kafka的特性" class="headerlink" title="Kafka的特性"></a>Kafka的特性</h4><ul>
+<li><p>高吞吐、低延迟</p>
+<p>（1）page cache（os cache，操作系统管理的缓存），Broker<strong>写数据</strong>只写到缓存就算成功，再由操作系统异步线程刷盘；</p>
+<p>（2）磁盘顺序写，将消息追加到文件末尾，减少磁盘寻址；</p>
+<p>（3）零拷贝，消费数据的时候，直接从os cache到socket，不经过应用层；</p>
+<p>（4）分区并发；Kafka 消息是以 topic 进行分类， topic 在物理层面以 partition 为分组，一个 partition 由多个 segment 组成，即topic分区（文件夹）再分段（文件），每次操作都是针对一小部分做操作，很轻便，<strong>不同的broker会作为不同 Topic 不同Partition的leader</strong>，增加Constomer并行操作和Broker水平扩展的能力；</p>
+<p>（5）批量发送，Kafka允许进行批量发送消息，Producer发送消息的时候，可以将消息缓存在本地，等到了固定条件发送到kafka，可减少IO延迟；但也一定程度上影响了消息的实时性，相当于以时延代价，换取更好的吞吐量；</p>
+<p>（6）数据压缩，Kafka还支持对消息集合进行压缩，Producer可以通过GZIP或Snappy格式对消息集合进行压缩，压缩的好处就是减少传输的数据量，减轻对网络传输的压力。</p>
+</li>
+<li><p>可扩展性、容错性、高并发、可靠性：分布式架构。</p>
+</li>
+<li><p>持久性：消息被持久化到本地磁盘，并且支持数据备份防止数据丢失。</p>
+</li>
+</ul>
+<h4 id="Kafka-高可靠性实现原理"><a href="#Kafka-高可靠性实现原理" class="headerlink" title="Kafka 高可靠性实现原理"></a>Kafka 高可靠性实现原理</h4><p>Kafka 主要采用副本（replication）机制实现高可靠性通过调节副本相关参数，可使 Kafka 在性能和可靠性之间取得平衡。</p>
+<h5 id="Replication机制"><a href="#Replication机制" class="headerlink" title="Replication机制"></a>Replication机制</h5><p>为了提高消息的可靠性，Kafka 每个 topic 的 partition 有 N 个副本（replicas），其中 N（大于等于 1）是 topic 的复制因子（replica fator）的个数。Kafka 通过多副本机制实现故障自动转移，当 Kafka 集群中出现 broker 失效时，副本机制可保证服务可用。对于任何一个 partition，它的 N 个 replicas 中，其中一个 replica 为 leader，其他都为 follower，leader 负责处理 partition 的所有读写请求，follower 则负责被动地去复制 leader 上的数据。如下图所示，Kafka 集群中有 4 个 broker，某 topic 有 3 个 partition，且复制因子即副本个数也为 3：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212708.png" alt="Replication机制"></p>
+<p>如果 leader 所在的 broker 发生故障或宕机，对应 partition 将因无 leader 而不能处理客户端请求，Zookeeper将会从 follower 中选举出一个新 leader 继续处理客户端的请求。</p>
+<h5 id="选举Leader"><a href="#选举Leader" class="headerlink" title="选举Leader"></a>选举Leader</h5><p>一个 partition 有多个副本（replicas），为了提高可靠性，这些副本分散在不同的 broker 上，由于带宽、读写性能、网络延迟等因素，同一时刻，这些副本的状态通常是不一致的：即 followers 与 leader 的状态不一致。 Kafka 机制中，leader 将负责维护和跟踪一个 ISR（In-Sync Replicas）列表，即同步副本队列，这个列表里面的副本与 leader 保持同步，状态一致。新的 leader 从将会从 ISR 列表中的副本中选出。</p>
+<h5 id="同步副本ISR"><a href="#同步副本ISR" class="headerlink" title="同步副本ISR"></a>同步副本ISR</h5><p>虽然同步副本队列 ISR（In-Sync Replicas）极大的增强了可用性，但是副本数量对 Kafka 的吞吐率有一定影响。默认情况下 Kafka 的 replica 数量为 1，即每个 partition 都只有唯一的 leader，无 follower，没有容灾能力。为了确保消息的可靠性，生产环境中，通常将其值大小设置为大于 1，比如 3。 所有的副本（replicas）统称为 Assigned Replicas，即 AR。ISR 是 AR 中的一个子集，由 leader 维护 ISR 列表，follower 从 leader 同步数据会有延迟，超过系统设定超时阈值的 follower 将被剔除出 ISR， 存入 OSR（Outof-Sync Replicas）列表，新加入的 follower 也会先存放在 OSR 中，即AR = ISR + OSR。</p>
+<h5 id="数据可靠性和持久性保证"><a href="#数据可靠性和持久性保证" class="headerlink" title="数据可靠性和持久性保证"></a>数据可靠性和持久性保证</h5><p>当 producer 向 leader 发送数据时，Kafka有三种不同的数据可靠性级别：</p>
+<ul>
+<li><p><strong>request.required.acks = 1</strong>，这是默认情况，即：producer 发送数据到 leader，leader 写本地日志成功，返回客户端成功；此时 ISR 中的其它副本还没有来得及拉取该消息，如果此时 leader 宕机了，那么此次发送的消息就会丢失。</p>
+</li>
+<li><p><strong>request.required.acks = 0</strong>，producer 不停向leader发送数据，而不需要 leader 反馈成功消息，这种情况下数据传输效率最高，但是数据可靠性确是最低的。可能在发送过程中丢失数据，可能在 leader 宕机时丢失数据。</p>
+</li>
+<li><p><strong>request.required.acks = -1（all）</strong>，producer 发送数据给 leader，leader 收到数据后要等到 ISR 列表中的所有副本（可以调整副本数来提高系统的性能）都同步数据完成后（强一致性），才向生产者返回成功消息，如果一直收不到成功消息，则认为发送数据失败会自动重发数据。这是可靠性最高的方案，当然，性能也会受到一定影响。</p>
+</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>Kafka是基于Java实现的消息系统，它具有以下特点：</p>
+<ul>
+<li>可扩展性，由Zookeeper管理，多个brokers组成的Kafka集群具有很强的可扩展性；</li>
+<li>可靠性，Kafka通过分布式集群、数据冗余和持久化机制保证了它的高可靠性；</li>
+<li>高性能；Kafka采用分区设计提高了它的吞吐量，并且通过顺序读写、页缓存和零拷贝等机制保证了它的高性能。</li>
+</ul>
+<h4 id="为什么选择Kafka"><a href="#为什么选择Kafka" class="headerlink" title="为什么选择Kafka"></a>为什么选择Kafka</h4><ul>
+<li>Kafka是一个分布式流媒体平台，用于发布和订阅记录流。Kafka用于容错存储。</li>
+<li>Kafka将主题日志分区复制到多个服务器。Kafka旨在让您的应用程序处理记录。</li>
+<li>Kafka速度很快，通过批处理和压缩记录来高效地使用IO。Kafka用于解耦数据流。</li>
+<li>Kafka用于将数据流式传输到数据池，应用程序和实时流分析系统。</li>
+</ul>
+<h4 id="Mafka"><a href="#Mafka" class="headerlink" title="Mafka"></a>Mafka</h4><p>Mafka一个基于Kafka开发的一个分布式消息中间件综合解决方案。</p>
+<h4 id="Mafka架构"><a href="#Mafka架构" class="headerlink" title="Mafka架构"></a>Mafka架构</h4><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212068.png" alt="Mafka架构" style="zoom:50%;">
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhitao/article/details/44858217">Mafka平台架构</a></p>
+<p>Mafka-client：发送和接收消息</p>
+<p>Mafka-manager：管理集群</p>
+<p>Mafka-monitor：监控</p>
 
                 
             </div>
@@ -517,7 +639,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2022/12/14/readme/">http://example.com/2022/12/14/readme/</a>
+                    <a href="http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/">http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -555,8 +677,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/README/">
-                                    <span class="chip bg-color">README</span>
+                                <a href="/tags/kafka/">
+                                    <span class="chip bg-color">kafka</span>
                                 </a>
                             
                         </div>
@@ -726,66 +848,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/12/15/hello-world/">
+                <a href="/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="分布式消息系统-Kafka">
                         
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/hexo/" class="post-category">
-                                    hexo
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/hexo/">
-                        <span class="chip bg-color">hexo</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/09/16/ji-yu-redis-de-poi-sou-suo/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="基于Redis的POI搜索">
-                        
-                        <span class="card-title">基于Redis的POI搜索</span>
+                        <span class="card-title">分布式消息系统-Kafka</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -796,7 +870,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-16
                             </span>
                         <span class="publish-author">
                             
@@ -814,11 +888,61 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/redis/">
-                        <span class="chip bg-color">redis</span>
+                    <a href="/tags/kafka/">
+                        <span class="chip bg-color">kafka</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/12/15/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
                     </a>
                     
                 </div>
