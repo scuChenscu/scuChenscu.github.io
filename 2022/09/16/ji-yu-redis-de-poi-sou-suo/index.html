@@ -438,6 +438,10 @@
                                 <span class="chip bg-color">redis</span>
                             </a>
                         
+                            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">源码</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -516,14 +520,13 @@
   <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//字节数组，用来保存字符串</span>
 <span class="token punctuation">}</span>
 <span class="token comment">// （1）len O(1) （2）不需要'\0'判断结束计算长度，可以存储各种二进制数据（3）杜绝缓冲区溢出</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501510.png" alt="String数据结构"></p>
 <ul>
 <li>常数级获取字符串长度</li>
 <li>二进制安全，不需要’\0’判断结束计算长度，可以存储各种二进制数据</li>
 <li>杜绝缓冲区溢出，修改时先判断空间是否足够，否则先扩容至所需大小，再写入</li>
 <li>减少修改字符串时空间再分配次数；（1）预分配（2）惰性空间释放</li>
-<li>兼容部分C字符串函数，虽然SDS的API都是二进制安全的，但他们一样遵循C字符串以空字符串结尾的惯例，并且总会在为buf数组分配空间时，多分配一个字节来容纳这个空字符，这是为了让那些保存文本数据的SDS可以重用一部分&lt;string.h&gt;库定义的函数。</li>
+<li>兼容部分C字符串函数，虽然SDS的API都是二进制安全的，但他们一样遵循C字符串以空字符串结尾的惯例，并且总会在为buf数组分配空间时，多分配一个字节来容纳这个空字符，这是为了让那些保存文本数据的SDS可以重用一部分<string.h>库定义的函数。</string.h></li>
 </ul>
 </li>
 <li><p>Hash: 散列</p>
@@ -553,7 +556,6 @@
     <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>match<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>ptr<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">unsigned</span> <span class="token keyword">long</span> len<span class="token punctuation">;</span>
 <span class="token punctuation">}</span> list<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501716.png" alt="linkedList"></p>
 <p>listNode 中使用了一个 void 类型的指针（void *value）保存其内存，由于链表内部并不知道 value 保存的内容的真实情况， 因此需要用户指定三个函数用于处理这个 value，这三个函数分别是：</p>
 <ul>
@@ -588,7 +590,6 @@
 	<span class="token comment">// 当前正在运作的安全迭代器数量</span>
   <span class="token keyword">int</span> iterators<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>dict<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">dictht</span><span class="token punctuation">{</span> <span class="token comment">// 哈希表</span>
  	<span class="token comment">// 哈希表节点数组</span>
 	dictEntry <span class="token operator">*</span><span class="token operator">*</span>table<span class="token punctuation">;</span>
@@ -599,7 +600,6 @@
   <span class="token comment">// 该哈希表已有节点的数量</span>
   <span class="token keyword">unsigned</span> <span class="token keyword">long</span> used<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>dictht<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">dictEntry</span> <span class="token punctuation">{</span> <span class="token comment">// 哈希表节点</span>
   <span class="token comment">// 键</span>
   <span class="token keyword">void</span> <span class="token operator">*</span>key<span class="token punctuation">;</span>
@@ -612,7 +612,6 @@
   <span class="token comment">// 指向下个哈希表节点，形成链表（拉链法解决冲突）</span>
   <span class="token keyword">struct</span> <span class="token class-name">dictEntry</span> <span class="token operator">*</span>next<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>dictEntry<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501971.png" alt="Dict数据结构"></p>
 <p><strong>结构特点：</strong></p>
 <ul>
@@ -628,7 +627,8 @@
 <li><p>缓存雪崩：同一时间缓存大量的key过期（定期删除策略）；（1）key失效时间 + 随机值（2）热点数据永不过期（脏数据）</p>
 </li>
 <li><p>缓存击穿：某个热点key在高并发期间过期；（1）热点数据永不过期（2）互斥锁，保证只有一个请求到数据库去数据写回缓存；</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/20220421221450.awebp" alt="获取数据" style="zoom:50%;"></li>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/20220421221450.awebp" alt="获取数据" style="zoom:50%;"></p>
+</li>
 <li><p>缓存穿透：（透）缓存和数据库都不存在的key；永远不要相信调用方，（1）在接口层做参数检验（2）对不存在的key设置value为null，防止恶意攻击。</p>
 </li>
 </ul>
@@ -679,20 +679,13 @@
 </ul>
 <p>核心：（1）加锁，原子性：SETNX key expire value，加锁的同时设置过期时间和value与持有者（线程ID）相关（2）解锁，lua脚本保证原子性，根据value判断是否为锁的持有者，del key解锁（3）锁超时自动释放，持有锁的线程开启守护线程，为即将过期但未释放的锁增加有效时间。（4）其他线程长时间等待锁，轮询或获得锁失败时订阅锁释放消息（5）单机宕机，集群                   <a target="_blank" rel="noopener" href="https://xiaomi-info.github.io/2019/12/17/redis-distributed-lock/">Redis分布式锁</a></p>
 <h4 id="Redis模式"><a href="#Redis模式" class="headerlink" title="Redis模式"></a>Redis模式</h4><p>单机-&gt;主从（主从复制，主负责读写，从负责读）-&gt;哨兵（哨兵节点监控数据节点，自动化的故障恢复）-&gt;集群（分布式存储，每个节点存储不一样的数据，hash slot，可扩展性强，高可用性）</p>
-<h4 id="Redis为什么快？"><a href="#Redis为什么快？" class="headerlink" title="Redis为什么快？"></a>Redis为什么快？</h4><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501248.png" alt="I/O多路复用" style="zoom:67%;">
-
+<h4 id="Redis为什么快？"><a href="#Redis为什么快？" class="headerlink" title="Redis为什么快？"></a>Redis为什么快？</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501248.png" alt="I/O多路复用" style="zoom:67%;"></p>
 <p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1745894">https://cloud.tencent.com/developer/article/1745894</a></p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501376.png" alt="Redis快的原因" style="zoom:50%;">
-
-
-
-
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501376.png" alt="Redis快的原因" style="zoom:50%;"></p>
 <h4 id="Redis如何判断数据过期"><a href="#Redis如何判断数据过期" class="headerlink" title="Redis如何判断数据过期"></a>Redis如何判断数据过期</h4><p>删除策略+过期字典+内存淘汰机制（Out of memory时触发）+ 持久化</p>
 <p>最常用的数据淘汰策略：allkeys-lru（<strong>least recently used</strong>）：当内存不⾜以容纳新写⼊数据时，在键空间中，移除最近最少使⽤的 key。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501676.png" alt="redis过期字典"></p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501766.png" alt="20220421221509">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501766.png" alt="20220421221509"></p>
 <h4 id="数据一致性问题"><a href="#数据一致性问题" class="headerlink" title="数据一致性问题"></a>数据一致性问题</h4><p>核心：（1）缓存和数据库数据不一致（2）只要数据可变，必然会存在不一致的情况（3）保证最终一致性</p>
 <p>策略：先写缓存或者先写数据库</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501928.png" alt="数据一致性问题"></p>
@@ -701,7 +694,6 @@
 cache<span class="token punctuation">.</span>delete
 db<span class="token punctuation">.</span>update
 asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h4 id="Redis-GEO"><a href="#Redis-GEO" class="headerlink" title="Redis GEO"></a>Redis GEO</h4><h5 id="Redis-GEO简介"><a href="#Redis-GEO简介" class="headerlink" title="Redis GEO简介"></a>Redis GEO简介</h5><p>Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。</p>
 <h5 id="Redis-GEO操作方法"><a href="#Redis-GEO操作方法" class="headerlink" title="Redis GEO操作方法"></a>Redis GEO操作方法</h5><ol>
 <li>geoadd：添加地理位置的坐标；</li>
@@ -720,7 +712,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
 <li>根据用户的经纬度信息使用georadius函数获取指定范围内的目标POI集合；</li>
 </ol>
 <h4 id="geoadd实现原理"><a href="#geoadd实现原理" class="headerlink" title="geoadd实现原理"></a>geoadd实现原理</h4><h5 id="geoadd命令用法"><a href="#geoadd命令用法" class="headerlink" title="geoadd命令用法"></a>geoadd命令用法</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c">GEOADD key longitude latitude member <span class="token punctuation">[</span>longitude latitude member <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>将给定的位置对象（纬度、经度、名字）添加到指定的key。其中，<code>key</code>为集合名称，<code>member</code>为该经纬度所对应的对象。在实际运用中，当所需存储的对象数量过多时，可通过设置多<code>key</code>(如一个省一个<code>key</code>)的方式对对象集合变相做<code>sharding</code>，避免单集合数量过多。</p>
 <h5 id="geoadd源码分析"><a href="#geoadd源码分析" class="headerlink" title="geoadd源码分析"></a>geoadd源码分析</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* GEOADD key long lat name [long2 lat2 name2 ... longN latN nameN] */</span>
 <span class="token keyword">void</span> <span class="token function">geoaddCommand</span><span class="token punctuation">(</span>client <span class="token operator">*</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -776,7 +767,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
     <span class="token function">replaceClientCommandVector</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span>argc<span class="token punctuation">,</span>argv<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">zaddCommand</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>通过源码分析可以看出Redis内部使用有序集合(zset)保存位置对象，有序集合中每个元素都是一个带位置的对象，元素的score值为其经纬度对应的52位的geohash值。</p>
 <h5 id="geoadd命令步骤总结："><a href="#geoadd命令步骤总结：" class="headerlink" title="geoadd命令步骤总结："></a>geoadd命令步骤总结：</h5><ol>
 <li>参数提取和校验；</li>
@@ -784,7 +774,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
 <li>调用ZADD命令将member及其对应的score存入集合key中。</li>
 </ol>
 <h4 id="georadius实现原理"><a href="#georadius实现原理" class="headerlink" title="georadius实现原理"></a>georadius实现原理</h4><h5 id="georadius命令用法"><a href="#georadius命令用法" class="headerlink" title="georadius命令用法"></a>georadius命令用法</h5><pre class="line-numbers language-none"><code class="language-none">GEORADIUS key longitude latitude radius m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [ASC|DESC] [COUNT count] [STORE key] [STORedisT key]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>以给定的经纬度为中心，返回目标集合中与中心的距离不超过给定最大距离的所有位置对象。</p>
 <h5 id="georadius源码分析"><a href="#georadius源码分析" class="headerlink" title="georadius源码分析"></a>georadius源码分析</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">/* GEORADIUS key x y radius unit [WITHDIST] [WITHHASH] [WITHCOORD] [ASC|DESC]
  *                               [COUNT count] [STORE key] [STORedisT key]
@@ -853,7 +842,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
     ……
     <span class="token function">geoArrayFree</span><span class="token punctuation">(</span>ga<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上文代码中最核心的步骤有两个，一是“计算中心点范围”，二是“对中心点及其周围8个geohash网格区域进行查找”。对应的是<code>geohashGetAreasByRadiusWGS84</code>和<code>membersOfAllNeighbors</code>两个函数：</p>
 <ul>
 <li>计算中心点范围</li>
@@ -909,7 +897,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
         radius<span class="token punctuation">.</span>area <span class="token operator">=</span> area<span class="token punctuation">;</span>
         <span class="token keyword">return</span> radius<span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ul>
 <li>对中心点及其周围8个geohash网格区域进行查找</li>
 </ul>
@@ -1019,19 +1006,16 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
         gp<span class="token operator">-&gt;</span>score <span class="token operator">=</span> score<span class="token punctuation">;</span>
         <span class="token keyword">return</span> C_OK<span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>GEORADIUS命令是主要是利用geoHash获取目标位置对象。</p>
 <h5 id="georadius命令步骤总结："><a href="#georadius命令步骤总结：" class="headerlink" title="georadius命令步骤总结："></a>georadius命令步骤总结：</h5><ol>
 <li>参数提取和校验；</li>
 <li>利用中心点和输入半径计算待查区域范围。这个范围参数包括满足条件的最高的GeoHash网格等级(精度) 以及对应的能够覆盖目标区域的九宫格位置；</li>
 <li>对九宫格进行遍历，根据每个GeoHash网格的范围框选出位置对象。进一步找出与中心点距离小于输入半径的对象，进行返回。</li>
 </ol>
-<h5 id="georadius命令步骤图解："><a href="#georadius命令步骤图解：" class="headerlink" title="georadius命令步骤图解："></a>georadius命令步骤图解：</h5><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501237.png" alt="georadius命令步骤图解" style="zoom:50%;">
-
+<h5 id="georadius命令步骤图解："><a href="#georadius命令步骤图解：" class="headerlink" title="georadius命令步骤图解："></a>georadius命令步骤图解：</h5><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501237.png" alt="georadius命令步骤图解" style="zoom:50%;"></p>
 <p>令左图的中心为搜索中心，绿色圆形区域为目标区域，所有点为待搜索的位置对象，红色点则为满足条件的位置对象。在实际搜索时，首先会根据搜索半径计算geohash网格等级（即右图中网格大小等级），并确定九宫格位置（即红色九宫格位置信息）；再依次查找计算九宫格中的点（蓝点和红点）与中心点的距离，最终筛选出距离范围内的点（红点）。</p>
 <h5 id="ZADD命令"><a href="#ZADD命令" class="headerlink" title="ZADD命令"></a>ZADD命令</h5><p>Redis ZADD 命令用于将一个或多个成员元素及其分数值加入到Sorted Set，Sorted Set的底层实现是跳表：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501409.png" alt="跳表数据结构" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501409.png" alt="跳表数据结构" style="zoom:50%;"></p>
 <p>跳表拥有类似二叉查找树的查询效率，操作平均时间复杂性为O(log(N))。且最底层的所有元素都以链表的形式按序排列。geoadd通过调用ZADD命令将对象写入跳表，所以georadius在查询时，只要找到跳表中目标POI的geoHash的第一个值，后续依次对比即可，不用多次查找，再结合Redis本身基于内存的存储特性，<strong>GEO在实际使用过程中有非常高的运行效率</strong>。</p>
 <p>通过上文的源码分析，可以了解到<strong>Redis GEO的实现主要是基于GeoHash。</strong></p>
 <h4 id="GeoHash索引"><a href="#GeoHash索引" class="headerlink" title="GeoHash索引"></a>GeoHash索引</h4><h5 id="GeoHash简介"><a href="#GeoHash简介" class="headerlink" title="GeoHash简介"></a>GeoHash简介</h5><p>GeoHash是一种基于hash思想的空间索引，它将二维的经纬度转换成字符串，每个字符串对应一个矩形地理区域，该区域内的所有POI坐标都共享相同的GeoHash字符串；GeoHash字符串具有以下特点：第一，字符串越长，表示的范围越精确；第二，两个GeoHash字符串前缀相似度越高，两个地理区域越相近。</p>
@@ -1043,152 +1027,13 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
 <li><p>根据POI经纬度计算GeoHash的二进制编码</p>
 <p>编码规则：对经纬度区间不断地进行二分细化，左区间取0，右区间取1，最终得到GeoHash的二进制编码；例如，计算西安交通大学兴庆校区（经度：108.962809，维度：34.262355）的GeoHash的二进制编码：</p>
 <p>（1）经度编码</p>
-<table>
-<thead>
-<tr>
-<th align="center">bit</th>
-<th align="center">min</th>
-<th align="center">mid</th>
-<th align="center">max</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">-180.000</td>
-<td align="center">0.000</td>
-<td align="center">180.000</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">90.000</td>
-<td align="center">180.000</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">90.000</td>
-<td align="center">135.000</td>
-<td align="center">180.000</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">90.000</td>
-<td align="center">112.500</td>
-<td align="center">135.000</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">90.000</td>
-<td align="center">101.250</td>
-<td align="center">112.500</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">101.250</td>
-<td align="center">106.875</td>
-<td align="center">112.500</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">106.875</td>
-<td align="center">109.6875</td>
-<td align="center">112.500</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">106.875</td>
-<td align="center">108.28125</td>
-<td align="center">109.6875</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">108.28125</td>
-<td align="center">108.984375</td>
-<td align="center">109.6875</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">108.28125</td>
-<td align="center">108.6328125</td>
-<td align="center">108.984375</td>
-</tr>
-</tbody></table>
+<p>| bit  |    min    |     mid     |    max     |<br>| :—: | :———-: | :————-: | :————: |<br>|  1   | -180.000  |    0.000    |  180.000   |<br>|  1   |     0     |   90.000    |  180.000   |<br>|  0   |  90.000   |   135.000   |  180.000   |<br>|  0   |  90.000   |   112.500   |  135.000   |<br>|  1   |  90.000   |   101.250   |  112.500   |<br>|  1   |  101.250  |   106.875   |  112.500   |<br>|  0   |  106.875  |  109.6875   |  112.500   |<br>|  1   |  106.875  |  108.28125  |  109.6875  |<br>|  0   | 108.28125 | 108.984375  |  109.6875  |<br>|  1   | 108.28125 | 108.6328125 | 108.984375 |</p>
 <p>（2）纬度编码</p>
-<table>
-<thead>
-<tr>
-<th align="center">bit</th>
-<th align="center">min</th>
-<th align="center">mid</th>
-<th align="center">max</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">-90.000</td>
-<td align="center">0.000</td>
-<td align="center">90.000</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">0.000</td>
-<td align="center">45.000</td>
-<td align="center">90.000</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">0.000</td>
-<td align="center">22.500</td>
-<td align="center">45.000</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">33.750</td>
-<td align="center">39.375</td>
-<td align="center">45.000</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">33.750</td>
-<td align="center">36.5625</td>
-<td align="center">39.375</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">33.750</td>
-<td align="center">35.15625</td>
-<td align="center">36.5625</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">33.750</td>
-<td align="center">34.453125</td>
-<td align="center">35.15625</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">33.750</td>
-<td align="center">34.1015625</td>
-<td align="center">34.453125</td>
-</tr>
-<tr>
-<td align="center">0</td>
-<td align="center">34.1015625</td>
-<td align="center">34.27734375</td>
-<td align="center">34.453125</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">34.1015625</td>
-<td align="center">34.189453125</td>
-<td align="center">34.27734375</td>
-</tr>
-</tbody></table>
+<p>| bit  |    min     |     mid      |     max     |<br>| :—: | :————: | :—————: | :————-: |<br>|  1   |  -90.000   |    0.000     |   90.000    |<br>|  0   |   0.000    |    45.000    |   90.000    |<br>|  1   |   0.000    |    22.500    |   45.000    |<br>|  0   |   33.750   |    39.375    |   45.000    |<br>|  0   |   33.750   |   36.5625    |   39.375    |<br>|  0   |   33.750   |   35.15625   |   36.5625   |<br>|  0   |   33.750   |  34.453125   |  35.15625   |<br>|  1   |   33.750   |  34.1015625  |  34.453125  |<br>|  0   | 34.1015625 | 34.27734375  |  34.453125  |<br>|  1   | 34.1015625 | 34.189453125 | 34.27734375 |</p>
 <p>得到经度编码1100110101和纬度编码1010000101；可见，当两个POI的经度或纬度的二进制编码前缀越相似，说明两个POI的经度或纬度越接近。</p>
 </li>
 <li><p>将经度编码和纬度编码进行组合</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501662.png" alt="经纬度编码组合" style="zoom: 32%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501662.png" alt="经纬度编码组合" style="zoom: 32%;"></p>
 <p>采用偶数位放经度，奇数位放纬度策略，交替选择经度编码和纬度编码组合成新的二进制编码：11100 10010 10010 10101</p>
 <p>每四位二进制编码对应一位十进制编码，转换得到：28 18 18 21；因为坐标信息中的经度和纬度不是独立的，这种组合编码方式同时考虑了经度和纬度两个维度的因素。</p>
 </li>
@@ -1196,30 +1041,27 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
 <p>Base32编码：Base系列字节编码为 ASCII 中的可见字符；Base32编码将字节编码为 ASCII 中的可见字符，将字节切为 5 个一组，每 5 个字节可以重组为 8 个字符。如果不够 5 个字节，那么就在切出的最后一组后边充 0，充够 5 位，然后右边充 =，充够 8组。例如：5个字节：00000001 00000011 00000111 00001111 00011111 切分为 00000 00100 00001 10000 01110 00011 11000 11111 每5个一组，重组为8组，每组对应一个字符，转换为十进制：0 4 1 16 14 3 24 31，查Base32字母表得到对应的字符串：AEBQODY7</p>
 </li>
 </ol>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501599.png" alt="Base32字母表" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501599.png" alt="Base32字母表" style="zoom:50%;"></p>
 <p>类似地，可以将GeoHash的十进制编码28 18 18 21转换为字符串4ssv，4ssv即为西安交通大学兴庆校区的GeoHash编码；可见，GeoHash编码字符串越长，POI的坐标精度越高，定位越准确。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501899.png" alt="geohash长度对应精度和误差" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501899.png" alt="geohash长度对应精度和误差" style="zoom:50%;"></p>
 <p>由上表可见，当GeoHash编码长度为8时，精度在19米左右，而当编码长度为9时，精度在2米左右，编码长度需要根据具体的数据情况和实际的业务场景决定。</p>
 <h5 id="GeoHash原理图解"><a href="#GeoHash原理图解" class="headerlink" title="GeoHash原理图解"></a>GeoHash原理图解</h5><p>GeoHash分别给经度和维度编码，然后将经纬度两串编码交叉组合成一串编码，这种编码方式在空间中的表示结果如下图所示。我们将二进制编码的结果填写到空间中，当将空间划分为四块时候，编码的顺序分别是左下角00，左上角01，右下脚10，右上角11，也就是类似于Z的曲线，当我们递归的将各个块分解成更小的子块时，编码的顺序是自相似的（分形），每一个子快也形成Z曲线，这种类型的曲线被称为Peano空间填充曲线。这种类型的空间填充曲线的优点是将二维空间转换成一维曲线（事实上是分形维），对大部分而言，编码相似的距离也相近。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501046.png" alt="GeoHash原理图解">　</p>
-<p>GeoHash的0、1串序列是经度和纬度交替进行排列，偶数位对应的序列为经度序列，奇数位对应的序列为纬度序列，<strong>在进行第一次划分时，GeoHash0、1序列中的前5个bits（11100），那么这5bits中有3bits是表示经度，2bits表示纬度</strong>，所以第一次划分时，是将经度划分成8个区段（2^3 = 8），将纬度划分为4个区段（2^2 = 4），**这样就形成了32个区域(对应Base32)**。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501292.jpg" alt="geohash编码" style="zoom: 67%;">
-
+<p>GeoHash的0、1串序列是经度和纬度交替进行排列，偶数位对应的序列为经度序列，奇数位对应的序列为纬度序列，<strong>在进行第一次划分时，GeoHash0、1序列中的前5个bits（11100），那么这5bits中有3bits是表示经度，2bits表示纬度</strong>，所以第一次划分时，是将经度划分成8个区段（2^3 = 8），将纬度划分为4个区段（2^2 = 4），<strong>这样就形成了32个区域(对应Base32)</strong>。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501292.jpg" alt="geohash编码" style="zoom: 67%;"></p>
 <p>这样，GeoHash就可以将整个地图或者是某个区域划分成32个区域：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501527.jpg" alt="geohash划分" style="zoom: 67%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501527.jpg" alt="geohash划分" style="zoom: 67%;"></p>
 <p>然后随着编码序列长度的增加，再不断在区域内递归划分更小的区域；换句话说，geoHash编码长度越长，所覆盖的地理位置范围就越小：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501951.png" alt="geohash编码对应地理位置范围" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501951.png" alt="geohash编码对应地理位置范围" style="zoom:50%;"></p>
 <h5 id="GeoHash存在问题及解决方案"><a href="#GeoHash存在问题及解决方案" class="headerlink" title="GeoHash存在问题及解决方案"></a>GeoHash存在问题及解决方案</h5><ul>
 <li><p>边缘问题</p>
 <p>由于GeoHash是将区域划分为规则矩形，并对每个矩形进行编码，这样在查询附近POI信息时会导致下图中的<strong>边缘问题</strong>：比如红色的点是当前位置，绿色的两个点分别是附近的两个餐馆，但是在查询的时候会发现距离较远餐馆的GeoHash编码与我们一样（在同一个GeoHash区域），而较近餐馆的GeoHash编码与我们不一致；所以在查询时，除了使用当前位置的GeoHash编码进行匹配外，还使用周围8个区域的GeoHash编码，这样就可以避免边缘问题。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501234.png" alt="边缘问题" style="zoom:150%;"></li>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501234.png" alt="边缘问题" style="zoom:150%;"></p>
+</li>
 <li><p>突变问题</p>
 <p>现有的GeoHash算法使用的是Peano空间填充曲线，Peano空间填充曲线最大的缺点就是突变性，有些编码相邻但距离却相差很远，比如0111与1000，编码是相邻的，但距离相差很大，导致了<strong>突变问题</strong>；因此在查询POI信息时，首先筛选GeoHash编码相似的POI点，然后进行实际距离计算。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501702.png" alt="突变问题" style="zoom:50%;"></li>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501702.png" alt="突变问题" style="zoom:50%;"></p>
+</li>
 </ul>
 <h5 id="GeoHash的代码实现"><a href="#GeoHash的代码实现" class="headerlink" title="GeoHash的代码实现"></a>GeoHash的代码实现</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">BitSet</span></span><span class="token punctuation">;</span>
@@ -1430,9 +1272,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>geo<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> geo<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
 <h4 id="基于Redis的POI搜索实现"><a href="#基于Redis的POI搜索实现" class="headerlink" title="基于Redis的POI搜索实现"></a>基于Redis的POI搜索实现</h4><h5 id="爬取西安市POI数据"><a href="#爬取西安市POI数据" class="headerlink" title="爬取西安市POI数据"></a>爬取西安市POI数据</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> urllib<span class="token punctuation">.</span>parse <span class="token keyword">import</span> quote
 <span class="token keyword">from</span> urllib <span class="token keyword">import</span> request
 <span class="token keyword">import</span> json
@@ -1504,10 +1343,8 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
     <span class="token keyword">for</span> keyword <span class="token keyword">in</span> keyword_list<span class="token punctuation">:</span>
         pois <span class="token operator">=</span> getpois<span class="token punctuation">(</span>city<span class="token punctuation">,</span> keyword<span class="token punctuation">)</span>
         write_to_excel<span class="token punctuation">(</span>pois<span class="token punctuation">,</span> city<span class="token punctuation">,</span> keyword<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>餐饮服务类型部分POI数据展示：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501285.png" alt="餐饮服务类型部分POI数据" style="zoom: 50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501285.png" alt="餐饮服务类型部分POI数据" style="zoom: 50%;"></p>
 <h5 id="将数据写入Redis"><a href="#将数据写入Redis" class="headerlink" title="将数据写入Redis"></a>将数据写入Redis</h5><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">insert_pois</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>keyword_list<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         pois_info <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
@@ -1537,7 +1374,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
         r<span class="token punctuation">.</span>geoadd<span class="token punctuation">(</span><span class="token string">'geo_'</span> <span class="token operator">+</span> key_list<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> pois_geo<span class="token punctuation">)</span>
         r<span class="token punctuation">.</span>hmset<span class="token punctuation">(</span><span class="token string">'h_'</span> <span class="token operator">+</span> key_list<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> pois_info<span class="token punctuation">)</span>
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'insert {} successful'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>keyword_list<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>核心步骤：</p>
 <ol>
 <li>使用geoadd函数写入POI的id，经度和纬度</li>
@@ -1567,7 +1403,6 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                 <span class="token keyword">break</span><span class="token punctuation">;</span>
         poi_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>poi_json<span class="token punctuation">)</span>
     <span class="token keyword">return</span> poi_list<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>核心步骤：</p>
 <ol>
 <li>使用georadius函数获取符合条件的POI的id</li>
@@ -1588,19 +1423,10 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
 
     poi_map<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token string">'map.html'</span><span class="token punctuation">)</span>
     webbrowser<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'map.html'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
-
-
-
 <p>可视化结果：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501654.png" alt="POI查询结果可视化" style="zoom:30%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161501654.png" alt="POI查询结果可视化" style="zoom:30%;"></p>
 <p>图中绿色标记点为西安交通大学兴庆校区，红色标记点为兴庆校区2公里以内的餐饮服务；当该范围内POI信息无法满足需求时，可以进一步扩大查询范围（5公里以内）：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161502770.png" alt="POI查询结果可视化" style="zoom:30%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161502770.png" alt="POI查询结果可视化" style="zoom:30%;"></p>
 
                 
             </div>
@@ -1667,6 +1493,10 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                             
                                 <a href="/tags/redis/">
                                     <span class="chip bg-color">redis</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">源码</span>
                                 </a>
                             
                         </div>
@@ -1852,7 +1682,7 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            讲一讲我为什么要搭建自己的博客。
                         
                     </div>
                     <div class="publish-info">
@@ -1889,24 +1719,24 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji-bao-gao/">
+                <a href="/2022/01/02/ji-yu-avx-yu-duo-xian-cheng-de-aes-suan-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="西安防疫一码通平台的故障分析及优化设计报告">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="基于AVX与多线程的AES算法">
                         
-                        <span class="card-title">西安防疫一码通平台的故障分析及优化设计报告</span>
+                        <span class="card-title">基于AVX与多线程的AES算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            课程作业，实验结果一塌糊涂。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-02
                             </span>
                         <span class="publish-author">
                             
@@ -1916,8 +1746,8 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                    研发
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -1927,8 +1757,8 @@ asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
-                        <span class="chip bg-color">高并发</span>
+                    <a href="/tags/AES/">
+                        <span class="chip bg-color">AES</span>
                     </a>
                     
                 </div>
@@ -2347,6 +2177,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 

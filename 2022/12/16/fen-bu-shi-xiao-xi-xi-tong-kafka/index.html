@@ -515,24 +515,19 @@
 <li><strong>ZooKeeper</strong>：Kafka 通过 ZooKeeper 来存储集群的 meta 信息等。</li>
 </ul>
 <h4 id="Kafka架构"><a href="#Kafka架构" class="headerlink" title="Kafka架构"></a>Kafka架构</h4><p>如下图所示，基于 Kafka-ZooKeeper 的分布式消息队列系统总体架构包括若干 Producer（消息生产者），若干 broker（作为 Kafka 节点的服务器），若干 Consumer（Group），以及一个 ZooKeeper 集群。Kafka通过 ZooKeeper 管理集群配置、选举 Leader 以及在 consumer group 发生变化时进行 Rebalance（即消费者负载均衡）。Producer 使用 push模式将消息发布到 broker，Consumer 使用 pull模式从 broker 订阅并消费消息。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212392.png" alt="Kafka架构" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212392.png" alt="Kafka架构" style="zoom:50%;"></p>
 <p>如下图所示，许多个的brokers组成一个kafka集群，每一个 Topic 被分为多个 Partitions，即物理分区；出于负载均衡考虑，同一个 Topic 的 Partitions 分别存储于 Kafka 集群的多个 broker 上，不同的broker会作为不同 Topic 的 Partitions的leader，Producer 可以通过随机或者 hash 等方式，将消息平均发送到多个 partition 上，以实现负载均衡。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212551.png" alt="kafka架构" style="zoom:67%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212551.png" alt="kafka架构" style="zoom:67%;"></p>
 <h4 id="Kafka读写机制"><a href="#Kafka读写机制" class="headerlink" title="Kafka读写机制"></a>Kafka读写机制</h4><h5 id="Topic和Partitions"><a href="#Topic和Partitions" class="headerlink" title="Topic和Partitions"></a>Topic和Partitions</h5><p>Kafka将 topic 划分成多个 partition，每个 partition 在存储层面是 append log 文件。任何发布到此 partition 的消息都会被追加到log文件的尾部，每条消息在文件中的位置称为 offset（偏移量），offset 为一个 long 型的数字，它唯一标记一条消息。 Kafka 机制中，producer push 来的消息是追加（append）到 partition 中的，这是一种顺序写磁盘的机制，效率远高于随机写内存，如下图所示：</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212709.png" alt="顺序写" style="zoom: 33%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212709.png" alt="顺序写" style="zoom: 33%;"></p>
 <p>Kafka会根据一定的算法将partition均匀分布到不同的 broker（服务器）上，当 producer 发布消息时，producer 客户端也会根据一定的算法选定目标 partition，将消息推送到目标partition，目标partition再将消息同步到其他brokers相应的partition，partiton 机制可以极大地提高吞吐量，并且使得系统具备良好的水平扩展能力。</p>
 <h5 id="Kafka-文件存储机制"><a href="#Kafka-文件存储机制" class="headerlink" title="Kafka 文件存储机制"></a>Kafka 文件存储机制</h5><p>Kafka 消息是以 topic 进行分类， topic 在物理层面以 partition 为分组，一个 partition 由多个 segment 组成。</p>
-<h6 id="partition文件存储方式"><a href="#partition文件存储方式" class="headerlink" title="partition文件存储方式"></a>partition文件存储方式</h6><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212410.png" alt="partition文件存储方式" style="zoom: 33%;">
-
+<h6 id="partition文件存储方式"><a href="#partition文件存储方式" class="headerlink" title="partition文件存储方式"></a>partition文件存储方式</h6><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212410.png" alt="partition文件存储方式" style="zoom: 33%;"></p>
 <ul>
 <li>每个partition(目录)相当于一个巨型文件被平均分配到多个大小相等segment(段)数据文件中。但每个段segment file消息数量不一定相等，这种特性方便快速删除old segment file，有效提高磁盘利用率。</li>
 <li>每个partition只需要支持顺序读写即可，Kafka往磁盘上写数据时，就是追加数据，没有随机写的操作，如果一个服务器磁盘达到一定的个数，磁盘也达到一定转数，往磁盘里面顺序写（追加写）数据的速度和写内存的速度差不多。</li>
 </ul>
-<h6 id="partition中segment文件存储结构"><a href="#partition中segment文件存储结构" class="headerlink" title="partition中segment文件存储结构"></a>partition中segment文件存储结构</h6><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212706.png" alt="segment文件存储结构" style="zoom:50%;">
-
+<h6 id="partition中segment文件存储结构"><a href="#partition中segment文件存储结构" class="headerlink" title="partition中segment文件存储结构"></a>partition中segment文件存储结构</h6><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212706.png" alt="segment文件存储结构" style="zoom:50%;"></p>
 <ul>
 <li>segment file：由index file和data file两部分一一对应组成，分别表示为“.index”索引文件和“.log”数据文件；</li>
 <li>segment文件命名规则：partition全局的第一个segment从0开始，后续每个segment文件名为上一个segment文件最后一条消息的offset值。</li>
@@ -540,8 +535,7 @@
 <p>索引文件存储大量元数据，数据文件存储大量消息，索引文件中元数据指向对应数据文件中message的物理偏移地址。segment index file采取稀疏索引存储方式，它减少索引文件大小，通过mmap可以直接内存操作，稀疏索引为数据文件的每个对应message设置一个元数据指针，它比稠密索引节省了更多的存储空间，但查找起来需要消耗更多的时间。</p>
 <h5 id="Kafka页缓存和零拷贝机制"><a href="#Kafka页缓存和零拷贝机制" class="headerlink" title="Kafka页缓存和零拷贝机制"></a>Kafka页缓存和零拷贝机制</h5><p><strong>页缓存</strong>可以加速数据I/O：写数据时首先写缓存，将写入的页标记为dirty，然后向外部存储flush，也就是缓存写机制中的write-back或者write-through；读数据时首先读取缓存，若未命中，再去外部存储读取，并且将读取来的数据也加入缓存。</p>
 <p><strong>零拷贝</strong>是指数据不需要经由应用程序，直接从磁盘文件复制到网卡。零拷贝大大提高了应用程序的性能，减少了内核和用户模式之间的上下文切换。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212226.png" alt="page cache和零拷贝机制" style="zoom:50%;">
-
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212226.png" alt="page cache和零拷贝机制" style="zoom:50%;"></p>
 <h6 id="写message"><a href="#写message" class="headerlink" title="写message"></a>写message</h6><ul>
 <li>消息从Java堆转入page cache(即物理内存)。</li>
 <li>由异步线程刷盘，消息从page cache刷入磁盘。</li>
@@ -561,7 +555,8 @@
 <li><p>局部有序：一个Topic下的消息，只需要满足同一业务字段的要按照生产顺序消费。例如：Topic消息是订单的流水表，包含订单orderId，业务要求同一个orderId的消息需要按照生产顺序进行消费。</p>
 <ul>
 <li><p>要满足局部有序，只需要在发消息的时候指定Partition Key，Kafka对其进行Hash计算，根据计算结果决定放入哪个Partition。这样Partition Key相同的消息会放在同一个Partition。此时，Partition的数量仍然可以设置多个，提升Topic的整体吞吐量。如下图所示，在不增加partition数量的情况下想提高消费速度，可以考虑再次hash唯一标识（例如订单orderId）到不同的线程上，多个消费者线程并发处理消息（依旧可以保证局部有序）。</p>
-<img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212505.png" alt="kafka消息顺序性" style="zoom:50%;"></li>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212505.png" alt="kafka消息顺序性" style="zoom:50%;"></p>
+</li>
 </ul>
 </li>
 </ol>
@@ -607,8 +602,7 @@
 <li>Kafka用于将数据流式传输到数据池，应用程序和实时流分析系统。</li>
 </ul>
 <h4 id="Mafka"><a href="#Mafka" class="headerlink" title="Mafka"></a>Mafka</h4><p>Mafka一个基于Kafka开发的一个分布式消息中间件综合解决方案。</p>
-<h4 id="Mafka架构"><a href="#Mafka架构" class="headerlink" title="Mafka架构"></a>Mafka架构</h4><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212068.png" alt="Mafka架构" style="zoom:50%;">
-
+<h4 id="Mafka架构"><a href="#Mafka架构" class="headerlink" title="Mafka架构"></a>Mafka架构</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212068.png" alt="Mafka架构" style="zoom:50%;"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhitao/article/details/44858217">Mafka平台架构</a></p>
 <p>Mafka-client：发送和接收消息</p>
 <p>Mafka-manager：管理集群</p>
@@ -865,7 +859,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            Kafka是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日志系统或消息系统，本文主要对kafka的基础知识进行总结。
                         
                     </div>
                     <div class="publish-info">
@@ -1361,6 +1355,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
