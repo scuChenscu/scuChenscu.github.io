@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="小程序多模块数据统计解决方案, 杂记">
+    <meta name="keywords" content="Java字节码剖析String, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>小程序多模块数据统计解决方案 | 杂记</title>
+    <title>Java字节码剖析String | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -425,12 +425,12 @@ mjx-container[display="true"] + br {
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">小程序多模块数据统计解决方案</h1>
+                    <h1 class="description center-align post-title">Java字节码剖析String</h1>
                 </div>
             </div>
         </div>
@@ -546,12 +546,12 @@ mjx-container[display="true"] + br {
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                                <span class="chip bg-color">微信小程序</span>
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/JavaScript/">
-                                <span class="chip bg-color">JavaScript</span>
+                            <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                <span class="chip bg-color">源码</span>
                             </a>
                         
                     </div>
@@ -579,7 +579,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-03
+                    2022-11-22
                 </div>
                 
 
@@ -603,131 +603,73 @@ mjx-container[display="true"] + br {
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="小程序多模块数据统计解决方案"><a href="#小程序多模块数据统计解决方案" class="headerlink" title="小程序多模块数据统计解决方案"></a>小程序多模块数据统计解决方案</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>微信小程序端新员工入职信息采集，主要有以下几点：</p>
-<ol>
-<li>项目是从0到1，在开发过程面临需求变动、方案的合理性考量，信息模版由前端来规定，将整个userInfo对象转化为字符串形式上上传到后端。</li>
-<li>在最初的设计中，将用户信息数据划分为多个模块，每个模块由一个page负责管理，最后在主页面进行所有模块数据完整度进行统计，完整度达到100%才能提交信息</li>
-<li>对于用户角色不同，对整个信息模板的结构有所不同，给数据统计带来了不小的挑战</li>
-</ol>
-<h2 id="面临主要问题"><a href="#面临主要问题" class="headerlink" title="面临主要问题"></a>面临主要问题</h2><ol>
-<li>前后端模板合并</li>
-<li>根据不同的用户角色渲染不同的模板结构</li>
-<li>数据完整度的统计</li>
-</ol>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h4 id="相关技术点"><a href="#相关技术点" class="headerlink" title="相关技术点"></a>相关技术点</h4><ul>
-<li>小程序生命周期，onload</li>
-<li>小程序data</li>
-<li>store机制</li>
-<li>js的import</li>
-<li>深浅拷贝</li>
-<li>对象遍历</li>
-<li>小程序的page</li>
+                <h2 id="Java命令"><a href="#Java命令" class="headerlink" title="Java命令"></a>Java命令</h2><p>javac：.java文件编译成.class文件，.class文件是字节码（概念类似机器码，字节码是JVM层面）<br>java：执行.class文件<br>javap：反汇编，.class文件反汇编成JVM的指令，<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html">The Java Virtual Machine Instruction Set</a></p>
+<h2 id="IDEA执行javap"><a href="#IDEA执行javap" class="headerlink" title="IDEA执行javap"></a>IDEA执行javap</h2><p>IDEA安装jclasslib插件<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241144.png" alt="IDEA安装jclasslib插件"><br>使用插件<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241277.png" alt="IDEA使用jclasslib插件"><br>第一个是插件，第二个是IDEA自带的，本质上都是执行javap命令</p>
+<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"> <span class="token number">0</span> new <span class="token comment">#2 &lt;java/lang/String&gt;  ## Create new object, #2 对应常量池中的String.class</span>
+ <span class="token number">3</span> dup <span class="token comment">## Duplicate the top operand stack value</span>
+ <span class="token number">4</span> ldc <span class="token comment">#3 &lt;Hello World!&gt;  ## Push item from run-time constant pool</span>
+ <span class="token number">6</span> invokespecial <span class="token comment">#4 &lt;java/lang/String.&lt;init&gt; : (Ljava/lang/String;)V&gt;</span>
+ <span class="token number">9</span> astore_1  <span class="token comment">## Store reference into local variable 1</span>
+<span class="token number">10</span> <span class="token builtin class-name">return</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241449.png" alt="局部变量表"><br>下面逐条指令分析</p>
+<h3 id="new-2"><a href="#new-2" class="headerlink" title="new #2"></a>new #2</h3><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241640.png" alt="new指令"><br>new指令创建了一个String对象（#2 表示常量池中String类），并且把对象引用objectref压入Operand Stack；需要注意，此时创建的对象还不是完整的对象；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241744.png" alt="常量池对象"></p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241874.png" alt="new指令Notes"></p>
+<h3 id="dup"><a href="#dup" class="headerlink" title="dup"></a>dup</h3><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241056.png" alt="dup指令"><br>dup指令拷贝栈顶的值，即是dup指令执行后Operand Stack有两个objectref，该操作的意义后续再说；</p>
+<h3 id="ldc-3"><a href="#ldc-3" class="headerlink" title="ldc #3"></a>ldc #3</h3><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241281.png" alt="ldc指令"><br>ldc指令从常量池取出对应的值并压入Operand Stack；#3表示常量池中字符串常量”Hello World!”；到该步骤说明了new String()方法会在常量池创建对应的字符串常量；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241475.png" alt="常量池对象"><br>我们可以做进一步的验证，在这里我们new一个普通的对象：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Object</span> object <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">0</span> new <span class="token comment">#7 &lt;java/lang/Object&gt;</span>
+<span class="token number">3</span> dup
+<span class="token number">4</span> invokespecial <span class="token comment">#1 &lt;java/lang/Object.&lt;init&gt; : ()V&gt;</span>
+<span class="token number">7</span> astore_1
+<span class="token number">8</span> <span class="token builtin class-name">return</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，以上指令没有包含ldc</p>
+<h3 id="invokespecial-4"><a href="#invokespecial-4" class="headerlink" title="invokespecial #4"></a>invokespecial #4</h3><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241656.png" alt="invokespecial指令"><br>invokespecial指令实例化对象，该步骤会将栈顶的字符串常量”Hello World!”弹出，调用String类的父类和它本身的构造方法；#4 对应String类的init方法；此时得到一个完整的String对象；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241794.png" alt="常量池对象"></p>
+<h3 id="astore-1"><a href="#astore-1" class="headerlink" title="astore_1"></a>astore_1</h3><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241927.png" alt="astore指令"><br>astore命令将Operand Stack的栈顶值弹出，写入局部变量表，_1表示局部变量表中的Nr.1；我们回顾前面的dup指令拷贝了一份引用，此时弹出一份引用，栈顶还有一份引用，因为从历史经验来看，我们通常会在定义了一个变量后紧接着就会使用它；所以JVM拷贝引用便于后续继续使用该变量；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241972.png" alt="局部变量表"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从以上指令可以得出：</p>
+<ul>
+<li>new Object()方法不是一个原子性操作（双重检查锁为什么要volatile关键字）</li>
+<li>new String()方法会创建两个对象，一个在常量池（如果没有则创建），一个在堆，还有一个栈中的引用；</li>
 </ul>
-<h4 id="微信小程序页面page实例的生命周期"><a href="#微信小程序页面page实例的生命周期" class="headerlink" title="微信小程序页面page实例的生命周期"></a>微信小程序<strong>页面page实例</strong>的生命周期</h4><p>我们先来讨论一波微信小程序页面page的生命周期，此处要注意区分小程序的生命周期和page实例的生命周期</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254324.png" alt="page生命周期"></p>
-<p>从上图我们可以看出，page实例执行顺序是：</p>
-<p>onLoad -&gt; onShow -&gt; onReady</p>
-<p>然后之后的page显示与隐藏（切换page，切换到后台）执行onShow函数和onHide函数，最后page销毁，执行onUnload函数</p>
-<p>现在，提出两个问题：</p>
-<ol>
-<li><p>三个函数是严格地串行执行吗，即是onLoad函数执行完毕再去执行onShow函数吗，显然不是。（JS的异步编程）</p>
-</li>
-<li><p>网上说onLoad函数只执行一次，具体是什么意思呢？</p>
-</li>
-</ol>
-<p>对于第一个问题，我只能说，懂得都懂，不懂的也不方便解释太多。</p>
-<p>对于第二个问题，严格上讲，在一个page实例的整个生命周期，onLoad函数只会执行一次。忽略前半句话，很容易让同学们产生误解。</p>
-<p>通过上面这句话，我们可以理解到，一个page实例从最开始的onLoad走到最后的onUnload，一个完整生命周期走完，页面从创建走到销毁。</p>
-<p>但是，如果我再次打开这个页面呢？显然，onLoad函数会再次执行，但是，这个page实例已经不再是之前的page实例了，他是上一个page实例销毁之后，重新创建的page实例，他们几乎一样，但是却是两个实例。</p>
-<p>那一个page实例什么时候会执行onUnload函数呢？</p>
-<p>这个时候，就不得不谈，微信小程序的页面栈，以及页面路由方式，当然，我才懒得谈呢。</p>
-<p>我们只需要知道一点：小程序的页面栈是有深度限制的，也就是， 当小程序的页面堆栈满了之后，就无法打开新的页面，只能进行回退，或者调用其他的某些路由进行页面出栈、清栈，或者直接把小程序关了，万事大吉！</p>
-<p>这个时候，聪明的同学们已经知道了，出栈、清栈，不就是调用page的onUnload函数嘛，你瞧我这小脑瓜，真聪明！</p>
-<p>经过本人的严格测试，小程序页面栈最多支持10个page，与官方说法一致</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254456.png" alt="小程序页面栈"></p>
-<p>在打开10个page后，再尝试通过wx.navigateTo()函数路由到新的page，小程序没有反应。</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254639.png" alt="页面路由和生命周期函数"></p>
-<p>针对小程序官方网站的页面路由规则，我进行了实验验证，得出结论：</p>
-<ol>
-<li><p>小程序页面栈深度最大值为10，此时navigateTo会失效；navigateTo失效很容易理解，因为他只是onHide当前页面，并没有销毁页面，所以下一个页面无法onLoad是理所当然的；redirectTo有效，因为redirectTo销毁了当前页面，onLoad新的页面。</p>
-</li>
-<li><p>如果一个页面已经在页面栈中，我们再navigateTo到该页面，会堆栈吗？答案是会的，有图有真相。</p>
-</li>
-</ol>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212162254723.png" alt="页面堆栈"></p>
-<p>好了，谈完page实例的生命周期。</p>
-<p>谈上面的内容，主要想说明什么呢？</p>
-<p>只是想说明一点：不要妄图利用onLoad函数来控制对某个引用对象的一次性操作。（那为什么要这么做呢，因为项目的业务场景，让我想这么干，我们将之称为：奇技淫巧）</p>
-<p>其实还想谈一谈，小程序的双线程、MVVM模型，可惜，我不会，就不谈了。</p>
-<p>下面，谈一谈，小程序page中的js文件的变量</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// page.js</span>
-<span class="token comment">// 小程序规定app.json注册的page，只负责page的渲染</span>
-<span class="token comment">// 所以在小程序page的js文件中，Page函数外部声明对象实际上没什么意义</span>
-<span class="token comment">// 因为该变量即使export，别的页面也无法获取使用</span>
-<span class="token comment">// (除非保证声明变量的page先被加载，调用该变量的page后加载)</span>
-<span class="token comment">// 按我的理解，这是一种按需/执行上下文时加载，节省资源</span>
-<span class="token comment">// 毕竟我不是专业前端，我瞎说的</span>
-<span class="token keyword">const</span> object1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
-<span class="token comment">// Page(Object object) 注册小程序中的一个页面。</span>
-<span class="token comment">// 接受一个 Object 类型参数，</span>
-<span class="token comment">// 其指定页面的初始数据、生命周期回调、事件处理函数等。</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token literal-property property">object2</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">object3</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">0</span> ldc <span class="token comment">#3 &lt;Hello World!&gt;</span>
+<span class="token number">2</span> astore_1
+<span class="token number">3</span> <span class="token builtin class-name">return</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>该方式只会在常量池创建（如果没有则创建），不会在堆上创建；</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>方式二比方式一更加简洁，所需要的空间更少，指令更少，所以我们在没有特殊情况下，尽可能使用方式二创建字符串；IDEA编译器也会给出相应的提示：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241053.png" alt="IDEA编译器提示"></li>
+</ul>
+<h2 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">internString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"Hello World!"</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> s2 <span class="token operator">=</span> s1<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> s3 <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<span class="token comment">// 正确示例</span>
-<span class="token comment">// page1</span>
-<span class="token comment">// page1.js</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> object <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token comment">// page1.wxml</span>
-<span class="token operator">&lt;</span>navigator open<span class="token operator">-</span>type<span class="token operator">=</span><span class="token string">"navigateTo"</span> url<span class="token operator">=</span><span class="token string">"/pages/2/2"</span><span class="token operator">&gt;</span>跳转<span class="token operator">&lt;</span><span class="token operator">/</span>navigator<span class="token operator">&gt;</span>
-
-<span class="token comment">// page2.js</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> object <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../1/1'</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-   <span class="token function-variable function">onLoad</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token comment">// 正常执行</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-<span class="token comment">// 错误示例</span>
-<span class="token comment">// page1</span>
-<span class="token comment">// page1.js</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> object <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../2/2'</span>
-<span class="token comment">// page1.wxml</span>
-<span class="token operator">&lt;</span>navigator open<span class="token operator">-</span>type<span class="token operator">=</span><span class="token string">"navigateTo"</span> url<span class="token operator">=</span><span class="token string">"/pages/2/2"</span><span class="token operator">&gt;</span>跳转<span class="token operator">&lt;</span><span class="token operator">/</span>navigator<span class="token operator">&gt;</span>
-
-<span class="token comment">// page2.js</span>
-<span class="token keyword">export</span> <span class="token keyword">const</span> object <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-<span class="token function">Page</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-   <span class="token function-variable function">onLoad</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span>
-    <span class="token comment">// 报错：Error: APP-SERVICE-Engine:Please do not register multiple Pages in pages/2/2.js</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>请问，在一个page的js文件中，object1，object2，object3区别在哪？</p>
-<p>显然，object1对象与page无关，它的作用域是整个js文件，它的生命周期与该js文件的生命周期一致，不管page如何onLoad，unLoad。</p>
-<p>object2，object3的作用域是page内，它们的生命周期与page的生命周期一致。</p>
-<p>object3在data对象中，小程序规定：数据只有在data中，才能进行数据绑定，用于页面渲染。</p>
-<p>而对于object1，object2，object3的修改：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">  <span class="token function">modifyData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    object1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>  <span class="token comment">// 直接修改，注意上文object1声明为const，此处只是举例</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span>object2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// 通过this获取对象，直接修改</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token comment">// 通过setData操作修改</span>
-      object3
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>综上，如果不是非常特殊的业务场景，我们尽量不要在page的js文件内部、Page()函数外部声明变量</p>
-<ol>
-<li>如果是page需要的变量，在Page()函数内部，data对象外部声明该变量；</li>
-<li>如果是全局变量，额外新建js文件，export该变量；</li>
-</ol>
-<p>思想：按需加载、各司其职！</p>
-<p>还想讲一讲js文件export变量，但是懒得写了，就这样吧</p>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">newString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> s2 <span class="token operator">=</span> s1<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> s3 <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">identityHashCode</span><span class="token punctuation">(</span>s3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>打印结果：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241121.png" alt="打印结果"><br>因为String类的hashCode()方法被重写了，此处使用System.identityHashCode()方法，该方法说明不管hashCode()是否被重写，都会返回对象的默认的hashCode()方法；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241236.png" alt="System.identityHashCode()方法"></p>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>从打印结果可以看出，intern()方法是指向常量池（如果没有则创建）；所以当两个字符串的字面量相等，那它们的intern()结果一定是一致的；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241349.png" alt="intern()方法源码注释"><br>那么问题来了，从上面的指令来看，不管哪种方法创建字符串都会在常量池有一份，intern()方法中的常量池中不存在的情况是怎么出现的呢？</li>
+</ul>
+<h2 id="方式四"><a href="#方式四" class="headerlink" title="方式四"></a>方式四</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello "</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241543.png" alt="JVM指令"><br>字节码分析可以得到，该方式创建的字符串，常量池只会存每个分量，整体的值不会存入常量池，并且JVM进行了优化，通过StringBuilder拼接字符串再toString()；在此之后调用s.intern()方法才会将整体的值写入常量池，此处不再赘述；</p>
+<h2 id="方式五"><a href="#方式五" class="headerlink" title="方式五"></a>方式五</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token string">"Hello "</span> <span class="token operator">+</span> <span class="token string">"World!"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241549.png" alt="JVM指令"><br>该方式的指令跟方式二是一样的，并且该步骤是在编译阶段完成的，可以去看一下反编译的.class文件：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241599.png" alt="反编译class文件"><br>.java文件：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241678.png" alt="java文件"><br>此处也说一下反编译和反汇编的区别：反编译是到源码，即.java；反汇编是到汇编语言，即JVM指令，而.class文件是纯纯的字节码，想看纯纯的字节码可以IDEA安装插件：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241810.png" alt="BinEd插件"><br>然后Build Project<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241880.png" alt="Build Project"><br>.class文件Open As Binary<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241979.png" alt="Open As Binary"><br>字节码文件（即.class文件）都会以CAFE BABE开头<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241159.png" alt="字节码文件"></p>
+<h2 id="方式六"><a href="#方式六" class="headerlink" title="方式六"></a>方式六</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"Hello "</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"World!"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>JVM指令：<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170241219.png" alt="JVM指令"></p>
+<h2 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h2><p>该讲的都讲完啦，因为intern()是native方法，想要了解底层实现，可以参考：<br>美团技术团队<a target="_blank" rel="noopener" href="https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html">深入解析String#intern</a></p>
 
                 
             </div>
@@ -754,7 +696,7 @@ mjx-container[display="true"] + br {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/">http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/</a>
+                    <a href="http://example.com/2022/11/22/java-zi-jie-ma-pou-xi-string/">http://example.com/2022/11/22/java-zi-jie-ma-pou-xi-string/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -792,12 +734,12 @@ mjx-container[display="true"] + br {
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                                    <span class="chip bg-color">微信小程序</span>
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
                                 </a>
                             
-                                <a href="/tags/JavaScript/">
-                                    <span class="chip bg-color">JavaScript</span>
+                                <a href="/tags/%E6%BA%90%E7%A0%81/">
+                                    <span class="chip bg-color">源码</span>
                                 </a>
                             
                         </div>
@@ -971,35 +913,31 @@ mjx-container[display="true"] + br {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/08/17/ean-13-shang-pin-tiao-ma/">
+                <a href="/2022/12/14/readme/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="EAN-13商品条码">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="README">
                         
-                        <span class="card-title">EAN-13商品条码</span>
+                        <span class="card-title">README</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            无聊 + 好奇心，本文主要是关于我们日常生活中很常见的商品条形码的基础知识。
+                            讲一讲我为什么要搭建自己的博客。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-17
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-14
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A7%91%E6%99%AE/" class="post-category">
-                                    科普
+                            <a href="/categories/README/" class="post-category">
+                                    README
                                 </a>
                             
                             
@@ -1009,8 +947,8 @@ mjx-container[display="true"] + br {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%95%86%E5%93%81%E6%9D%A1%E7%A0%81/">
-                        <span class="chip bg-color">商品条码</span>
+                    <a href="/tags/README/">
+                        <span class="chip bg-color">README</span>
                     </a>
                     
                 </div>
@@ -1024,24 +962,24 @@ mjx-container[display="true"] + br {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">
+                <a href="/2022/09/16/ji-yu-redis-de-poi-sou-suo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java单例设计模式（懒汉式：DoubleCheck+volatile）">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="基于Redis的POI搜索">
                         
-                        <span class="card-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</span>
+                        <span class="card-title">基于Redis的POI搜索</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            DoubleCheck单例模式以及为什么要使用volatile关键字
+                            Redis是一个使用ANSIC编写的开源、支持网络、基于内存、分布式、可选持久性的键值对存储数据库，本文主要对redis的基础知识进行总结，并分析redis中geo函数的实现原理并给出简单的实践示例。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
                             </span>
                         <span class="publish-author">
                             
@@ -1062,12 +1000,12 @@ mjx-container[display="true"] + br {
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
                     </a>
                     
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/redis/">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
                 </div>
