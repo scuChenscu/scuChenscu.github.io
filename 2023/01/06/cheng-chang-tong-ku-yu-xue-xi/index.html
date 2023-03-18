@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java单例设计模式（懒汉式：DoubleCheck+volatile）, 杂记">
+    <meta name="keywords" content="成长：痛苦与学习, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java单例设计模式（懒汉式：DoubleCheck+volatile） | 杂记</title>
+    <title>成长：痛苦与学习 | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -425,12 +425,12 @@ mjx-container[display="true"] + br {
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</h1>
+                    <h1 class="description center-align post-title">成长：痛苦与学习</h1>
                 </div>
             </div>
         </div>
@@ -546,12 +546,8 @@ mjx-container[display="true"] + br {
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Java/">
-                                <span class="chip bg-color">Java</span>
-                            </a>
-                        
-                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                                <span class="chip bg-color">设计模式</span>
+                            <a href="/tags/%E6%80%9D%E8%80%83/">
+                                <span class="chip bg-color">思考</span>
                             </a>
                         
                     </div>
@@ -562,12 +558,8 @@ mjx-container[display="true"] + br {
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                技术
-                            </a>
-                        
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                研发
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                生活
                             </a>
                         
                     </div>
@@ -579,7 +571,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-21
+                    2023-01-06
                 </div>
                 
 
@@ -588,14 +580,14 @@ mjx-container[display="true"] + br {
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -613,90 +605,14 @@ mjx-container[display="true"] + br {
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>即某个类在整个系统只能有一个实例对象可被获取和使用的代码模式；例如代表JVM运行环境的Runtime类</p>
-<h2 id="单例模式要素"><a href="#单例模式要素" class="headerlink" title="单例模式要素"></a>单例模式要素</h2><ol>
-<li>私有静态引用指向自己的实例</li>
-<li>私有的构造方法</li>
-<li>返回实例对象的公有静态方法</li>
-</ol>
-<p>饿汉式单例模式：直接创建对象，不存在线程安全问题<br>懒汉式单例模式：延迟创建对象，需要时再创建，节省空间</p>
-<h2 id="懒汉式：DoubleCheck-volatile"><a href="#懒汉式：DoubleCheck-volatile" class="headerlink" title="懒汉式：DoubleCheck+volatile"></a>懒汉式：DoubleCheck+volatile</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
-	<span class="token comment">// 2.私有的构造方法</span>
-	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1.调用Singleton的getInstance静态方法</span>
-<span class="token class-name">Singleton</span> singleton <span class="token operator">=</span> <span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 2.创建实例对象</span>
-singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 3.返回实例对象</span>
-<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-<span class="token comment">// 此后，每次调用getInstance方法都直接返回该实例对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>类加载时，初始化静态成员变量singleton1<br>调用getInstance静态方法，在栈中创建引用变量singleton2<br>同时，第一次getInstance方法会执行new Singleton()，在堆中创建一个实例对象singleton3</p>
-<p>三者关系<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170033468.png" alt="变量关系"><br>堆区中只会存在一个singleton实例对象，此后每次调用getInstance方法实际上都是返回该对象。</p>
-<h2 id="DoubleCheck的作用"><a href="#DoubleCheck的作用" class="headerlink" title="DoubleCheck的作用"></a>DoubleCheck的作用</h2><p>第一次：判断singleton是否已经实例化，如果是，直接返回，否则，执行实例化。<br>第二次：对Singleton.class加锁后，再次判断singleton是否实例化，因为在并发场景下，该线程在判断singleton==null之后和加锁之前，其他线程已经实例化，所以需要再次判断。</p>
-<h2 id="Java对象实例化"><a href="#Java对象实例化" class="headerlink" title="Java对象实例化"></a>Java对象实例化</h2><ol>
-<li>确认类元信息是否存在；即在JVM内存的元数据区检查需要创建的类元信息是否存在，若不存在，则在双亲委派模式下查找对应的.class文件。如果没有找到文件，抛出ClassNotFoundException异常，如果找到，则进行类加载，并生成对应的Class类对象。</li>
-<li>分配对象内存；计算对象占用空间大小，如果实例成员变量是引用变量，仅需要分配4个字节的引用变量空间，接着在堆中划分一块内存给新对象。</li>
-<li>设定默认值；即为成员变量设定各种形式的零值。</li>
-<li>设置对象头；设置新对象的哈希码、GC信息、锁信息、对象所属的类元信息等。</li>
-<li><p>执行init方法；初始化成员变量，执行实例化代码块，调用类的构造方法，并把堆内对象的首地址赋值给引用变量。</p>
-<h2 id="volatile的作用"><a href="#volatile的作用" class="headerlink" title="volatile的作用"></a>volatile的作用</h2></li>
-</ol>
-<p>volatile解决多线程共享变量的可见性问题。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
-	<span class="token comment">// 2.私有的构造方法</span>
-	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果不使用volatile关键字，使用方在调用getInstance方法时，有可能会得到未初始化完成的对象。<br>因为对java编译器而言，初始化singleton实例和将对象地址写入singleton字段非原子操作，且两个阶段的执行顺序是未定义的。</p>
-<p>  （1）初始化singleton实例<br> （2）静态成员变量singleton指向该地址，即将堆地址赋值给singleton字段</p>
-<p> 假设某线程执行new singleton()时，先执行（2），此时，另一个线程调用getInstance方法，singleton!=null，会直接返回一个不正确的singleton单例对象，因为此时（1）还没有执行成功，即对象里面的成员变量没有完成赋值，还是默认值。<br> volatile关键字修饰目标属性，这样singleton限制了编译器对它的读写操作进行指令重排，确定对象实例化后才返回引用。</p>
-<h2 id="字节码分析"><a href="#字节码分析" class="headerlink" title="字节码分析"></a>字节码分析</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/* new determines the size in bytes of instances of the given class and allocates memory 
-the new instance from the garbage collected heap. The fields of the instance are set to the
-initial value 0, or null. Next, a reference to the new object is pushed onto the operand
-stack 
-*/</span>
-<span class="token constant">NEW</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span>
-<span class="token comment">/* This pops the top single-word value off the operand stack, and then pushes that value 
-twice
-*/</span>
-<span class="token constant">DUP</span>
-<span class="token comment">// The main use of invokespecial is to invoke an object's instance initialization method</span>
-<span class="token constant">INVOKESPECIAL</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token generics"><span class="token punctuation">&lt;</span>init<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
-<span class="token comment">// Pops objectref off the stack and stores it in local variable</span>
-<span class="token constant">ASTORE</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol>
-<li>为对象分配内存空间，初始化成员变量值为0或者NULL；将对象堆首地址赋值给引用变量，压栈；</li>
-<li>复制栈顶地址，即先pop一次，然后再push两次，对于此步操作的意义，网上的解释是：一般实例化一个对象后紧接着会使用它，将引用变量存回局部变量表的同时保留一份在栈上；</li>
-<li>调用对象的实例初始化方法，即为对象的成员变量赋值；</li>
-<li>将对象引用从栈中取出，存入局部变量表。</li>
-</ol>
-<p>如果不使用volatile关键字，步骤1中的”将对象堆首地址赋值给引用变量“和步骤3中的“为对象的成员变量赋值”可能指令重排，无法保证返回正确的对象。</p>
+                <p>​        上班摸鱼的时候，看了很多前辈在公司内部博客发表的文章，主要是一些成长经历的分享；他们的成长过程大抵相似：初入新环境，最开始的不适应、不自信，经过不断地学习、积累，最终突破、成长，成为可以独当一面的专业人才，在某一领域具备一定的影响力。我从中提炼出关于成长的两个词语：痛苦和学习。我相信绝大多数人的成长经历都不会是一帆风顺的，成长的过程总是充满了荆棘，有没有痛苦的成长吗？有，一是站在巨人的肩膀上摘果实，二是永远生活在舒适区的零成长；所谓的零成长，即是随着时间流逝线性积累生活经验，没有什么脱胎换骨的质变。所以，我认为，真正的成长是要经过痛苦磨炼，而造成这些痛苦的根源便是学习。学习，从0到1，从无知到知道，若没有学习，便是永远在重复，是不会有成长的。</p>
+<p>​        学习的过程是痛苦的。学习意味着我们要面对新的知识，它会打破我们过去的认知，去吸纳新的知识到我们的思维，重新建立一个新的体系。所谓不破不立，应该就是这个道理吧。学习的痛苦程度与知识的“新”是正相关的，但是遗憾的是，它没有跟我们知识吸收程度呈正相关，也就是说，学习“新”的知识我们会痛苦，但不一定能掌握它。下面，我们仅讨论那些很“新”的知识，即那些不易被我们掌握的知识。当我们接触新知识，建立概念，浅尝辄止，很轻松；但是当我们开始深入，发现新知识难以理解，这便是痛苦的开始了，我们思考、查阅、实践和验证等等，通过一系列的方式来认识它，但是它好像终究不能以过去的思维去剖析它（因为它是一个新知识），最后，我们可能会放弃，可能会暂时搁置，可能会另寻代替之道，可能会直接生搬硬套，可能会不予理解地认可它（自欺欺人地说：它就是这个样子的）、基于它继续去学习新知识，诚然，此后的道路不会太顺畅，因为我们深知，有一道坎我们还没有迈过去，痛苦伴随着我们整个学习的过程。</p>
+<p>​        直到某一天，我们在使用新知识、或者看到一些与其相关的知识的时候，突然顿悟，理解了新知识，新知识变旧，似乎是一瞬间的事，这个瞬间是很神奇的突然开窍：原来如此！顿悟是一瞬间，但是悟，是一个很漫长的“润物无声”的过程，是坚持、积累、实践、反思凝聚成一瞬间的“顿”，此刻痛苦烟消云散，因为我们学习到了新知识。学习与痛苦往返如此，这个过程周期的长短，取决于一个人的学习能力、投入成本。</p>
+<p>​        我思考着，这些年来，我有在成长嘛？应该是有的吧，如果没有，我又哪来关于痛苦与学习的思考呢；如果没有，曾经让我费解的问题，如今我又怎能轻而易举地完美解决呢。只是，我有大的成长、质的改变嘛？好像有，好像又没有，我不确定，因为我总感觉自己在捣鼓一些“旧”知识，即是一些早已潜移默化游离在思维的知识，我只是把它们扎根到思维，这个过程是学习嘛？它并没有带给我多少痛苦。我好像没有什么突破，似乎永远在一个已知的领域学习，好像学习了，但好像又没有什么新知识收获。</p>
+<p>​        我一直以为自己缺乏一个领路人，可以给我指明方向。但是这是可遇不可求的，大多数成功的人应当不是别人给他导航，而是靠自己掌舵。没有任何人可以对世界了如指掌、可以洞察未来，同时还要对我有清晰的认知和定位。显然，我只能靠自己，但是我又是一个缺乏自驱力的矛盾体，很容易因为别人的只言片语动摇了方向，我没有办法下定决心在某个领域深耕，最终导致这些年来，好像什么都知道，但又好像一事无成。</p>
+<p>​        我观察前辈们，他们好像总是处事不惊、处理问题游刃有余，但是我亦知无人尽知天下事，所以，他们应当是靠着多年的经验总结出一套方法论，以不变应万变，兵来将挡、水来土掩。我反思自己的问题：（1）学习方法，我至今都没有建立起一套属于自己的学习体系，我学习新知识的速度极其缓慢，并且很容易陷入细节处无法自拔，我不善于总结、反思和输出。我多段实习经历并没有给我带来相当体量的知识，所以我准备阅读《费曼学习法》，我应该要学会学习了。（2）思考方式，新事物呈现在我们面前，思考的切入点很重要，切入点的不同就可能是事半功倍和事倍功半的区别了。</p>
+<p>​        我很羡慕我的本科室友，他有着良好的学习方法和思考方式，对于一个新事物，他可以在极短的时间内就掌握了它的核心概念，并且使用通俗的话术输出自己的理解。显然，我做不到。《费曼学习法》中提到：输出倒逼输入。所以，我应该做笔记。以前总觉得CSDN的一些博客来回copy，误人子弟，我要求自己在产出博客之前，尽可能地把所有原理都弄清楚才输出，显然，这会耗费大量的时间，并且有些概念是以我当时的能力难以理解的，这也反映了我喜欢抠细节的毛病。所以，我做出改变：输出！尽可能地输出！根据自己的理解输出！不要害怕犯错，不要害怕肤浅，很多时候，自己是难以发现问题，只有在输出的时候，在别人阅读你的输出的时候，在你未来的某一天接触了更深入的知识的时候，才是问题暴露的时候！所以，没关系！我们再回去填坑就好，没有任何人可以一蹴而就地成为专家，成长的速度取决于学习的速度，学习最快的方法，应当是总结、反思和输出！术业有专攻，总有人在某些领域比我强，永远也不会有完美无瑕的输出，如果我因此而不敢输出，那么我怎么能成长呢？！</p>
+<p>​        写到此处，突然意识到：犯错，好像也是成长的一种方式，或者说，从犯错中学习，更痛苦，更深刻，更能成长。</p>
 
                 
             </div>
@@ -723,7 +639,7 @@ twice
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/</a>
+                    <a href="http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/">http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -761,12 +677,8 @@ twice
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Java/">
-                                    <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                                    <span class="chip bg-color">设计模式</span>
+                                <a href="/tags/%E6%80%9D%E8%80%83/">
+                                    <span class="chip bg-color">思考</span>
                                 </a>
                             
                         </div>
@@ -940,35 +852,30 @@ twice
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/">
+                <a href="/2023/01/08/wu-tai-shan-you-ji/">
                     <div class="card-image">
                         
+                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202301081242809.png" class="responsive-img" alt="五台山游记">
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="小程序多模块数据统计解决方案">
-                        
-                        <span class="card-title">小程序多模块数据统计解决方案</span>
+                        <span class="card-title">五台山游记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是之前实习的时候参与的微信小程序项目，主要是关于新员工入职信息采集模块。
+                            周末出行五台山，一日游记
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-03
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-08
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    技术
-                                </a>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                    研发
+                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
+                                    生活
                                 </a>
                             
                             
@@ -978,12 +885,8 @@ twice
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                        <span class="chip bg-color">微信小程序</span>
-                    </a>
-                    
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/%E6%97%85%E8%A1%8C/">
+                        <span class="chip bg-color">旅行</span>
                     </a>
                     
                 </div>
@@ -994,27 +897,27 @@ twice
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">
+                <a href="/2023/01/06/gap-mo-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java单例设计模式（懒汉式：DoubleCheck+volatile）">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="GAP模型">
                         
-                        <span class="card-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</span>
+                        <span class="card-title">GAP模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            DoubleCheck单例模式以及为什么要使用volatile关键字
+                            GAP:Generalizable Approximate Graph Partitioning Framework模型
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-06
                             </span>
                         <span class="publish-author">
                             
@@ -1024,24 +927,19 @@ twice
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                    研发
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">深度学习</span>
                     </a>
                     
                 </div>

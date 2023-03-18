@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-06T14:30:51.200Z</updated>
+  <updated>2023-01-08T05:03:42.777Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>五台山游记</title>
+    <link href="http://example.com/2023/01/08/wu-tai-shan-you-ji/"/>
+    <id>http://example.com/2023/01/08/wu-tai-shan-you-ji/</id>
+    <published>2023-01-08T04:37:16.000Z</published>
+    <updated>2023-01-08T05:03:42.777Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202301081242809.png&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>成长：痛苦与学习</title>
+    <link href="http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/"/>
+    <id>http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/</id>
+    <published>2023-01-06T15:10:25.000Z</published>
+    <updated>2023-01-06T16:40:26.760Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
   
   <entry>
     <title>GAP模型</title>
@@ -48,7 +98,7 @@
     <link href="http://example.com/2023/01/01/yi-bu-ren-wu-kai-fa-shi-jian-zong-jie/"/>
     <id>http://example.com/2023/01/01/yi-bu-ren-wu-kai-fa-shi-jian-zong-jie/</id>
     <published>2023-01-01T07:15:31.000Z</published>
-    <updated>2023-01-01T08:35:44.617Z</updated>
+    <updated>2023-01-06T15:00:03.947Z</updated>
     
     
       
@@ -61,7 +111,9 @@
     
     
     
-    <category term="研发" scheme="http://example.com/categories/%E7%A0%94%E5%8F%91/"/>
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
     
     
     <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
