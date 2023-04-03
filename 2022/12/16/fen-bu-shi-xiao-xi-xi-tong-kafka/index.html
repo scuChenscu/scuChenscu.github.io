@@ -611,6 +611,7 @@
 <li>Kafka速度很快，通过批处理和压缩记录来高效地使用IO。Kafka用于解耦数据流。</li>
 <li>Kafka用于将数据流式传输到数据池，应用程序和实时流分析系统。</li>
 </ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yangyongjie/p/14615396.html">Kafka高吞吐量的原因</a></p>
 <h4 id="Mafka"><a href="#Mafka" class="headerlink" title="Mafka"></a>Mafka</h4><p>Mafka一个基于Kafka开发的一个分布式消息中间件综合解决方案。</p>
 <h4 id="Mafka架构"><a href="#Mafka架构" class="headerlink" title="Mafka架构"></a>Mafka架构</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212068.png" alt="Mafka架构" style="zoom:50%;"></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhitao/article/details/44858217">Mafka平台架构</a></p>
@@ -1367,6 +1368,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-01-08T05:03:42.777Z</updated>
+  <updated>2023-03-18T15:24:50.866Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,169 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>多路IO复用</title>
+    <link href="http://example.com/2023/03/18/duo-lu-io-fu-yong/"/>
+    <id>http://example.com/2023/03/18/duo-lu-io-fu-yong/</id>
+    <published>2023-03-18T08:54:00.000Z</published>
+    <updated>2023-03-18T15:24:50.866Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/crazymakercircle/p/10225159.html&quot;&gt;Java</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ThreadLocal原理</title>
+    <link href="http://example.com/2023/03/08/threadlocal-yuan-li/"/>
+    <id>http://example.com/2023/03/08/threadlocal-yuan-li/</id>
+    <published>2023-03-08T15:53:41.000Z</published>
+    <updated>2023-03-17T14:20:03.835Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;先通俗得讲，ThreadLocal是个什么东西&lt;/p&gt;
+&lt;p&gt;有没有某种对象，可以支持统一的初始值，然后每个线程又能够独立修改值，彼此之间相互不影响。&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-java&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java线程池</title>
+    <link href="http://example.com/2023/03/04/java-xian-cheng-chi/"/>
+    <id>http://example.com/2023/03/04/java-xian-cheng-chi/</id>
+    <published>2023-03-04T12:31:38.000Z</published>
+    <updated>2023-03-07T16:24:03.080Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;今天聊一下Java线程池，主要是从源码分析一下整个执行过程。&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Boot线程池</title>
+    <link href="http://example.com/2023/02/26/boot-xian-cheng-chi/"/>
+    <id>http://example.com/2023/02/26/boot-xian-cheng-chi/</id>
+    <published>2023-02-25T19:25:42.000Z</published>
+    <updated>2023-02-25T19:25:42.246Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>管道模式</title>
+    <link href="http://example.com/2023/02/26/guan-dao-mo-shi/"/>
+    <id>http://example.com/2023/02/26/guan-dao-mo-shi/</id>
+    <published>2023-02-25T19:17:51.000Z</published>
+    <updated>2023-02-25T19:17:51.681Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>四个春天</title>
+    <link href="http://example.com/2023/01/21/si-ge-chun-tian/"/>
+    <id>http://example.com/2023/01/21/si-ge-chun-tian/</id>
+    <published>2023-01-20T18:33:19.000Z</published>
+    <updated>2023-01-20T18:33:19.799Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>阶段</title>
+    <link href="http://example.com/2023/01/21/jie-duan/"/>
+    <id>http://example.com/2023/01/21/jie-duan/</id>
+    <published>2023-01-20T18:05:52.000Z</published>
+    <updated>2023-01-20T18:32:45.972Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;人生有很多阶段，我才活到25岁，未曾经历过大风大浪，思想还是很稚嫩。&lt;/p&gt;
+&lt;p&gt;小时候，从记事起，感觉自己是世界的中心，所以的人和事都是围绕着自己发展，我是这个世界唯一具有真正思想的生物，别人都是为了取悦我、服务我而存在。&lt;/p&gt;
+&lt;p&gt;慢慢地长大了，开始认识到每个人都</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《无人生还》</title>
+    <link href="http://example.com/2023/01/11/wu-ren-sheng-huan/"/>
+    <id>http://example.com/2023/01/11/wu-ren-sheng-huan/</id>
+    <published>2023-01-11T14:06:29.000Z</published>
+    <updated>2023-01-11T14:21:33.648Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;首先，《无人生还》是一本推理小说，讲的是十个人在一个孤岛上死光光，最终靠着凶手的自述来阐述杀人过程。我对这个杀人过程的合理性是不太认可的，觉得太勉强，而且凶手还得将十个人的死亡场景对应上那首童谣，更是难上加难。&lt;/p&gt;
+&lt;p&gt;但是我觉得对于这本小说可读的过程在于（1）他会让</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="读书" scheme="http://example.com/tags/%E8%AF%BB%E4%B9%A6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>五台山游记</title>
     <link href="http://example.com/2023/01/08/wu-tai-shan-you-ji/"/>
     <id>http://example.com/2023/01/08/wu-tai-shan-you-ji/</id>
     <published>2023-01-08T04:37:16.000Z</published>
-    <updated>2023-01-08T05:03:42.777Z</updated>
+    <updated>2023-01-08T08:39:01.420Z</updated>
     
     
       
@@ -38,6 +196,8 @@
     
     
     <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
     
   </entry>
   
@@ -127,7 +287,7 @@
     <link href="http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/"/>
     <id>http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/</id>
     <published>2022-12-16T04:12:34.000Z</published>
-    <updated>2022-12-16T07:40:03.813Z</updated>
+    <updated>2023-03-24T01:32:36.240Z</updated>
     
     
       
@@ -154,7 +314,7 @@
     <link href="http://example.com/2022/12/15/hello-world/"/>
     <id>http://example.com/2022/12/15/hello-world/</id>
     <published>2022-12-15T13:45:25.460Z</published>
-    <updated>2022-12-16T03:45:10.249Z</updated>
+    <updated>2023-01-08T05:11:07.739Z</updated>
     
     
       
@@ -235,7 +395,7 @@
     <link href="http://example.com/2022/09/16/ji-yu-redis-de-poi-sou-suo/"/>
     <id>http://example.com/2022/09/16/ji-yu-redis-de-poi-sou-suo/</id>
     <published>2022-09-16T06:59:46.000Z</published>
-    <updated>2022-12-16T07:38:40.371Z</updated>
+    <updated>2023-03-23T17:54:09.550Z</updated>
     
     
       
@@ -264,7 +424,7 @@
     <link href="http://example.com/2022/04/01/mysql-shu-ju-jie-gou-ji-di-ceng-yuan-li/"/>
     <id>http://example.com/2022/04/01/mysql-shu-ju-jie-gou-ji-di-ceng-yuan-li/</id>
     <published>2022-04-01T10:32:20.000Z</published>
-    <updated>2022-12-17T10:36:47.010Z</updated>
+    <updated>2023-03-23T17:03:18.428Z</updated>
     
     
       
@@ -337,145 +497,6 @@
     
     
     <category term="高并发" scheme="http://example.com/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>空间大尺度变化地物目标提取模型性能提升研究</title>
-    <link href="http://example.com/2021/12/22/kong-jian-da-chi-du-bian-hua-di-wu-mu-biao-ti-qu-mo-xing-xing-neng-ti-sheng-yan-jiu/"/>
-    <id>http://example.com/2021/12/22/kong-jian-da-chi-du-bian-hua-di-wu-mu-biao-ti-qu-mo-xing-xing-neng-ti-sheng-yan-jiu/</id>
-    <published>2021-12-22T08:44:53.000Z</published>
-    <updated>2022-12-16T09:00:51.204Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;空间大尺度变化地物目标提取模型性能提升研究&quot;&gt;&lt;a href=&quot;#空间大尺度变化地物目标提取模型性能提升研究&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="算法" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="神经网络" scheme="http://example.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>反向传播的一般情形</title>
-    <link href="http://example.com/2021/10/04/fan-xiang-chuan-bo-de-yi-ban-qing-xing/"/>
-    <id>http://example.com/2021/10/04/fan-xiang-chuan-bo-de-yi-ban-qing-xing/</id>
-    <published>2021-10-03T18:26:39.000Z</published>
-    <updated>2022-12-16T18:32:15.461Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;前提条件&quot;&gt;&lt;a href=&quot;#前提条件&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="算法" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="神经网络" scheme="http://example.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EAN-13商品条码</title>
-    <link href="http://example.com/2021/08/17/ean-13-shang-pin-tiao-ma/"/>
-    <id>http://example.com/2021/08/17/ean-13-shang-pin-tiao-ma/</id>
-    <published>2021-08-17T15:07:31.000Z</published>
-    <updated>2022-12-16T15:11:49.782Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;EAN-13商品条码&quot;&gt;&lt;a href=&quot;#EAN-13商品条码&quot; class=&quot;headerlink&quot; title=&quot;EAN-13商品条码&quot;&gt;&lt;/a&gt;EAN-13商品条码&lt;/h1&gt;&lt;p&gt;今天在阅读《编码》时看到通用产品代码（UPC，Universal</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="科普" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A7%91%E6%99%AE/"/>
-    
-    
-    <category term="商品条码" scheme="http://example.com/tags/%E5%95%86%E5%93%81%E6%9D%A1%E7%A0%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>小程序多模块数据统计解决方案</title>
-    <link href="http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/"/>
-    <id>http://example.com/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/</id>
-    <published>2021-03-03T14:52:40.000Z</published>
-    <updated>2022-12-16T15:03:20.770Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;小程序多模块数据统计解决方案&quot;&gt;&lt;a href=&quot;#小程序多模块数据统计解决方案&quot; class=&quot;headerlink&quot; title=&quot;小程序多模块数据统计解决方案&quot;&gt;&lt;/a&gt;小程序多模块数据统计解决方案&lt;/h1&gt;&lt;h2 id=&quot;场景&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="微信小程序" scheme="http://example.com/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
-    
-    <category term="JavaScript" scheme="http://example.com/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java单例设计模式（懒汉式：DoubleCheck+volatile）</title>
-    <link href="http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/"/>
-    <id>http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/</id>
-    <published>2020-04-20T16:32:05.000Z</published>
-    <updated>2022-12-16T16:38:30.109Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;单例设计模式&quot;&gt;&lt;a href=&quot;#单例设计模式&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

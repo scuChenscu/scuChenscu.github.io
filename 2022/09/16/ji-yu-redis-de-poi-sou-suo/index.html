@@ -476,14 +476,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    9.2k
+                    9.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    38 分
+                    40 分
                 </div>
                 
 
@@ -510,7 +510,8 @@
 <li><p>支持持久化操作，支持用 AOF 和 RDB 两种数据持久化策略把数据持久化到磁盘；</p>
 </li>
 <li><p>单线程请求，并发请求情况下不需要考虑数据一致性问题；Redis 利用队列技术将并发访问变为串行访问，消</p>
-<p>除了传统数据库串行控制的开销</p>
+<p>除了传统数据库串行控制的开销；多路IO复用</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303240136252.png" alt="文件事件处理器"></p>
 </li>
 <li><p>支持发布与订阅的消息机制；</p>
 </li>
@@ -521,7 +522,8 @@
 <li><p>原子性；通过 MULTI 和 EXEC指令包起来</p>
 </li>
 </ol>
-<h4 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h4><p><a target="_blank" rel="noopener" href="https://pdai.tech/md/db/nosql-redis/db-redis-x-redis-ds.html">Redis进阶 - 数据结构：底层数据结构详解</a></p>
+<h4 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h4><p>String、Hash、List、Set、Zset</p>
+<p><a target="_blank" rel="noopener" href="https://pdai.tech/md/db/nosql-redis/db-redis-x-redis-ds.html">Redis进阶 - 数据结构：底层数据结构详解</a></p>
 <ol>
 <li><p>String: 字符串</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">sdshdr</span><span class="token punctuation">{</span>
@@ -704,6 +706,20 @@
 cache<span class="token punctuation">.</span>delete
 db<span class="token punctuation">.</span>update
 asynchronousCache<span class="token punctuation">.</span>delete<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>单机模式、主从模式、哨兵模式、集群模式</strong></p>
+<p>主从：主库复制读/写；从库只负责读</p>
+<p>哨兵模式：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303240152950.jpeg" alt="img" style="zoom:50%;"></p>
+<p>如图，哨兵节点由两部分组成，哨兵节点和数据节点：</p>
+<ul>
+<li>哨兵节点：哨兵系统由一个或多个哨兵节点组成，哨兵节点是特殊的redis节点，不存储数据。</li>
+<li>数据节点：主节点和从节点都是数据节点。</li>
+</ul>
+<p>访问redis集群的数据都是通过哨兵集群的，哨兵监控整个redis集群。</p>
+<p>一旦发现redis集群出现了问题，比如刚刚说的主节点挂了，从节点会顶上来。但是主节点地址变了，这时候应用服务无感知，也不用更改访问地址，因为哨兵才是和应用服务做交互的。</p>
+<p>Sentinel 很好的解决了故障转移，在高可用方面又上升了一个台阶，当然Sentinel还有其他功能。</p>
+<p>之前的两种模式数据都是在一个节点上的，单个节点存储是存在上限的。集群模式就是把数据进行分片存储，当一个分片数据达到上限的时候，就分成多个分片。</p>
+<h5 id="数据分片怎么分？"><a href="#数据分片怎么分？" class="headerlink" title="数据分片怎么分？"></a>数据分片怎么分？</h5><p>集群的键空间被分割为16384个slots（即hash槽），通过hash的方式将数据分到不同的分片上的。</p>
 <h4 id="Redis-GEO"><a href="#Redis-GEO" class="headerlink" title="Redis GEO"></a>Redis GEO</h4><h5 id="Redis-GEO简介"><a href="#Redis-GEO简介" class="headerlink" title="Redis GEO简介"></a>Redis GEO简介</h5><p>Redis GEO 主要用于存储地理位置信息，并对存储的信息进行操作，该功能在 Redis 3.2 版本新增。</p>
 <h5 id="Redis-GEO操作方法"><a href="#Redis-GEO操作方法" class="headerlink" title="Redis GEO操作方法"></a>Redis GEO操作方法</h5><ol>
 <li>geoadd：添加地理位置的坐标；</li>
@@ -2195,6 +2211,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
