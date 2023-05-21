@@ -567,14 +567,14 @@ mjx-container[display="true"] + br {
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.5k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    16 分
                 </div>
                 
 
@@ -640,10 +640,23 @@ mjx-container[display="true"] + br {
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303042111768.png" alt="ExecutorService方法"></p>
 <p>然后还有一个类叫AbstractExecutorService，该类给出了ExecutorService的一些执行方法的默认实现</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303042121047.png" alt="AbstractExecutorService"></p>
-<p>好，重头戏，ThreadPoolExecutor，这里关于ThreadPoolExecutor的核心参数就不展开了，直接看execute()方法</p>
+<p>下面就是我们通常使用线程池的方式：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadPool</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Executor</span> executor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadPoolExecutor</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span><span class="token constant">SECONDS</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">ArrayBlockingQueue</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        executor<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// task</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们创建好线程池之后，有任务需要处理就封装成一个runnable对象丢进execute()方法去执行。</p>
+<h4 id="execute-方法"><a href="#execute-方法" class="headerlink" title="execute()方法"></a>execute()方法</h4><p>这里关于ThreadPoolExecutor的核心参数就不展开了，直接看execute()方法</p>
 <p>execute()方法主要是判断线程池状态是否满足去执行addWorker()方法，addWorker()就是去创建工作线程，core参数用于区分创建核心线程和非核心线程；所以execute()方法就是把runnable任务添加到工作线程</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303060026393.png" alt="execute()方法"></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java">   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> command<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">execute</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> command<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 新来的任务调用excute()方法</span>
         <span class="token comment">// 健壮性判断</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>command <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">NullPointerException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -698,11 +711,11 @@ mjx-container[display="true"] + br {
             <span class="token comment">// 失败就拒绝</span>
             <span class="token function">reject</span><span class="token punctuation">(</span>command<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303052347363.png" alt="execute方法的执行流程"></p>
-<p>execute()方法的核心是addWorker()方法</p>
-<p>addWorker()方法一进去就有两层循环，经过了这两层循环的判断，才能真正进入添加工作线程的流程</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202304182314943.png" alt="execute()方法"></p>
+<p>可以看到，线程池在工作线程未达到corePoolSize的时候，不会复用线程，只要有任务来就会创建工作线程；当核心工作线程都满了之后，对于新来的任务，会先加入阻塞队列（此时核心工作线程执行完任务后会从阻塞队列取任务来执行）；当阻塞队列也满了之后（说明核心工作线程忙不过来了），会尝试创建非核心线程来执行任务，如果非核心线程创建失败（达到maximumPoolSize），则执行拒绝策略。</p>
+<h4 id="addWorker-方法"><a href="#addWorker-方法" class="headerlink" title="addWorker()方法"></a>addWorker()方法</h4><p>execute()方法的核心是addWorker()方法；addWorker()方法一进去就有两层循环，经过了这两层循环的判断，才能真正进入添加工作线程的流程：</p>
 <ul>
-<li>外层循环是判断线程池状态，能否添加工作线程，添加工作线程就是new worker对象，加入workers hashset里面；线程池处于以下两种状态可以添加工作线程（1）running状态（2）shutdown状态，此时不能添加新任务，但是缓存队列workQueue不为空的话，允许添加工作线程；</li>
+<li>外层循环是判断线程池状态，能否添加工作线程，添加工作线程就是创建worker对象，加入到线程池的HashSet\<worker> workers里面；线程池处于以下两种状态可以添加工作线程（1）running状态（2）shutdown状态，此时不能添加新任务，但是缓存队列BlockingQueue\<runnable> workQueue不为空的话，允许添加工作线程；</runnable></worker></li>
 <li>内层循环是判断线程池内工作线程的情况，是否允许添加工作线程，允许添加的话，workerCount通过CAS操作加1，break两层循环，进入添加工作线程的流程；这里workerCount + 1和workers.add(worker)不是原子性操作，是分开的，+1比较轻量，如果到时候添加工作线程失败了再-1；</li>
 <li>总结，两层for循环成功走完，得出一个结论：当线程池可以添加工作线程，只干了一件事：workerCount + 1</li>
 <li>不得不说这两层for循环写得很艺术，因为它并不是真的需要循环去做什么事情，因为循环体可能顶多就走一两次，它更多的是通过循环体来感知线程池的状态和重试</li>
@@ -749,7 +762,7 @@ mjx-container[display="true"] + br {
         <span class="token keyword">try</span> <span class="token punctuation">{</span>
             w <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span>firstTask<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 这里会初始化thread成员变量，getThreadFactory().newThread(this)；this就是新建的worker，所以worker的thread执行的就是worker的run（）方法，而worker的run()调用了ThreadPoolExecutor的runWorker(this)，this就是新建的worker；既然是创建工作线程，肯定是要new一个worker对象，然后把任务丢进去，这个丢进去的任务很显然就是worker要直接处理的任务，如果firstTask为空，则是去缓存队列里面取任务，后面的runworker()方法会详细讲；注意这里firstTask可能是null</span>
             <span class="token keyword">final</span> <span class="token class-name">Thread</span> t <span class="token operator">=</span> w<span class="token punctuation">.</span>thread<span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>t <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// t什么时候会为空呢？我悟了！看下面锁的代码块就懂了，t.start()方法不是在lock里面，所以可能会null？</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>t <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 因为线程是由ThreadFactory创建，存在自定义ThreadFactory导致线程为null</span>
                 <span class="token comment">// 加锁，操作workers</span>
                 <span class="token keyword">final</span> <span class="token class-name">ReentrantLock</span> mainLock <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>mainLock<span class="token punctuation">;</span>
                 mainLock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -782,9 +795,11 @@ mjx-container[display="true"] + br {
                 <span class="token function">addWorkerFailed</span><span class="token punctuation">(</span>w<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 添加线程失败，恢复计数，什么情况下会走到这一步？（1）t有问题，（2）线程池状态有问题</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> workerStarted<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment">// addWorker添加线程失败执行addWorkerFailed方法，（1）从工作线程队列移除该worker；（2）workerCount - 1；（3）尝试关闭线程池</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们忽略addWorker()方法前半部分的判断逻辑，关注创建worker的过程：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202304182336753.png" alt="addWorker()方法"></p>
+<p>单纯看这部分逻辑是比较简单的，就是先加锁，因为涉及到HashSet\<worker> workers；然后在里面再一次判断是否满足创建工作线程的条件，满足就创建并执行任务，线程的start()只能执行一次，真正对线程的复用是在run()方法里面实现的。</worker></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// addWorker添加线程失败执行addWorkerFailed方法，（1）从工作线程队列移除该worker；（2）workerCount - 1；（3）尝试关闭线程池</span>
     <span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">addWorkerFailed</span><span class="token punctuation">(</span><span class="token class-name">Worker</span> w<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 但是最大线程数没有被恢复</span>
         <span class="token keyword">final</span> <span class="token class-name">ReentrantLock</span> mainLock <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>mainLock<span class="token punctuation">;</span>
         mainLock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 涉及workers，加锁操作</span>
@@ -827,7 +842,7 @@ mjx-container[display="true"] + br {
             <span class="token punctuation">}</span>
             <span class="token comment">// else retry on failed CAS</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">Worker</span>
     <span class="token keyword">extends</span> <span class="token class-name">AbstractQueuedSynchronizer</span>
     <span class="token keyword">implements</span> <span class="token class-name">Runnable</span>  <span class="token comment">// ThreadPoolExecutor内部类，实现runnable接口</span>
@@ -854,16 +869,26 @@ mjx-container[display="true"] + br {
         <span class="token function">runWorker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ThreadPoolExecutor的方法</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// runWorker()方法有两种情况，一种是带任务的，即worker.firstTask不为空，一种是不带任务的，这个时候就通过getTask()方法从缓存队列里面取任务来执行</span>
-<span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">runWorker</span><span class="token punctuation">(</span><span class="token class-name">Worker</span> w<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<h4 id="runWorker-方法"><a href="#runWorker-方法" class="headerlink" title="runWorker()方法"></a>runWorker()方法</h4><p>前面讲到addWorker()方法满足条件就会调用t.start()方法去执行任务。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token class-name">Runnable</span> firstTask<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">setState</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// inhibit interrupts until runWorker</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstTask <span class="token operator">=</span> firstTask<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>thread <span class="token operator">=</span> <span class="token function">getThreadFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newThread</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">runWorker</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面可以看出，把worker对象丢进线程，worker实现了runnable接口，线程执行的就是worker的run()方法，也是线程池的runWorker(worker)方法。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">runWorker</span><span class="token punctuation">(</span><span class="token class-name">Worker</span> w<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token class-name">Thread</span> wt <span class="token operator">=</span> <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 下面体现了线程池是如何复用的（1）取任务（2）将firstTask设为null</span>
+  			<span class="token comment">// 线程只有在第一次执行的时候可能带有firstTask，后面都是通过getTask()方法获取任务</span>
         <span class="token class-name">Runnable</span> task <span class="token operator">=</span> w<span class="token punctuation">.</span>firstTask<span class="token punctuation">;</span> 
         w<span class="token punctuation">.</span>firstTask <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-        w<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// allow interrupts，注意unlock()，因为在初始化worker对象的时候，setState(-1);worker继承了AQS，初始化的时候将state设为-1了</span>
+        w<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 因为worker对象初始化时setState(-1)，worker继承了AQS，unlock()实际上是调用trytryRelease()方法setState(0);至于为什么这么做呢，涉及到线程中断，后面再说</span>
         <span class="token keyword">boolean</span> completedAbruptly <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
         <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            <span class="token comment">// while循环执行任务</span>
+            <span class="token comment">// while循环执行任务，这里就是线程复用的关键</span>
             <span class="token keyword">while</span> <span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">||</span> <span class="token punctuation">(</span>task <span class="token operator">=</span> <span class="token function">getTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 w<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token comment">// If pool is stopping, ensure thread is interrupted;</span>
@@ -901,8 +926,8 @@ mjx-container[display="true"] + br {
         <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
             <span class="token function">processWorkerExit</span><span class="token punctuation">(</span>w<span class="token punctuation">,</span> completedAbruptly<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>getTask()方法跟前面那些方法很类似，都是先判断状态，再获取任务</p>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="getTask-方法"><a href="#getTask-方法" class="headerlink" title="getTask()方法"></a>getTask()方法</h4><p>getTask()方法跟前面那些方法很类似，都是先判断状态，再获取任务</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token class-name">Runnable</span> <span class="token function">getTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">boolean</span> timedOut <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// Did the last poll() time out?</span>
 
@@ -944,8 +969,7 @@ mjx-container[display="true"] + br {
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>梳理完源码再看一遍美团技术团队的文章，大概就能把Java的线程池捋清楚了</p>
-
+<h4 id="shutdown-方法"><a href="#shutdown-方法" class="headerlink" title="shutdown()方法"></a>shutdown()方法</h4>
                 
             </div>
             <hr/>
@@ -1217,7 +1241,7 @@ mjx-container[display="true"] + br {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/26/boot-xian-cheng-chi/">
+                <a href="/2023/02/26/springboot-xian-cheng-chi/">
                     <div class="card-image">
                         
                         
