@@ -8,7 +8,7 @@
       <link href="/2023/05/21/hexo-jiao-cheng/"/>
       <url>/2023/05/21/hexo-jiao-cheng/</url>
       
-        <content type="html"><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> bloghexo n <span class="token variable">$name</span> <span class="token comment"># 创建文件，n -&gt; new的意思，文件名不支持空格</span><span class="token comment"># 然后就是在文件里面写内容，在这里统一规定一下，以后标题从一级标题开始写</span><span class="token comment"># summary简单写一下该博客的基本内容，没什么规范，categories的话就是 -技术或者-生活</span><span class="token comment"># tags目前也没什么固定，技术类主要就分算法和研发；生活就按具体内容来定可以了。</span><span class="token comment"># 博客写好了先在本地看效果</span>hexo <span class="token parameter variable">-s</span> <span class="token comment"># s -&gt; server，就是本地起服务</span><span class="token comment"># 然后真正写好了就提交的github服务器，并且在上面正式部署</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+        <content type="html"><![CDATA[<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> bloghexo n <span class="token variable">$name</span> <span class="token comment"># 创建文件，n -&gt; new的意思，文件名不支持空格</span><span class="token comment"># 然后就是在文件里面写内容，在这里统一规定一下，以后标题从一级标题开始写</span><span class="token comment"># summary简单写一下该博客的基本内容，没什么规范，categories的话就是 -技术或者-生活</span><span class="token comment"># tags目前也没什么固定，技术类主要就分算法和研发；生活就按具体内容来定可以了。</span><span class="token comment"># Mathjax在用到公式的时候设置为true</span><span class="token comment"># 博客写好了先在本地看效果</span>hexo <span class="token parameter variable">-s</span> <span class="token comment"># s -&gt; server，就是本地起服务</span><span class="token comment"># 然后真正写好了就提交的github服务器，并且在上面正式部署</span>hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="token operator">&amp;&amp;</span> hexo d<span class="token comment"># 清理缓存文件，生成静态文件，部署</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><a href="https://blog.csdn.net/wgshun616/article/details/81019687?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-81019687-blog-126924064.235%5Ev36%5Epc_relevant_default_base3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-81019687-blog-126924064.235%5Ev36%5Epc_relevant_default_base3&amp;utm_relevant_index=2">Hexo 的 Next 主题中渲染 MathJax 数学公式</a></p>]]></content>
       
       
       <categories>
@@ -167,9 +167,9 @@
       
         <tags>
             
-            <tag> 旅行 </tag>
-            
             <tag> 思考 </tag>
+            
+            <tag> 旅行 </tag>
             
         </tags>
       
