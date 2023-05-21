@@ -106,19 +106,6 @@
   </entry>
   
   <entry>
-    <title>Boot线程池</title>
-    <link href="http://example.com/2023/02/26/springboot-xian-cheng-chi/"/>
-    <id>http://example.com/2023/02/26/springboot-xian-cheng-chi/</id>
-    <published>2023-02-25T19:25:42.000Z</published>
-    <updated>2023-02-25T19:25:42.246Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>管道模式</title>
     <link href="http://example.com/2023/02/26/guan-dao-mo-shi/"/>
     <id>http://example.com/2023/02/26/guan-dao-mo-shi/</id>
@@ -218,9 +205,9 @@
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
     <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
     
   </entry>
   
@@ -493,6 +480,33 @@
     
     
     <category term="AES" scheme="http://example.com/tags/AES/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>西安防疫一码通平台的故障分析及优化设计</title>
+    <link href="http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji/"/>
+    <id>http://example.com/2021/12/30/xi-an-fang-yi-yi-ma-tong-ping-tai-de-gu-zhang-fen-xi-ji-you-hua-she-ji/</id>
+    <published>2021-12-30T06:18:32.000Z</published>
+    <updated>2022-12-16T07:35:18.005Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;西安防疫一码通平台的故障分析及优化设计&quot;&gt;&lt;a href=&quot;#西安防疫一码通平台的故障分析及优化设计&quot; class=&quot;headerlink&quot; title=&quot;西安防疫一码通平台的故障分析及优化设计&quot;&gt;&lt;/a&gt;西安防疫一码通平台的故障分析及优化设计&lt;/h2&gt;&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="高并发" scheme="http://example.com/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
     
   </entry>
   

@@ -62,19 +62,6 @@
     
     
     <entry>
-      <title>Boot线程池</title>
-      <link href="/2023/02/26/springboot-xian-cheng-chi/"/>
-      <url>/2023/02/26/springboot-xian-cheng-chi/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>管道模式</title>
       <link href="/2023/02/26/guan-dao-mo-shi/"/>
       <url>/2023/02/26/guan-dao-mo-shi/</url>
@@ -167,9 +154,9 @@
       
         <tags>
             
-            <tag> 思考 </tag>
-            
             <tag> 旅行 </tag>
+            
+            <tag> 思考 </tag>
             
         </tags>
       
