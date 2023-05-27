@@ -313,7 +313,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271618785.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -432,9 +432,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/hexo/">
+                                <span class="chip bg-color">hexo</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -464,14 +468,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    229
+                    617
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -495,6 +499,7 @@ hexo n <span class="token variable">$name</span> <span class="token comment"># �
 <span class="token comment"># summary简单写一下该博客的基本内容，没什么规范，categories的话就是 -技术或者-生活</span>
 <span class="token comment"># tags目前也没什么固定，技术类主要就分算法和研发；生活就按具体内容来定可以了。</span>
 <span class="token comment"># Mathjax在用到公式的时候设置为true</span>
+<span class="token comment"># img是配置封面图，这个如果更换主题可能就无法使用了</span>
 
 <span class="token comment"># 博客写好了先在本地看效果</span>
 hexo <span class="token parameter variable">-s</span> <span class="token comment"># s -&gt; server，就是本地起服务</span>
@@ -502,9 +507,49 @@ hexo <span class="token parameter variable">-s</span> <span class="token comment
 <span class="token comment"># 然后真正写好了就提交的github服务器，并且在上面正式部署</span>
 hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="token operator">&amp;&amp;</span> hexo d
 <span class="token comment"># 清理缓存文件，生成静态文件，部署</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wgshun616/article/details/81019687?spm=1001.2101.3001.6650.1&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-81019687-blog-126924064.235%5Ev36%5Epc_relevant_default_base3&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-81019687-blog-126924064.235%5Ev36%5Epc_relevant_default_base3&amp;utm_relevant_index=2">Hexo 的 Next 主题中渲染 MathJax 数学公式</a></p>
 <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903521356431367">为你的hexo博客配置个性域名</a></p>
+<p>因为hero d会强制更新，需要重新配置域名，我不确定上面的博客方式是否有效，我使用的是在blog/source下创建CNAME文件，写入我的域名。</p>
+<p><a target="_blank" rel="noopener" href="https://luwanglin.github.io/2020/08/12/hexo-bo-ke-wen-zhang-front-matter/">hexo博客文章Front-matter</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/blinkfox/blinkfox.github.io/blob/hexo/themes/hexo-theme-matery/README_CN.md">hexo-theme-matery主题中文文档</a></p>
+<p>在这里统一categories：</p>
+<ul>
+<li>技术（具体的一些实操也归为下面两类）<ul>
+<li>研发（编程语言、框架、中间件、设计模式）</li>
+<li>算法（这里的算法主要是机器学习和深度学习方向）</li>
+<li>日后有其他方向也可以加上去</li>
+</ul>
+</li>
+<li>生活（生活下面的子标题还没想好怎么分）</li>
+<li>方法论（如学习方法、PPT制作方法、沟通方法等）</li>
+</ul>
+<p>然后tags就比较随意了：</p>
+<p>对于技术：</p>
+<ul>
+<li>编程语言：java、python等</li>
+<li>框架：SpringBoot、Pytorch等</li>
+<li>中间件：MySQL、Redis等</li>
+<li>工具：pandas、scarpy等等</li>
+<li>具体方向：设计模式、多线程、数据处理等</li>
+<li>其他根据实际情况定，主要是给出内容的一个方向就好</li>
+<li>对于一些问题，没有找到相应的答案，也可以写一篇博客</li>
+</ul>
+<p>对于生活：</p>
+<ul>
+<li><p>阅读</p>
+</li>
+<li><p>游记</p>
+</li>
+</ul>
+<h4 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h4><ul>
+<li>阿里云的OSS加载图片很慢，导致线上服务加载超时，无法显示出来。</li>
+<li>数学公式问题还是没有完全解决，执行hexo g会报错。</li>
+<li>相关的一些GitHub，QQ等边缘功能还没有实现。</li>
+</ul>
+<p>通过修改<code>/scaffolds/post.md</code>文件来修改front-matter</p>
+<p>段落缩进</p>
+<p>  </p>
 
                 
             </div>
@@ -568,7 +613,11 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/hexo/">
+                                    <span class="chip bg-color">hexo</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -736,30 +785,28 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/05/21/hexo-jiao-cheng/">
+                <a href="/2023/05/22/shen-ru-chai-jie-java-xu-ni-ji/">
                     <div class="card-image">
                         
+                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038051.png" class="responsive-img" alt="深入拆解Java虚拟机">
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="hexo教程">
-                        
-                        <span class="card-title">hexo教程</span>
+                        <span class="card-title">深入拆解Java虚拟机</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录一下hexo基本命令和用法
+                            阅读郑雨迪的《深入拆解Java虚拟机》。
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -768,11 +815,22 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
                                     技术
                                 </a>
                             
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                    研发
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -783,19 +841,18 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/18/duo-lu-io-fu-yong/">
+                <a href="/2023/03/18/io-duo-lu-fu-yong/">
                     <div class="card-image">
                         
+                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271622686.png" class="responsive-img" alt="IO多路复用">
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="多路IO复用">
-                        
-                        <span class="card-title">多路IO复用</span>
+                        <span class="card-title">IO多路复用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            总结常用的IO方式。
                         
                     </div>
                     <div class="publish-info">
@@ -804,11 +861,27 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            肥肥大大只丶
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    技术
+                                </a>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
+                                    研发
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IO/">
+                        <span class="chip bg-color">IO</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1030,13 +1103,13 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/scuChenscu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:2376584476@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1046,7 +1119,7 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2376584476" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2376584476" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Java单例设计模式（懒汉式：DoubleCheck+volatile）, 杂记">
+    <meta name="keywords" content="深入拆解Java虚拟机, 杂记">
     <meta name="description" content="让那暴风，柔和地吹。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Java单例设计模式（懒汉式：DoubleCheck+volatile） | 杂记</title>
+    <title>深入拆解Java虚拟机 | 杂记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -32,119 +32,7 @@
 <meta name="generator" content="Hexo 5.4.2">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="杂记" type="application/atom+xml">
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+</head>
 
 
 
@@ -425,12 +313,12 @@ mjx-container[display="true"] + br {
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038051.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</h1>
+                    <h1 class="description center-align post-title">深入拆解Java虚拟机</h1>
                 </div>
             </div>
         </div>
@@ -550,10 +438,6 @@ mjx-container[display="true"] + br {
                                 <span class="chip bg-color">Java</span>
                             </a>
                         
-                            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                                <span class="chip bg-color">设计模式</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -579,7 +463,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-21
+                    2023-05-22
                 </div>
                 
 
@@ -588,14 +472,14 @@ mjx-container[display="true"] + br {
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    14 分
                 </div>
                 
 
@@ -613,90 +497,124 @@ mjx-container[display="true"] + br {
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>即某个类在整个系统只能有一个实例对象可被获取和使用的代码模式；例如代表JVM运行环境的Runtime类</p>
-<h2 id="单例模式要素"><a href="#单例模式要素" class="headerlink" title="单例模式要素"></a>单例模式要素</h2><ol>
-<li>私有静态引用指向自己的实例</li>
-<li>私有的构造方法</li>
-<li>返回实例对象的公有静态方法</li>
+                <h1 id="Java虚拟机基本原理"><a href="#Java虚拟机基本原理" class="headerlink" title="Java虚拟机基本原理"></a>Java虚拟机基本原理</h1><h2 id="Java代码是怎么运行的"><a href="#Java代码是怎么运行的" class="headerlink" title="Java代码是怎么运行的"></a>Java代码是怎么运行的</h2><h3 id="为什么Java要在虚拟机里运行"><a href="#为什么Java要在虚拟机里运行" class="headerlink" title="为什么Java要在虚拟机里运行"></a>为什么Java要在虚拟机里运行</h3><p>因为Java是高级语言，它具有跨平台的特性，先经过编译器转换成字节码（字节码具有跨平台的特性），再将字节码转换为机器码，由CPU执行</p>
+<h3 id="Java虚拟机具体是怎样运行Java字节码的？"><a href="#Java虚拟机具体是怎样运行Java字节码的？" class="headerlink" title="Java虚拟机具体是怎样运行Java字节码的？"></a>Java虚拟机具体是怎样运行Java字节码的？</h3><p>分为两个角度，一个是从虚拟机的角度，一个是硬件的角度</p>
+<ul>
+<li>从虚拟机的角度，JVM执行的字节码；.java文件编译后得到.class文件，将.class文件加载到JVM的方法区里面（方法区是JVM规范，目前主流的实现是元空间），然后JVM执行方法区中的代码。</li>
+<li>从硬件的角度，字节码是无法被机器直接执行，因为CPU只认识机器码；所以JVM需要把字节码转换为机器码；转换主要有两种方式，一种是解释执行，就是逐条字节码翻译成机器码执行；一种是即时编译（Just-In-Time complilation，JIT），是将一个方法的字节码编译成机器码后执行（之前一直理解成整个.class编译，没想到是以方法为单位进行编译）。<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038051.png" alt="解释执行和编译执行"><br>解释执行的话，优势就是不用等待编译，直接就执行，缺点就是每次都要解释；编译执行的话，就是一开始会比较慢，因为要把整个方法的字节码编译成字节码，但是整个编译完之后，实际运行速度更快。</li>
+<li>编译与解释混合执行；解释器启动时先解释执行，省去编译时间；JVM分析热点代码，将高频模块转换为机器码执行。</li>
+</ul>
+<h2 id="Java的基本类型"><a href="#Java的基本类型" class="headerlink" title="Java的基本类型"></a>Java的基本类型</h2><p>pass</p>
+<h2 id="Java虚拟机时如何加载Java类的"><a href="#Java虚拟机时如何加载Java类的" class="headerlink" title="Java虚拟机时如何加载Java类的"></a>Java虚拟机时如何加载Java类的</h2><h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p>通过双亲委派机制来加载类，即.class文件加载到内存中变成字节流。（类的唯一性是由类加载器实例以及类的全名一同确定的。）</p>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>链接分为三个阶段</p>
+<ul>
+<li>验证，确保被加载的类符合JVM的约束条件</li>
+<li>准备，（1）为类的静态字段分配内存（2）构造其他跟类层次相关的数据结构，比如说用来实现虚方法的动态绑定的方法表。在class文件被加载至Java虚拟机之前，这个类无法知道其他类及其方法、字段所对应的具体地址，甚至不知道自己方法、字段的地址。因此，每当需要引用这些成员时，Java编译器会生成一个符号引用。在运行阶段，这个符号引用一般都能够无歧义地定位到具体目标上。举例来说，对于一个方法调用，编译器会生成一个包含目标方法所在类的名字、目标方法的名字、接收参数类型以及返回值类型的符号引用，来指代所要调用的方法。</li>
+<li>解析，符号引用解析成实际引用；碰到未加载的类。如果符号引用指向一个未被加载的类，或者未被加载类的字段或方法，那么解析将触发这个类的加载（但未必触发这个类的链接以及初始化）</li>
+<li>初始化，静态字段赋值，如果是final的话，由JVM完成初始化；其他赋值或者静态代码块，执行\<clinit>方法。<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3></clinit></li>
+<li>避免类的重复加载</li>
+<li>保证核心API不被修改</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ClassLoader</span> classLoader <span class="token operator">=</span> <span class="token class-name">Parent</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>classLoader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">ClassLoader</span> c1 <span class="token operator">=</span> classLoader<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">ClassLoader</span> c2 <span class="token operator">=</span> c1<span class="token punctuation">.</span><span class="token function">getParent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038403.png" alt="类加载器"><br>Bootstrap ClassLoader是C++实现的，所以为null，类加载器之间不是继承关系，而是组合关系；</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">ClassLoader</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">//每个类加载器都有个父加载器</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">ClassLoader</span> parent<span class="token punctuation">;</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">loadClass</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  
+        <span class="token comment">//查找一下这个类是不是已经加载过了</span>
+        <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> c <span class="token operator">=</span> <span class="token function">findLoadedClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">//如果没有加载过</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> c <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+          <span class="token comment">//先委派给父加载器去加载，注意这是个递归调用</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>parent <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              c <span class="token operator">=</span> parent<span class="token punctuation">.</span><span class="token function">loadClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+              <span class="token comment">// 如果父加载器为空，查找Bootstrap加载器是不是加载过了</span>
+              c <span class="token operator">=</span> <span class="token function">findBootstrapClassOrNull</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 如果父加载器没加载成功，调用自己的findClass去加载</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            c <span class="token operator">=</span> <span class="token function">findClass</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">return</span> c；
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">protected</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">findClass</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token comment">//1. 根据传入的类名name，到在特定目录下去寻找类文件，把.class文件读入内存</span>
+          <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+          
+       <span class="token comment">//2. 调用defineClass将字节数组转成Class对象</span>
+       <span class="token keyword">return</span> <span class="token function">defineClass</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> off<span class="token punctuation">,</span> len<span class="token punctuation">)</span>；
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">// 将字节码数组解析成一个Class对象，用native方法实现</span>
+    <span class="token keyword">protected</span> <span class="token keyword">final</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">defineClass</span><span class="token punctuation">(</span><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> b<span class="token punctuation">,</span> <span class="token keyword">int</span> off<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span><span class="token punctuation">{</span>
+       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="破坏双亲委派模型"><a href="#破坏双亲委派模型" class="headerlink" title="破坏双亲委派模型"></a>破坏双亲委派模型</h3><p>自定义类加载器，继承ClassLoader，重写findClass()和loadClass()方法<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038985.png" alt="破坏双亲委派模型"><br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038728.png" alt="Tomcat打破双亲委派模型"></p>
+<h2 id="JVM是如何执行方法调用的"><a href="#JVM是如何执行方法调用的" class="headerlink" title="JVM是如何执行方法调用的"></a>JVM是如何执行方法调用的</h2><p>主要涉及到的核心概念就是静态绑定和动态绑定</p>
+<ul>
+<li>Java虚拟机中的静态绑定指的是在解析时便能够直接识别目标方法的情况</li>
+<li>动态绑定则指的是需要在运行过程中根据调用者的动态类型来识别目标方法的情况（重写）</li>
+</ul>
+<h3 id="方法调用指令共有5种"><a href="#方法调用指令共有5种" class="headerlink" title="方法调用指令共有5种"></a>方法调用指令共有5种</h3><ol>
+<li>invokestatic：用于调用静态方法。</li>
+<li>invokespecial：用于调用私有实例方法（就是私有非静态方法）、构造器，以及使用super关键字调用父类的实例方法或构造器，和所实现接口的默认方法：\<init>方法；私有方法；super.method()</init></li>
+<li>invokevirtual：用于调用非私有实例方法。 </li>
+<li>invokeinterface：用于调用接口方法。</li>
+<li>invokedynamic：用于调用动态方法。（单独再说）</li>
 </ol>
-<p>饿汉式单例模式：直接创建对象，不存在线程安全问题<br>懒汉式单例模式：延迟创建对象，需要时再创建，节省空间</p>
-<h2 id="懒汉式：DoubleCheck-volatile"><a href="#懒汉式：DoubleCheck-volatile" class="headerlink" title="懒汉式：DoubleCheck+volatile"></a>懒汉式：DoubleCheck+volatile</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
-	<span class="token comment">// 2.私有的构造方法</span>
-	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1.调用Singleton的getInstance静态方法</span>
-<span class="token class-name">Singleton</span> singleton <span class="token operator">=</span> <span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 2.创建实例对象</span>
-singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 3.返回实例对象</span>
-<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-<span class="token comment">// 此后，每次调用getInstance方法都直接返回该实例对象</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>类加载时，初始化静态成员变量singleton1<br>调用getInstance静态方法，在栈中创建引用变量singleton2<br>同时，第一次getInstance方法会执行new Singleton()，在堆中创建一个实例对象singleton3</p>
-<p>三者关系<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212170033468.png" alt="变量关系"><br>堆区中只会存在一个singleton实例对象，此后每次调用getInstance方法实际上都是返回该对象。</p>
-<h2 id="DoubleCheck的作用"><a href="#DoubleCheck的作用" class="headerlink" title="DoubleCheck的作用"></a>DoubleCheck的作用</h2><p>第一次：判断singleton是否已经实例化，如果是，直接返回，否则，执行实例化。<br>第二次：对Singleton.class加锁后，再次判断singleton是否实例化，因为在并发场景下，该线程在判断singleton==null之后和加锁之前，其他线程已经实例化，所以需要再次判断。</p>
-<h2 id="Java对象实例化"><a href="#Java对象实例化" class="headerlink" title="Java对象实例化"></a>Java对象实例化</h2><ol>
-<li>确认类元信息是否存在；即在JVM内存的元数据区检查需要创建的类元信息是否存在，若不存在，则在双亲委派模式下查找对应的.class文件。如果没有找到文件，抛出ClassNotFoundException异常，如果找到，则进行类加载，并生成对应的Class类对象。</li>
-<li>分配对象内存；计算对象占用空间大小，如果实例成员变量是引用变量，仅需要分配4个字节的引用变量空间，接着在堆中划分一块内存给新对象。</li>
-<li>设定默认值；即为成员变量设定各种形式的零值。</li>
-<li>设置对象头；设置新对象的哈希码、GC信息、锁信息、对象所属的类元信息等。</li>
-<li><p>执行init方法；初始化成员变量，执行实例化代码块，调用类的构造方法，并把堆内对象的首地址赋值给引用变量。</p>
-<h2 id="volatile的作用"><a href="#volatile的作用" class="headerlink" title="volatile的作用"></a>volatile的作用</h2></li>
-</ol>
-<p>volatile解决多线程共享变量的可见性问题。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Singleton</span> <span class="token punctuation">{</span>
-    <span class="token comment">// 1.私有静态引用指向自己的实例</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">volatile</span> <span class="token class-name">Singleton</span> singleton<span class="token punctuation">;</span>
-	<span class="token comment">// 2.私有的构造方法</span>
-	<span class="token keyword">private</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
-	<span class="token comment">// 3.返回实例对象的公有静态方法</span>
-	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Singleton</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token keyword">synchronized</span> <span class="token punctuation">(</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">if</span> <span class="token punctuation">(</span>singleton <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-					singleton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Singleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-				<span class="token punctuation">}</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span>
-		<span class="token keyword">return</span> singleton<span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如果不使用volatile关键字，使用方在调用getInstance方法时，有可能会得到未初始化完成的对象。<br>因为对java编译器而言，初始化singleton实例和将对象地址写入singleton字段非原子操作，且两个阶段的执行顺序是未定义的。</p>
-<p>  （1）初始化singleton实例<br> （2）静态成员变量singleton指向该地址，即将堆地址赋值给singleton字段</p>
-<p> 假设某线程执行new singleton()时，先执行（2），此时，另一个线程调用getInstance方法，singleton!=null，会直接返回一个不正确的singleton单例对象，因为此时（1）还没有执行成功，即对象里面的成员变量没有完成赋值，还是默认值。<br> volatile关键字修饰目标属性，这样singleton限制了编译器对它的读写操作进行指令重排，确定对象实例化后才返回引用。</p>
-<h2 id="字节码分析"><a href="#字节码分析" class="headerlink" title="字节码分析"></a>字节码分析</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/* new determines the size in bytes of instances of the given class and allocates memory 
-the new instance from the garbage collected heap. The fields of the instance are set to the
-initial value 0, or null. Next, a reference to the new object is pushed onto the operand
-stack 
-*/</span>
-<span class="token constant">NEW</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span>
-<span class="token comment">/* This pops the top single-word value off the operand stack, and then pushes that value 
-twice
-*/</span>
-<span class="token constant">DUP</span>
-<span class="token comment">// The main use of invokespecial is to invoke an object's instance initialization method</span>
-<span class="token constant">INVOKESPECIAL</span> designModel<span class="token operator">/</span><span class="token class-name">Singleton</span><span class="token punctuation">.</span><span class="token generics"><span class="token punctuation">&lt;</span>init<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token class-name">V</span>
-<span class="token comment">// Pops objectref off the stack and stores it in local variable</span>
-<span class="token constant">ASTORE</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol>
-<li>为对象分配内存空间，初始化成员变量值为0或者NULL；将对象堆首地址赋值给引用变量，压栈；</li>
-<li>复制栈顶地址，即先pop一次，然后再push两次，对于此步操作的意义，网上的解释是：一般实例化一个对象后紧接着会使用它，将引用变量存回局部变量表的同时保留一份在栈上；</li>
-<li>调用对象的实例初始化方法，即为对象的成员变量赋值；</li>
-<li>将对象引用从栈中取出，存入局部变量表。</li>
-</ol>
-<p>如果不使用volatile关键字，步骤1中的”将对象堆首地址赋值给引用变量“和步骤3中的“为对象的成员变量赋值”可能指令重排，无法保证返回正确的对象。</p>
+<p>对于1.和2.的方法调用，属于静态绑定；在类加载的解析阶段，会将符号引用转换为指向方法内存地址的实际引用；<br>对于3.和4.的方法调用，属于动态绑定；在类加载的解析阶段，会将符号引用转换为指向方法表的对应方法的引用；<br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038084.png" alt="符号引用和实际引用"><br><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038058.png" alt="方法表"><br>实际上，使用了方法表的动态绑定与静态绑定相比，仅仅多出几个内存解引用操作：访问栈上的调用者，读取调用者的动态类型，读取该类型的方法表，读取方法表中某个索引值所对应的目标方法。</p>
+<h2 id="JVM是如何处理异常的"><a href="#JVM是如何处理异常的" class="headerlink" title="JVM是如何处理异常的"></a>JVM是如何处理异常的</h2><h2 id="JVM是如何实现反射的"><a href="#JVM是如何实现反射的" class="headerlink" title="JVM是如何实现反射的"></a>JVM是如何实现反射的</h2><h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><h2 id="Java虚拟机是怎么实现synchronized的"><a href="#Java虚拟机是怎么实现synchronized的" class="headerlink" title="Java虚拟机是怎么实现synchronized的"></a>Java虚拟机是怎么实现synchronized的</h2><p>首先，字节码层面的实现：</p>
+<ul>
+<li>如果是synchronized(object)，则得到的字节码会有显式的monitorenter指令和monitorexit指令；</li>
+<li>如果是作用于方法，字节码中方法的访问标记包括ACC_SYNCHRONIZED。该标记表示在进入该方法时，Java虚拟机需要进行monitorenter操作。而在退出该方法时，Java虚拟机均需要进行monitorexit操作。</li>
+</ul>
+<p>monitorenter指令和monitorexit指令都是JVM的指令；抽象理解的话，就是每个锁对象，比如synchronized(object)中的object，它会有一个锁计数器和一个指向持有该锁的线程的指针；（为什么叫monitor，因为每一个对象都有一个monitor与之关联）如果目标锁对象的计数器为0，那么说明它没有被其他线程所持有。在这个情况下，Java虚拟机会将该锁对象的持有线程设置为当前线程，并且将其计数器加1。在目标锁对象的计数器不为0的情况下，如果锁对象的持有线程是当前线程，那么Java虚拟机可以将其计数器加1，否则需要等待，直至持有线程释放该锁。当执行monitorexit时，Java虚拟机则需将锁对象的计数器减1。当计数器减为0时，那便代表该锁已经被释放掉了。（可重入锁）</p>
+<h3 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/webor2006/p/11442551.html">Java精通并发-通过openjdk源码分析ObjectMonitor底层实现</a><br>从上面的理解，我们很直接地想到，当一个锁已经被其他的线程持有时，当前线程执行monitorenter需要等待；那么这个等待过程，在重量级锁的实现下，就是阻塞挂起当前线程，待持有锁的线程释放了锁，当前线程再被唤醒加入到锁的争抢，即执行monitorenter指令。而在这个过程（阻塞和唤醒），会涉及到操作系统从用户态切换至内核态。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">ObjectMonitor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//锁计数器</span>
+_owner <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+_WaitSet <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span> <span class="token comment">//处于wait状态的线程，会被加入到_WaitSet</span>
+_EntryList <span class="token operator">=</span> <span class="token constant">NULL</span> <span class="token punctuation">;</span> <span class="token comment">//处于等待锁block状态的线程，会被加入到该列表</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p>当进行加锁操作时，Java虚拟机会判断是否已经是重量级锁。如果不是，它会在当前线程的当前栈桢中划出一块空间，作为该锁的锁记录，并且将锁对象的标记字段复制到该锁记录中。然后，判断锁标记是否为01（无锁/偏向锁），如果是，Java虚拟机会尝试用CAS（compare-and-swap）操作替换锁对象的标记字段为栈中锁记录的地址，成功则获得锁（我终于理解这个步骤了，轻量级锁的00是因为锁记录的地址内存对齐后，这两位为00，也就是说CAS修改完锁记录的地址，锁标记也一并修改为00）。<br>如果锁标记不是01，即为00；有两种可能：（1）锁重入，将栈中的锁记录清零；这样在释放锁的时候知道是重入（2）其他线程持有锁，升级锁为重量级锁，然后当前线程自适应自旋尝试获得锁，失败后入队，等待被唤醒；<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yescode/p/14474104.html">Synchronized 轻量级锁会自旋？好像并不是这样的。</a></p>
+<h4 id="轻量级锁解锁"><a href="#轻量级锁解锁" class="headerlink" title="轻量级锁解锁"></a>轻量级锁解锁</h4><p>当进行解锁操作时，如果当前锁记录的值为0，则代表重复进入同一把锁，直接返回即可。否则，Java虚拟机会尝试用CAS操作，比较锁对象的标记字段的值是否为当前锁记录的地址。如果是，则替换为锁记录中的值，也就是锁对象原本的标记字段。此时，该线程已经成功释放这把锁。如果不是，则意味着这把锁已经被膨胀为重量级锁。此时，Java虚拟机会进入重量级锁的释放过程，唤醒因竞争该锁而被阻塞了的线程。</p>
+<h3 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h3><p>在最初状态下，对象的偏向锁标记为0，表示无锁状态（假设是支持偏向锁）；此时线程执行monitorenter命令，通过CAS操作将当前线程的地址记录在锁对象的标记字段之中，并且将标记字段的最后三位设置为101（进入偏向锁阶段）。<br>在接下来的运行过程中，每当有线程请求这把锁，Java虚拟机只需判断锁对象标记字段中：（1）最后三位是否为101，（2）是否包含当前线程的地址，（3）以及epoch值是否和锁对象的类的epoch值相同。如果都满足，那么当前线程持有该偏向锁，可以直接返回。如果不满足，判断锁对象的epoch值是否和类的epoch相等，如若不等，那么当前线程可以将该锁重偏向至自己；否则撤销偏向锁，升级为轻量级锁</p>
+<h3 id="偏向锁加锁"><a href="#偏向锁加锁" class="headerlink" title="偏向锁加锁"></a>偏向锁加锁</h3><p>栈帧创建Lock Record，Lock Record的obj字段指向锁对象；CAS写入ThreadID</p>
+<h3 id="偏向锁重入"><a href="#偏向锁重入" class="headerlink" title="偏向锁重入"></a>偏向锁重入</h3><p>栈帧创建Lock Record，Lock Record的obj字段指向锁对象；判断ThreadID为当前线程ID，结束；</p>
+<h3 id="偏向锁解锁"><a href="#偏向锁解锁" class="headerlink" title="偏向锁解锁"></a>偏向锁解锁</h3><p>偏向锁解锁不会主动释放锁，即不会主动修改Mark Word，只会移除栈帧中的Lock Record；</p>
+<h3 id="偏向锁升级为轻量级锁"><a href="#偏向锁升级为轻量级锁" class="headerlink" title="偏向锁升级为轻量级锁"></a>偏向锁升级为轻量级锁</h3><p>栈帧创建Lock Record，Lock Record的obj字段指向锁对象；（1）ThreadID不是当前线程ID；（2）锁对象epoch等于类的epoch；（3）持有偏向锁的线程不存活，JVM会维持一个Thread List；持有偏向锁的线程不在同步代码块，即Lock Record为空；满足以上三个条件，撤销偏向锁，升级为轻量级锁：将Mark Word修改为指向当前Lock Record的指针，</p>
+<h4 id="epoch是什么"><a href="#epoch是什么" class="headerlink" title="epoch是什么"></a>epoch是什么</h4><p>其本质是一个版本号，代表了偏向锁的有效性，epoch存储在可偏向对象的MarkWord中。除了对象中的epoch，对象所属的类class信息中，也会保存一个epoch值。</p>
+<ul>
+<li>类的对象锁撤销达到20次（默认值），代版本偏向锁失效，epoch + 1；表示之前那一代的偏向锁已经失效。而新设置的偏向锁则需要复制新的epoch值。为了保证当前持有偏向锁并且已加锁的线程不至于因此丢锁，Java虚拟机需要遍历所有线程的Java栈，找出该类已加锁的实例，并且将它们标记字段中的epoch值加1。该操作需要所有线程处于安全点状态。</li>
+<li>类的对象锁撤销达到40次，那么Java虚拟机会认为这个类已经不再适合偏向锁。此时，Java虚拟机会撤销该类实例的偏向锁，并且在之后的加锁过程中直接为该类实例设置轻量级锁。</li>
+</ul>
+<h4 id="偏向锁撤销"><a href="#偏向锁撤销" class="headerlink" title="偏向锁撤销"></a>偏向锁撤销</h4><p>当请求加锁的线程和锁对象标记字段保持的线程地址不匹配时（而且锁对象的epoch值和类的epoch相等，如若不等，那么当前线程可以将该锁重偏向至自己），Java虚拟机需要撤销该偏向锁。这个撤销过程非常麻烦，它要求持有偏向锁的线程到达安全点safepoint，再将偏向锁替换成轻量级锁。（判断持有偏向锁的线程是否还存活，不存活直接撤销；持有偏向锁的线程的lock record为空，说明不在执行同步方法，直接撤销；将偏向线程所有相关Lock Record的Displaced Mark Word设置为null，然后将最高位的Lock Record的Displaced Mark Word 设置为无锁状态，最高位的Lock Record也就是第一次获得锁时的Lock Record（这里的第一次是指重入获取锁时的第一次），然后将对象头指向最高位的Lock Record，这里不需要用CAS指令，因为是在safepoint。 执行完后，就升级成了轻量级锁。原偏向线程的所有Lock Record都已经变成轻量级锁的状态。）</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038109.png" alt="偏向锁撤销"></p>
+<h4 id="批量重偏向与撤销"><a href="#批量重偏向与撤销" class="headerlink" title="批量重偏向与撤销"></a>批量重偏向与撤销</h4><ul>
+<li>批量重偏向是一个线程对大量同类对象同步初始化，另一个线程再对这些对象进程同步操作；这种情况不宜升级为轻量级锁</li>
+<li>批量撤销：生产者/消费者队列，不宜用偏向锁，直接升级为轻量级锁</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305220038800.png" alt="锁状态"></p>
+<p>当调用一个锁对象的wait或notify方法时，如当前锁的状态是偏向锁或轻量级锁则会先膨胀成重量级锁。</p>
+<h3 id="happen-before"><a href="#happen-before" class="headerlink" title="happen-before"></a>happen-before</h3><p>首先，我们要明确，happen-before是用来表述两个操作的内存可见性；专业的说， 操作X happens-before操作Y，那么X的结果对于Y可见。<br>happen-before好像就是跟我们平时写代码，先写一条指令，再写另外一条指令，先写的指令肯定先于后写的指令，看起来没什么特别之处。</p>
+<p>但是在实际执行的时候，如果不存在数据依赖，指令可能会被重排。</p>
+<h4 id="什么是可见性"><a href="#什么是可见性" class="headerlink" title="什么是可见性"></a>什么是可见性</h4><p>当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值<br><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/d0f4d9e812ee03b6a32265686">https://xie.infoq.cn/article/d0f4d9e812ee03b6a32265686</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6887838347726290951">https://juejin.cn/post/6887838347726290951</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6887838347726290951">https://juejin.cn/post/6887838347726290951</a><br>JDK1.5之后JMM实现的happen-before；volatile关键字只是happen-before规则中的一种；</p>
+<h4 id="为什么volatile不能保证原子性"><a href="#为什么volatile不能保证原子性" class="headerlink" title="为什么volatile不能保证原子性"></a>为什么volatile不能保证原子性</h4><p>整点代码来看看<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904038580879367">https://juejin.cn/post/6844904038580879367</a> // 怎么看汇编代码<br>IDEA中vm options与program arguments区别，还有Environment variables<br><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/363553?utm_source=zhihu&amp;utm_medium=bbs-ex&amp;utm_campaign=other&amp;utm_content=content">java锁升级</a></p>
 
                 
             </div>
@@ -723,7 +641,7 @@ twice
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">http://example.com/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/</a>
+                    <a href="http://example.com/2023/05/22/shen-ru-chai-jie-java-xu-ni-ji/">http://example.com/2023/05/22/shen-ru-chai-jie-java-xu-ni-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -763,10 +681,6 @@ twice
                             
                                 <a href="/tags/Java/">
                                     <span class="chip bg-color">Java</span>
-                                </a>
-                            
-                                <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                                    <span class="chip bg-color">设计模式</span>
                                 </a>
                             
                         </div>
@@ -940,24 +854,23 @@ twice
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/03/xiao-cheng-xu-duo-mo-kuai-shu-ju-tong-ji-jie-jue-fang-an/">
+                <a href="/2023/05/22/she-ji-mo-shi-zhi-dai-li-mo-shi/">
                     <div class="card-image">
                         
+                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271552285.jpeg" class="responsive-img" alt="设计模式之代理模式">
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="小程序多模块数据统计解决方案">
-                        
-                        <span class="card-title">小程序多模块数据统计解决方案</span>
+                        <span class="card-title">设计模式之代理模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是之前实习的时候参与的微信小程序项目，主要是关于新员工入职信息采集模块。
+                            代理模式：JDK动态代理、Cglib动态代理和Spring AOP
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-03
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-22
                         </span>
                         <span class="publish-author">
                             
@@ -978,12 +891,16 @@ twice
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">
-                        <span class="chip bg-color">微信小程序</span>
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
                     </a>
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/%E6%BA%90%E7%A0%81/">
+                        <span class="chip bg-color">源码</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                        <span class="chip bg-color">设计模式</span>
                     </a>
                     
                 </div>
@@ -994,27 +911,26 @@ twice
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/21/java-dan-li-she-ji-mo-shi-lan-han-shi-doublecheck-volatile/">
+                <a href="/2023/05/21/hexo-jiao-cheng/">
                     <div class="card-image">
                         
+                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271618785.png" class="responsive-img" alt="hexo教程">
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Java单例设计模式（懒汉式：DoubleCheck+volatile）">
-                        
-                        <span class="card-title">Java单例设计模式（懒汉式：DoubleCheck+volatile）</span>
+                        <span class="card-title">hexo教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            DoubleCheck单例模式以及为什么要使用volatile关键字
+                            记录hexo基本命令和用法。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-21
                             </span>
                         <span class="publish-author">
                             
@@ -1024,24 +940,15 @@ twice
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                    研发
-                                </a>
-                            
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                        <span class="chip bg-color">设计模式</span>
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
                     </a>
                     
                 </div>
@@ -1265,13 +1172,13 @@ twice
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+    <a href="https://github.com/scuChenscu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
         <i class="fab fa-github"></i>
     </a>
 
 
 
-    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:2376584476@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fas fa-envelope-open"></i>
     </a>
 
@@ -1281,7 +1188,7 @@ twice
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2376584476" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2376584476" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
