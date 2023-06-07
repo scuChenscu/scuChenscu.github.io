@@ -468,7 +468,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    617
+                    658
                 </div>
                 
 
@@ -550,6 +550,12 @@ hexo clean <span class="token operator">&amp;&amp;</span> hexo g <span class="to
 <p>通过修改<code>/scaffolds/post.md</code>文件来修改front-matter</p>
 <p>段落缩进</p>
 <p>  </p>
+<p>修改背景图：</p>
+<p># banner 是否每日切换.</p>
+<p># 若为 false, 则 banner 默认为 /medias/banner/0.jpg</p>
+<p>banner:</p>
+<p>  enable: false</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40634846/article/details/109673421">取消hexo的matery主题的背景图遮罩颜色</a></p>
 
                 
             </div>
@@ -1298,6 +1304,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 

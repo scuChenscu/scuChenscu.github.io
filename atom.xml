@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-27T07:05:00.547Z</updated>
+  <updated>2023-06-07T16:58:42.842Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2023年暑期实习面试历程</title>
+    <link href="http://example.com/2023/06/06/2023-nian-shu-qi-shi-xi-mian-shi-li-cheng/"/>
+    <id>http://example.com/2023/06/06/2023-nian-shu-qi-shi-xi-mian-shi-li-cheng/</id>
+    <published>2023-06-05T16:54:01.000Z</published>
+    <updated>2023-06-07T16:58:42.842Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;盛大登场&quot;&gt;&lt;a href=&quot;#盛大登场&quot; class=&quot;headerlink&quot; title=&quot;盛大登场&quot;&gt;&lt;/a&gt;盛大登场&lt;/h1&gt;&lt;p&gt;​        今年的春季实习招聘似乎比往年来得更早，我记忆中本科实习面试美团是在五月份的时候。&lt;/p&gt;
+&lt;p&gt;​   </summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="生活" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="面试" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>M厂实习期间需求开发总结</title>
+    <link href="http://example.com/2023/05/30/m-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/"/>
+    <id>http://example.com/2023/05/30/m-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/</id>
+    <published>2023-05-29T17:43:48.000Z</published>
+    <updated>2023-06-03T07:44:00.123Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;M厂实习期间负责的需求开发工作，业务主要是互联网广告，负责广告投放第三方系统后反馈链路的开发工作。&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="Kafka" scheme="http://example.com/tags/Kafka/"/>
+    
+    <category term="高并发" scheme="http://example.com/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>宇宙</title>
@@ -65,11 +125,11 @@
     <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
     
     
+    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
     <category term="Java" scheme="http://example.com/tags/Java/"/>
     
     <category term="源码" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81/"/>
-    
-    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
@@ -105,7 +165,7 @@
     <link href="http://example.com/2023/05/21/hexo-jiao-cheng/"/>
     <id>http://example.com/2023/05/21/hexo-jiao-cheng/</id>
     <published>2023-05-21T07:49:25.000Z</published>
-    <updated>2023-05-27T08:34:42.235Z</updated>
+    <updated>2023-05-27T09:17:01.658Z</updated>
     
     
       
@@ -206,9 +266,9 @@
     <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
     
     
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
     <category term="多线程" scheme="http://example.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="Java" scheme="http://example.com/tags/Java/"/>
     
   </entry>
   
@@ -232,6 +292,33 @@
     
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
     
+    
+    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《围城》</title>
+    <link href="http://example.com/2023/02/03/wei-cheng/"/>
+    <id>http://example.com/2023/02/03/wei-cheng/</id>
+    <published>2023-02-03T15:47:12.000Z</published>
+    <updated>2023-06-03T16:03:26.337Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
     
     <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
     
@@ -445,18 +532,19 @@
   </entry>
   
   <entry>
-    <title>实习期间需求开发总结</title>
-    <link href="http://example.com/2023/01/01/shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/"/>
-    <id>http://example.com/2023/01/01/shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/</id>
+    <title>H厂实习期间需求开发总结</title>
+    <link href="http://example.com/2023/01/01/h-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/"/>
+    <id>http://example.com/2023/01/01/h-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/</id>
     <published>2023-01-01T07:15:31.000Z</published>
-    <updated>2023-05-27T08:49:53.669Z</updated>
+    <updated>2023-05-29T17:50:31.258Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;H厂实习期间负责的需求开发工作：在开发过程中用到了一些设计模式和线程池技术。&lt;/p&gt;
+&lt;h2 id=&quot;项目背景&quot;&gt;&lt;a</summary>
         
       
     
@@ -466,91 +554,10 @@
     
     <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
     
-    
-    <category term="多线程" scheme="http://example.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-  </entry>
-  
-  <entry>
-    <title>SpringBoot事件监听机制</title>
-    <link href="http://example.com/2022/12/22/springboot-shi-jian-jian-ting-ji-zhi/"/>
-    <id>http://example.com/2022/12/22/springboot-shi-jian-jian-ting-ji-zhi/</id>
-    <published>2022-12-21T16:44:51.000Z</published>
-    <updated>2023-05-27T08:37:51.868Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;Spring事件机制关键对象&quot;&gt;&lt;a href=&quot;#Spring事件机制关键对象&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-    <category term="SpringBoot" scheme="http://example.com/tags/SpringBoot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分布式消息系统-Kafka</title>
-    <link href="http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/"/>
-    <id>http://example.com/2022/12/16/fen-bu-shi-xiao-xi-xi-tong-kafka/</id>
-    <published>2022-12-16T04:12:34.000Z</published>
-    <updated>2023-05-27T08:27:29.619Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;分布式消息系统-Kafka&quot;&gt;&lt;a href=&quot;#分布式消息系统-Kafka&quot; class=&quot;headerlink&quot; title=&quot;分布式消息系统-Kafka&quot;&gt;&lt;/a&gt;分布式消息系统-Kafka&lt;/h2&gt;&lt;h4 id=&quot;Kafka简介&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="kafka" scheme="http://example.com/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2022/12/15/hello-world/"/>
-    <id>http://example.com/2022/12/15/hello-world/</id>
-    <published>2022-12-15T13:45:25.460Z</published>
-    <updated>2023-05-27T08:35:09.339Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="hexo" scheme="http://example.com/categories/hexo/"/>
-    
-    
-    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    <category term="多线程" scheme="http://example.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   

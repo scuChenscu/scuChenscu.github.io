@@ -472,14 +472,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.8k
+                    7.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    24 分
+                    27 分
                 </div>
                 
 
@@ -497,14 +497,77 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="MySQL数据结构及底层原理"><a href="#MySQL数据结构及底层原理" class="headerlink" title="MySQL数据结构及底层原理"></a>MySQL数据结构及底层原理</h1><h4 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834257.png" alt="系统架构"></p>
+                <h1 id="MySQL数据结构及底层原理"><a href="#MySQL数据结构及底层原理" class="headerlink" title="MySQL数据结构及底层原理"></a>MySQL数据结构及底层原理</h1><h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834257.png" alt="系统架构"></p>
 <p>大体来说，MySQL可以分为Server层和存储引擎层两部分：</p>
 <ul>
 <li>Server层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖MySQL的大多数核心服务功能；</li>
 <li>存储引擎层负责数据的存储和提取。</li>
 </ul>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834851.png" alt="系统架构" style="zoom:50%;"></p>
-<p>索引是什么？一种可以提高查询效率的数据结构</p>
+<h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>注意，这里提到的是数据库事务，而不是MySQL事务，或者说Innodb存储引擎实现的事务。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>事务是逻辑上的⼀组操作，要么都执⾏，要么都不执⾏。</p>
+<h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
+<li>原子性（Actomicity），事务中的操作序列为一个不可分割整体，要么全部执行成功，要么全部不执行。</li>
+<li>一致性（Consistency）事务要确保数据库的状态从一个一致的状态转变成另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。</li>
+<li>隔离性（Isolation）多个事务并发执行时，彼此之间相互独立。</li>
+<li>持久性（Durability）事务成功提交，其对数据库的修改将被永久保存。</li>
+</ul>
+<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h4><ul>
+<li>读未提交（Read Uncommitted）<br>一个事务的更新语句未提交，其他事务可以读取到结果</li>
+<li>读已提交（Read Committed）<br>一个事务只能读到其他事务已经提交的结果</li>
+<li>可重复读（Repeatable Read）<br>一个事务对数据多次读取，结果一致</li>
+<li>串行化（Serializable）<br>事务串行执行</li>
+</ul>
+<h4 id="并发异常"><a href="#并发异常" class="headerlink" title="并发异常"></a>并发异常</h4><p>并发异常是指在多个事务并发执行时可能会出现的异常；这里要注意，我们前面提到的事务的特性是指我们在执行事务的时候应该要满足的特性：一系列操作要么全部成功，要么失败回滚。而事务并发异常，是事务在不同的隔离级别下可能会出现的问题。</p>
+<ul>
+<li>回滚丢失/第一类更新丢失：事务B回滚导致事务A的更新丢失</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834645.png" alt="回滚丢失/第一类更新丢失" style="zoom:50%;"></p>
+<ul>
+<li>覆盖丢失/第二类更新丢失：事务B的更新覆盖事务A的更新</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/20220421233111.png" alt="覆盖丢失/第二类更新丢失" style="zoom:50%;"></p>
+<ul>
+<li>脏读：事务A更新后回滚，事务B读到事务A的更新</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834909.png" alt="脏读" style="zoom:50%;"></p>
+<ul>
+<li>不可重复读，事务B两次读取数据结果不一致（事务A在该过程对数据进行了修改）</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834308.png" alt="不可重复读" style="zoom:50%;"></p>
+<ul>
+<li>幻读</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834575.png" alt="幻读" style="zoom:50%;"></p>
+<h4 id="标准SQL事务隔离级别实现原理"><a href="#标准SQL事务隔离级别实现原理" class="headerlink" title="标准SQL事务隔离级别实现原理"></a>标准SQL事务隔离级别实现原理</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624198.png" alt="标准SQL事务隔离级别实现方式"></p>
+<p>在标准SQL事务隔离级别实现下，涉及了大量的读写锁操作。Innodb存储引擎引入了MVCC机制减少锁操作解决读写冲突。</p>
+<h4 id="MVCC机制"><a href="#MVCC机制" class="headerlink" title="MVCC机制"></a>MVCC机制</h4><p> MVCC是指多版本并发控制。MVCC是在并发访问数据库时，通过对数据进行多版本控制，避免因写锁而导致读操作的堵塞，从而很好的优化并发堵塞问题。</p>
+<h5 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h5><p>MVCC的实现原理主要依赖于每一行记录中的3个隐藏字段、undo log和readview。</p>
+<h6 id="隐藏字段"><a href="#隐藏字段" class="headerlink" title="隐藏字段"></a>隐藏字段</h6><ul>
+<li><p>DB_TRX_ID：6字节，最近修改事务id，记录创建这条记录或者最后一次修改该记录的事务id</p>
+</li>
+<li><p>DB_ROLL_PTR：7字节，回滚指针，指向这条记录的上一个版本,用于配合undo log，指向上一个旧版本</p>
+</li>
+<li><p>DB_ROW_JD：6字节，隐藏的主键，如果数据表没有主键，那么innodb会自动生成一个6字节的row_id</p>
+</li>
+</ul>
+<h6 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h6><p>回滚日志，在对数据进行insert，delete，update操作生成的方便回滚的日志。</p>
+<h6 id="readview"><a href="#readview" class="headerlink" title="readview"></a>readview</h6><p>readview是事务进行快照读操作的时候生成的读视图。</p>
+<p>上面先对隐藏字段、undo log和readview进行简单说明。后面再结合具体场景去讲MVCC的实现原理。实际上根据我的理解，MVCC机制主要应用在读已提交和可重复读两种隔离级别；对于读未提交根本不关心事务是否已经提交，对于串行化，根本不可能有别的事务。</p>
+<h5 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h5><h6 id="快照读"><a href="#快照读" class="headerlink" title="快照读"></a>快照读</h6><p>快照读就是我们平时执行的普通的select查询语句；涉及前面提到的readview，只是在读已提交和可重复读两种隔离级别下，生成读视图的时机不同。</p>
+<p>事务在启动瞬间，会有一个数组，该数组保存当前正在“活跃”的事务：即启动还未提交的事务；数组里面事务ID的最小值记为低水位，当前系统里面已经创建过的事务ID的最大值加1记为高水位。</p>
+<p>那么，行数据的row trx_id可能处于下面几种情况：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835539.png" alt="事务数组" style="zoom:50%;"></p>
+<ul>
+<li>读已提交：每次执行select语句的时候生成视图，只要row trx_id属于已提交事务，就是可见的；</li>
+<li>可重复读：第一次执行select语句的时候生成视图，事务内都用该视图；</li>
+</ul>
+<p>（如果select语句查询的数据不一样呢）</p>
+<p>而上面找历史数据就会用到DB_ROLL_PTR和undo log；MVCC机制不依赖锁就实现了可重复读隔离级别下的快照读。</p>
+<h6 id="当前读"><a href="#当前读" class="headerlink" title="当前读"></a>当前读</h6><p>当前读就是读取当前版本最新的数据；select … in share mode; select for update; insert, delete, update这些操作都是当前读，也就是说，当前“读”的读不仅仅是读操作，也包括在修改数据的写操作中包含的“读”操作。</p>
+<p>理论上，对于当前读，我们就按照标准的事务隔离级别实现方式进行加锁就可以了。但是，Innodb默认的隔离级别是可重复读，按照标准的锁实现，我们知道会出现幻读问题，所以Innodb引入了由record Lock和gap Lock组成的Next-key lock；避免可重复读下的快照读出现幻读。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834766.png" alt="可重复读" style="zoom:50%;"></p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>索引是一种可以提高查询效率的数据结构；</p>
 <h4 id="数据结构：B-树（横向比较其他数据结构）"><a href="#数据结构：B-树（横向比较其他数据结构）" class="headerlink" title="数据结构：B+树（横向比较其他数据结构）"></a>数据结构：B+树（横向比较其他数据结构）</h4><ul>
 <li>哈希；单点检索效率高，但是区间检索、排序（order by）很差，也许还会有大数据量的哈希碰撞问题。</li>
 <li>二叉搜索树，会产生单边树问题形成链表（连最基本的自增主键效果都很差），树高过高，浪费空间。</li>
@@ -513,7 +576,7 @@
 <li>B+树，平均查询次数低，查询时间稳定（稳定大于一切）。非叶子节点可以存储更多的索引（非叶子节点只存储索引，不存储数据，每次IO获取更多的索引），全表扫描直接到叶子节点就行，叶子节点有链表，支持范围查询。</li>
 </ul>
 <p><strong>B+树索引并不能直接找到具体的行，只是找到被查找行所在的页，然后DB通过把整页读入内存，再在内存中查找。</strong>（一个节点就是一个page）</p>
-<p>B+树在主键索引树存数据，其他索引树存主键，所以会回表（即先拿主键，再通过主键拿数据）</p>
+<p>B+树在主键索引树存数据，其他索引树存主键，所以会回表（即先拿主键，再通过主键拿数据）；为了避免回表，可以使用覆盖索引（即需要的数据就在索引）；</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834668.png" alt="B+树聚集索引" style="zoom:50%;"></p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834496.png" alt="B+树非聚集索引" style="zoom:50%;"></p>
 <p>采用B+树的索引结构优点：</p>
@@ -531,40 +594,6 @@
 </ul>
 <p>在InnoDB中，数据和索引文件是合起来储存的，InnoDB 的存储文件有两个，后缀名分别是 .frm 和 .idb，其中 .frm 是表的定义文件，而 idb 是数据文件。</p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0KGhWQPTl870-Et-gpAreg">为了把mysql的索引底层原理讲清楚，我把计算机翻了个底朝天</a></p>
-<h4 id="事务（引擎层）"><a href="#事务（引擎层）" class="headerlink" title="事务（引擎层）"></a>事务（引擎层）</h4><p>事务是逻辑上的⼀组操作，要么都执⾏，要么都不执⾏。</p>
-<h4 id="事务特性：ACID"><a href="#事务特性：ACID" class="headerlink" title="事务特性：ACID"></a>事务特性：ACID</h4><ul>
-<li>原子性（Actomicity），事务中的操作序列为一个不可分割整体，要么全部执行成功，要么全部不执行。</li>
-<li>一致性（Consistency）事务要确保数据库的状态从一个一致的状态转变成另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。</li>
-<li>隔离性（Isolation）多个事务并发执行时，彼此之间相互独立。</li>
-<li>持久性（Durability）事务成功提交，其对数据库的修改将被永久保存。</li>
-</ul>
-<p>更确切来说，应该是通过AID保证C</p>
-<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><ul>
-<li>读未提交（Read Uncommitted）<br>一个事务的更新语句未提交，其他事务可以读取到结果</li>
-<li>读已提交（Read Committed）<br>一个事务只能读到其他事务已经提交的结果</li>
-<li>可重复读（Repeatable Read）<br>一个事务对数据多次读取，结果一致</li>
-<li>串行化（Serializable）<br>事务串行执行</li>
-</ul>
-<h4 id="事务并发异常"><a href="#事务并发异常" class="headerlink" title="事务并发异常"></a>事务并发异常</h4><ul>
-<li>回滚丢失/第一类更新丢失：事务B回滚导致事务A的更新丢失</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834645.png" alt="回滚丢失/第一类更新丢失" style="zoom:50%;"></p>
-<ul>
-<li>覆盖丢失/第二类更新丢失：事务B的更新覆盖事务A的更新</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834766.png" alt="覆盖丢失/第二类更新丢失" style="zoom:50%;"></p>
-<ul>
-<li>脏读：事务A更新后回滚，事务B读到事务A的更新</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834909.png" alt="脏读" style="zoom:50%;"></p>
-<ul>
-<li>不可重复读，事务B两次读取数据结果不一致（事务A在该过程对数据进行了修改）</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834308.png" alt="不可重复读" style="zoom:50%;"></p>
-<ul>
-<li>幻读</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834575.png" alt="幻读" style="zoom:50%;"></p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834864.png" alt="InnoDB事务行锁"></p>
 <h4 id="Innodb默认隔离级别：可重复读"><a href="#Innodb默认隔离级别：可重复读" class="headerlink" title="Innodb默认隔离级别：可重复读"></a>Innodb默认隔离级别：可重复读</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834766.png" alt="Innodb默认隔离级别"></p>
 <p><strong>在快照读（单纯的select操作）情况下，mysql通过mvcc（undo回滚日志，只要事务未提交，就会保留undo日志，所以要减少长事务的使用，避免undo日志占据太多空间）来避免幻读。简单讲就是在当前事务开始前未提交的事务，对数据库修改的版本都当前事务都是不可见的。</strong></p>
@@ -579,9 +608,6 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835547.png" alt="image-20220414104551031"></p>
 <p>两个核心概念：每个事务都有一个transcation id；数据库每行记录有多个版本，每个版本有row trx_id；当某个事务对行数据操作时，就会：row trx_id = transaction id；给该行数据追加自己的事务id。</p>
 <p>MVCC一致性读的实现：</p>
-<p>事务在启动瞬间，会有一个数组，该数组保存当前正在“活跃”的事务：即启动还未提交的事务；数组里面事务ID的最小值记为低水位，当前系统里面已经创建过的事务ID的最大值加1记为高水位。</p>
-<p>那么，行数据的row trx_id可能处于下面几种情况：</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835539.png" alt="事务数组" style="zoom:50%;"></p>
 <p>简单讲，就是当前事务之前提交的版本，可见；未提交/视图数组创建后提交，不可见。</p>
 <p><strong>可重复读的核心就是一致性读（consistent read）；而事务更新数据的时候，只能用当前读。如果当前的记录的行锁被其他事务占用的话，就需要进入锁等待。</strong>（为什么需要可重复读：当在进行数据校对的时候，不希望新发生的变更影响当前校对，即需要一个数据的静态视图）</p>
 <p><strong>在当前读（select…lock in share mode、select… for update、update/insert/delete）情况下，mysql通过next-key lock来避免幻读。（间隙锁Gap lock和行锁合称next-key lock）</strong></p>
@@ -601,7 +627,7 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <li>没有索引的列，当前读操作时，会加全表gap锁，生产环境要注意。（是gap + record）</li>
 <li>非唯一索引列，如果where条件部分命中(&gt;、&lt;、like等)或者全未命中，则会加附近Gap间隙锁。例如，某表数据如下，非唯一索引2,6,9,9,11,15。如下语句要操作非唯一索引列9的数据，gap锁将会锁定的列是(6,11]，该区间内无法插入数据。</li>
 </ul>
-<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p>定义：一种可以提高数据查询效率的数据结构。</p>
+<h4 id="索引-1"><a href="#索引-1" class="headerlink" title="索引"></a>索引</h4><p>定义：一种可以提高数据查询效率的数据结构。</p>
 <p>聚簇索引：主键索引，叶子节点存整行数据</p>
 <p>非聚簇索引：非主键索引，叶子节点存主键，再根据主键去查主键索引拿到行数据（回表）</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835341.png" alt="索引"></p>
@@ -762,7 +788,7 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <li>读写分离、分担压力</li>
 <li>高可用、可扩展</li>
 </ol>
-<h5 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h5><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835502.png" alt="主从复制实现原理" style="zoom:50%;"></p>
+<h5 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="实现原理"></a>实现原理</h5><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835502.png" alt="主从复制实现原理" style="zoom:50%;"></p>
 <ol>
 <li>master 服务器会将 SQL 记录通过多 dump 线程写入到 binary log 中。</li>
 <li>slave 服务器开启一个 io thread 线程向服务器发送请求，向 master 服务器请求 binary log。master 服务器在接收到请求之后，根据偏移量将新的 binary log 发送给 slave 服务器。（解耦合）</li>
@@ -803,7 +829,7 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <p>首先，我们不考虑Innodb，而是标准SQL事务隔离级别实现原理：</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624198.png" alt="标准SQL事务隔离级别实现方式" style="zoom:50%;"></p>
 <p>可以看到，在标准SQL事务隔离级别实现下，涉及了大量的读写锁操作。Innodb存储引擎引入了MVCC机制来解决读写冲突。在MVCC机制下，就有了快照读和当前读的概念。</p>
-<h4 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><ul>
+<h4 id="快照读和当前读-1"><a href="#快照读和当前读-1" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><ul>
 <li>快照读就是读取历史数据，视图的概念；平时常用的select语句就是快照读；普通的select语句不涉及锁操作，也就是别的事务对这个数据加了读写锁也不会影响普通的select语句执行。快照读只存在于读已提交和可重复读两个隔离级别下。读未提交读最新数据，串行化加表锁。</li>
 <li>当前读就是读取当前版本最新的数据；select … in share mode; select for update; insert, delete, update这些操作都是当前读，也就是说，当前“读”的读不仅仅是读操作，也包括在修改数据的写操作中包含的“读”操作。</li>
 </ul>
@@ -1582,6 +1608,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
