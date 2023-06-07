@@ -386,9 +386,9 @@
     <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
     
     
-    <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
-    
     <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+    <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
     
   </entry>
   
