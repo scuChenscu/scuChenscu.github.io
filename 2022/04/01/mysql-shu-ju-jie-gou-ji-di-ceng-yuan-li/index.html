@@ -472,7 +472,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.7k
+                    7.8k
                 </div>
                 
 
@@ -497,7 +497,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="MySQL数据结构及底层原理"><a href="#MySQL数据结构及底层原理" class="headerlink" title="MySQL数据结构及底层原理"></a>MySQL数据结构及底层原理</h1><h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834257.png" alt="系统架构"></p>
+                <h1 id="MySQL数据结构及底层原理"><a href="#MySQL数据结构及底层原理" class="headerlink" title="MySQL数据结构及底层原理"></a>MySQL数据结构及底层原理</h1><p>文中有很多内容参考林晓斌 《MySQL实战45讲》，关于林晓斌的故事，大家可以去八卦一下。</p>
+<h2 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h2><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834257.png" alt="系统架构"></p>
 <p>大体来说，MySQL可以分为Server层和存储引擎层两部分：</p>
 <ul>
 <li>Server层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖MySQL的大多数核心服务功能；</li>
@@ -505,7 +506,7 @@
 </ul>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834851.png" alt="系统架构" style="zoom:50%;"></p>
 <h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>注意，这里提到的是数据库事务，而不是MySQL事务，或者说Innodb存储引擎实现的事务。</p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>事务是逻辑上的⼀组操作，要么都执⾏，要么都不执⾏。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>事务就是要保证一组数据库操作，要么全部成功，要么全部失败。</p>
 <h4 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h4><ul>
 <li>原子性（Actomicity），事务中的操作序列为一个不可分割整体，要么全部执行成功，要么全部不执行。</li>
 <li>一致性（Consistency）事务要确保数据库的状态从一个一致的状态转变成另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。</li>
@@ -513,11 +514,17 @@
 <li>持久性（Durability）事务成功提交，其对数据库的修改将被永久保存。</li>
 </ul>
 <h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h4><ul>
-<li>读未提交（Read Uncommitted）<br>一个事务的更新语句未提交，其他事务可以读取到结果</li>
-<li>读已提交（Read Committed）<br>一个事务只能读到其他事务已经提交的结果</li>
-<li>可重复读（Repeatable Read）<br>一个事务对数据多次读取，结果一致</li>
-<li>串行化（Serializable）<br>事务串行执行</li>
+<li><p>读未提交（Read Uncommitted）<br>一个事务还没提交时，它做的变更就能被别的事务看到。</p>
+</li>
+<li><p>读已提交（Read Committed）<br>一个事务提交之后，它做的变更才会被其他事务看到。</p>
+</li>
+<li><p>可重复读（Repeatable Read）<br>一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。</p>
+</li>
+<li><p>串行化（Serializable）</p>
+<p>顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。 </p>
+</li>
 </ul>
+<p>隔离级别越高，性能越多；因为会引入更多的锁机制，出现读写锁冲突，导致事务阻塞。</p>
 <h4 id="并发异常"><a href="#并发异常" class="headerlink" title="并发异常"></a>并发异常</h4><p>并发异常是指在多个事务并发执行时可能会出现的异常；这里要注意，我们前面提到的事务的特性是指我们在执行事务的时候应该要满足的特性：一系列操作要么全部成功，要么失败回滚。而事务并发异常，是事务在不同的隔离级别下可能会出现的问题。</p>
 <ul>
 <li>回滚丢失/第一类更新丢失：事务B回滚导致事务A的更新丢失</li>
@@ -539,34 +546,83 @@
 <li>幻读</li>
 </ul>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834575.png" alt="幻读" style="zoom:50%;"></p>
-<h4 id="标准SQL事务隔离级别实现原理"><a href="#标准SQL事务隔离级别实现原理" class="headerlink" title="标准SQL事务隔离级别实现原理"></a>标准SQL事务隔离级别实现原理</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624198.png" alt="标准SQL事务隔离级别实现方式"></p>
+<h4 id="标准SQL事务隔离级别实现原理"><a href="#标准SQL事务隔离级别实现原理" class="headerlink" title="标准SQL事务隔离级别实现原理"></a>标准SQL事务隔离级别实现原理</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624198.png" alt="标准SQL事务隔离级别实现方式" style="zoom:50%;"></p>
 <p>在标准SQL事务隔离级别实现下，涉及了大量的读写锁操作。Innodb存储引擎引入了MVCC机制减少锁操作解决读写冲突。</p>
-<h4 id="MVCC机制"><a href="#MVCC机制" class="headerlink" title="MVCC机制"></a>MVCC机制</h4><p> MVCC是指多版本并发控制。MVCC是在并发访问数据库时，通过对数据进行多版本控制，避免因写锁而导致读操作的堵塞，从而很好的优化并发堵塞问题。</p>
-<h5 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h5><p>MVCC的实现原理主要依赖于每一行记录中的3个隐藏字段、undo log和readview。</p>
-<h6 id="隐藏字段"><a href="#隐藏字段" class="headerlink" title="隐藏字段"></a>隐藏字段</h6><ul>
-<li><p>DB_TRX_ID：6字节，最近修改事务id，记录创建这条记录或者最后一次修改该记录的事务id</p>
-</li>
-<li><p>DB_ROLL_PTR：7字节，回滚指针，指向这条记录的上一个版本,用于配合undo log，指向上一个旧版本</p>
-</li>
-<li><p>DB_ROW_JD：6字节，隐藏的主键，如果数据表没有主键，那么innodb会自动生成一个6字节的row_id</p>
-</li>
-</ul>
-<h6 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h6><p>回滚日志，在对数据进行insert，delete，update操作生成的方便回滚的日志。</p>
-<h6 id="readview"><a href="#readview" class="headerlink" title="readview"></a>readview</h6><p>readview是事务进行快照读操作的时候生成的读视图。</p>
-<p>上面先对隐藏字段、undo log和readview进行简单说明。后面再结合具体场景去讲MVCC的实现原理。实际上根据我的理解，MVCC机制主要应用在读已提交和可重复读两种隔离级别；对于读未提交根本不关心事务是否已经提交，对于串行化，根本不可能有别的事务。</p>
-<h5 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h5><h6 id="快照读"><a href="#快照读" class="headerlink" title="快照读"></a>快照读</h6><p>快照读就是我们平时执行的普通的select查询语句；涉及前面提到的readview，只是在读已提交和可重复读两种隔离级别下，生成读视图的时机不同。</p>
-<p>事务在启动瞬间，会有一个数组，该数组保存当前正在“活跃”的事务：即启动还未提交的事务；数组里面事务ID的最小值记为低水位，当前系统里面已经创建过的事务ID的最大值加1记为高水位。</p>
-<p>那么，行数据的row trx_id可能处于下面几种情况：</p>
+<h4 id="Innodb事务隔离的实现原理"><a href="#Innodb事务隔离的实现原理" class="headerlink" title="Innodb事务隔离的实现原理"></a>Innodb事务隔离的实现原理</h4><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000025156465">深入理解MySQL中事务隔离级别的实现原理</a></p>
+<h5 id="事务ID"><a href="#事务ID" class="headerlink" title="事务ID"></a>事务ID</h5><p>InnoDB里面每个事务有一个唯一的事务ID，叫作transaction id。它是在事务开始的时候向 InnoDB的事务系统申请的，是按申请顺序严格递增的。</p>
+<p>每个事务在启动瞬间，会有一个数组，该数组保存当前正在“活跃”的事务：即启动还未提交的事务；数组里面事务ID的最小值记为低水位，当前系统里面已经创建过的事务ID的最大值加1记为高水位。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835539.png" alt="事务数组" style="zoom:50%;"></p>
-<ul>
-<li>读已提交：每次执行select语句的时候生成视图，只要row trx_id属于已提交事务，就是可见的；</li>
-<li>可重复读：第一次执行select语句的时候生成视图，事务内都用该视图；</li>
+<h5 id="MVCC机制"><a href="#MVCC机制" class="headerlink" title="MVCC机制"></a>MVCC机制</h5><p> MVCC是指多版本并发控制。MVCC是在并发访问数据库时，通过对数据进行多版本控制，避免因写锁而导致读操作的堵塞，从而很好的优化并发堵塞问题。MVCC的实现原理主要依赖于行记录的隐藏字段、undo log和readview。</p>
+<p>强调：MVCC机制主要是应用在读已提交和可重复读隔离级别下的快照读操作，快照读即我们平时最常用的select查询语句。</p>
+<h6 id="行记录的隐藏字段"><a href="#行记录的隐藏字段" class="headerlink" title="行记录的隐藏字段"></a>行记录的隐藏字段</h6><ul>
+<li>trx_id：表示最后更新该行记录的事物ID；</li>
+<li>roll_pointer：回滚指针，指向这条记录的上一个版本；上一个版本在undo log里面；</li>
 </ul>
-<p>（如果select语句查询的数据不一样呢）</p>
-<p>而上面找历史数据就会用到DB_ROLL_PTR和undo log；MVCC机制不依赖锁就实现了可重复读隔离级别下的快照读。</p>
-<h6 id="当前读"><a href="#当前读" class="headerlink" title="当前读"></a>当前读</h6><p>当前读就是读取当前版本最新的数据；select … in share mode; select for update; insert, delete, update这些操作都是当前读，也就是说，当前“读”的读不仅仅是读操作，也包括在修改数据的写操作中包含的“读”操作。</p>
-<p>理论上，对于当前读，我们就按照标准的事务隔离级别实现方式进行加锁就可以了。但是，Innodb默认的隔离级别是可重复读，按照标准的锁实现，我们知道会出现幻读问题，所以Innodb引入了由record Lock和gap Lock组成的Next-key lock；避免可重复读下的快照读出现幻读。</p>
+<p>MVCC机制下，每行数据都是有多个版本的。每次事务更新数据的时候，都会生成一个新的数据版本，并且把transaction id赋值给最新数据版本的事务ID，记为row trx_id。同时，旧的数据版本要保留， 并且在新的数据版本中，能够通过roll_pointer拿到它，实际上以前版本的数据不是真实存在的，因为如果存数据会耗费太多空间，所以undo log记录的是操作，通过执行操作来计算出历史版本数据（可以参考Redis持久化的AOF和RDB）。 </p>
+<p>总结：数据表中的每一条记录，可能有多个版本，每个版本有自己的row trx_id，当前版本记录可以通过roll_pointer找到上一个版本记录。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202306101721458.png" alt="行记录状态变更"></p>
+<h6 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h6><p>回滚日志，对数据进行insert,delete,update操作生成的方便回滚的日志；</p>
+<p>比如说SQL语句是将4改为3，那么回滚日志就是将3改为4，即记录逆操作；</p>
+<h6 id="readview"><a href="#readview" class="headerlink" title="readview"></a>readview</h6><p>快照读视图，它没有物理结构，作用是在事务执行期间用来定义“我能看到什么数据”。</p>
+<p>在MySQL中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。假设一个值从1被按顺序改成了2、3、4，在回滚日志里面就会有类似下面的记录。 在查询这条记录的时候，不同时刻启动的事务会有不同的read-view。当没有事务再需要用到这些回滚日志时，回滚日志会被删除（如何判断回滚日志不再需要？其实很简单，看事务持久化到哪了就好，后面再展开说）。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202306101710758.png" alt="回滚记录"></p>
+<p>好了，讲到这里，大概清楚MVCC的实现原理，就是根据当前的隔离级别和事务ID计算去你可以看到的数据视图；从而避免了读锁的使用，提高了并发效率；因为标准实现上，读数据要加读锁，别的事务就不能写了，而MVCC则是我看我的视图，你改你的数据。</p>
+<h5 id="readView生成"><a href="#readView生成" class="headerlink" title="readView生成"></a>readView生成</h5><p>读已提交和可重复读的readView生成时机有所不同；</p>
+<h6 id="可重复读的readView"><a href="#可重复读的readView" class="headerlink" title="可重复读的readView"></a>可重复读的readView</h6><p>前面提到当前事务启动的瞬间，会创建一个数组，这个数组记录了当前正在“活跃”的事务，即先于当前事务创建，但未提交的事务，如下图中的黄色部分的未提交事务集合，数组最小值为低水位，数组最大值+1 为高水位：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835539.png" alt="事务数组" style="zoom:50%;"></p>
+<p>那么，对于每一个行记录的row trx_id，有以下几种情况：</p>
+<ul>
+<li>小于低水位，即落在绿色部分，可见；因为是在当前事务之前就已经提交了。（也可能是当前事务自己提交的）</li>
+<li>大于高水位，即落在红色部分（这里可能不太好理解，红色部分不是未开始事务吗？当前事务启动之后，又有新的事务启动了，那新事务的id就落在了高水位之后，并且它先于当前事务提交了），很明显对当前事务是不可见的。</li>
+<li>介于高低水位之间，即落在黄色部分，此时就需要额外地判断了：<ul>
+<li>row trx_id在数组集合中，即当前事务启动时，更新该row的事务还未提交，那就是对当前事务不可见；</li>
+<li>row trx_id不在数组集合中，即当前事务启动时，更新该row的事务已经提交了，那就是对当前事务可见；</li>
+</ul>
+</li>
+</ul>
+<p>总结，对于可重复读的readView生成，核心就一句话：以我启动的时刻为准，如果一个数据版本是在我启动之前生成的，就认；如果是我启动以后才生成的，我就不认，我必须要找到它的上一个版 本”。当然，如果“上一个版本”也不可见，那就得继续往前找。还有，如果是这个事务自己更新的数据，它自己还是要认的。 </p>
+<h6 id="读已提交的readView"><a href="#读已提交的readView" class="headerlink" title="读已提交的readView"></a>读已提交的readView</h6><p>读已提交生成readView是在每次执行查询的时候，而不是在事务启动的时候，其余原理同可重复读的readView。所以读已提交会出现不可重复读的情况，因为有些事务介于两次查询之间进行了提交，那些row在第二次查询时就是可见的。</p>
+<h5 id="MVCC-的优缺点"><a href="#MVCC-的优缺点" class="headerlink" title="MVCC 的优缺点"></a>MVCC 的优缺点</h5><ul>
+<li>优点：前面的分析很清晰了，就是不用上读锁，提高了并发效率；</li>
+<li>缺点：存储row trx_id和roll_pointer等需要额外的空间；</li>
+</ul>
+<h4 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">table</span> <span class="token keyword">where</span> id <span class="token operator">=</span> ?<span class="token punctuation">;</span> <span class="token comment"># 快照读，不加锁，同时也忽略读写锁；</span>
+<span class="token keyword">BEGIN</span><span class="token punctuation">;</span> <span class="token comment"># START TRANSACTION;两者是等价的</span>
+<span class="token comment"># 下面的语句只有在事务中才有效，通常会先开闭自动提交</span>
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">table</span> <span class="token keyword">where</span> id <span class="token operator">=</span> ? <span class="token keyword">lock</span> <span class="token operator">in</span> <span class="token keyword">share</span> <span class="token keyword">mode</span><span class="token punctuation">;</span> <span class="token comment"># 加共享锁，即别的事务只能读不能写；如果存在写锁，则阻塞至写锁释放，读取最新值</span>
+<span class="token keyword">select</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token keyword">table</span> <span class="token keyword">where</span> id <span class="token operator">=</span> ? <span class="token keyword">for</span> <span class="token keyword">update</span><span class="token punctuation">;</span> <span class="token comment"># 加排它锁，即别的事务不能读和写</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="快照读"><a href="#快照读" class="headerlink" title="快照读"></a>快照读</h5><p>快照读就是我们平时执行的普通的select查询语句；读已提交和可重复读会涉及前面提到的readview视图的概念，两者生成读视图的时机不同。</p>
+<ul>
+<li>读未提交：直接返回记录上的最新值，没有视图概念；</li>
+<li>读已提交：视图是在每个SQL语句开始执行的时候创建的；</li>
+<li>可重复读：视图是在事务启动时创建的，整个事务存在期间都用这个视图；</li>
+<li>串行化：直接用加锁的方式来避免并行访问。</li>
+</ul>
+<p>而关于视图的创建，就用到了隐藏字段和undo log。</p>
+<h5 id="当前读"><a href="#当前读" class="headerlink" title="当前读"></a>当前读</h5><p>当前读就是读取当前版本最新的数据；select … in share mode; select for update; insert, delete, update这些操作都是当前读，也就是说，当前“读”的读不仅仅是读操作，也包括在修改数据的写操作中包含的“读”操作。</p>
+<p>理论上，对于当前读，我们就按照标准的事务隔离级别实现方式进行加锁就可以了。但是，Innodb默认的隔离级别是可重复读，按照标准的锁实现，我们知道会出现幻读问题，所以Innodb引入了由record Lock和gap Lock组成的Next-key lock；避免可重复读下的快照读出现幻读（这里要注意，实际上并没有彻底解决幻读，但是在面试基本上到这一步就差不多了）。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834766.png" alt="可重复读" style="zoom:50%;"></p>
+<p>所以，Innodb事务隔离级别实现方式：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202306101624320.png" alt="Innodb事务隔离级别实现方式" style="zoom:50%;"></p>
+<h6 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h6><p>可以看到，在lnnoDB事务中，行锁是在需要的时候才加上的，而是要等到事务结束时才释放。这个就是两阶段锁协议。事务update加行锁，commit释放。</p>
+<h4 id="Innodb的锁"><a href="#Innodb的锁" class="headerlink" title="Innodb的锁"></a>Innodb的锁</h4><p>读未提交和读已提交只有行级锁；主要讨论可重复读下的行锁和间隙锁。</p>
+<h5 id="为什么需要间隙锁"><a href="#为什么需要间隙锁" class="headerlink" title="为什么需要间隙锁"></a>为什么需要间隙锁</h5><p>间隙锁是Innodb在可重复读隔离级别下解决幻读；快照读用 MVCC，当前读用行锁和间隙锁；</p>
+<h5 id="行锁和间隙锁"><a href="#行锁和间隙锁" class="headerlink" title="行锁和间隙锁"></a>行锁和间隙锁</h5><p><strong>InnoDB行锁是通过给索引上的索引项加锁来实现的，这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用全表的间隙锁，效果等价于表锁</strong>。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/rjzheng/p/9950951.html">select加锁分析</a></p>
+<ul>
+<li>行锁（Record Lock）：对行记录加锁。</li>
+<li>间隙锁（Gap Lock）：产生幻读的原因是，行锁只能锁住行，但是新插入记录这个动作，要更新的是记录之间的“间隙”。因此，为了解决幻读问题，InnoDB只好引入新的锁，也就是间隙锁(Gap Lock)。就是锁定范围空间的数据，假设id有3,4,5，锁定id&gt;3的数据，是指的4，5及后面的数字都会被锁定，因为此时如果不锁定没有的数据，例如当加入了新的数据id=6，就会出现幻读，间隙锁避免了幻读。</li>
+<li>Next-Key Lock ：Record Lock + Gap Lock，锁定一个范围并且锁定记录本身 。</li>
+</ul>
+<h5 id="当前读的实现方式"><a href="#当前读的实现方式" class="headerlink" title="当前读的实现方式"></a>当前读的实现方式</h5><ul>
+<li>对主键或唯一索引，如果当前读时，where条件全部精确命中(=或者in)，这种场景本身就不会出现幻读，所以只会加行记录锁。</li>
+<li>没有索引的列，当前读操作时，会加全表gap锁，生产环境要注意。</li>
+<li>非唯一索引列，如果where条件部分命中(&gt;、&lt;、like等)或者全未命中，则会加附近Gap间隙锁。例如，某表数据如下，非唯一索引2,6,9,9,11,15。如下语句要操作非唯一索引列9的数据，gap锁将会锁定的列是(6,11]，该区间内无法插入数据。</li>
+</ul>
+<h6 id="为什么非索引列出加全表gap锁"><a href="#为什么非索引列出加全表gap锁" class="headerlink" title="为什么非索引列出加全表gap锁"></a>为什么非索引列出加全表gap锁</h6><p>不加的话会出现幻读，当你查询条件为非索引列等值查询，只锁该行记录，别的事务可以写入新的值等于非索引列的行记录；幻读就出现了，所以只能是锁表；</p>
+<h5 id="间隙锁的危害"><a href="#间隙锁的危害" class="headerlink" title="间隙锁的危害"></a>间隙锁的危害</h5><ul>
+<li>死锁，间隙锁不会冲突；也就是可能会出现两个事务对同一个范围加上了间隙锁，再执行更新操作导致死锁；</li>
+<li>性能，间隙锁会锁住更大的范围，影响并发；</li>
+</ul>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>索引是一种可以提高查询效率的数据结构；</p>
 <h4 id="数据结构：B-树（横向比较其他数据结构）"><a href="#数据结构：B-树（横向比较其他数据结构）" class="headerlink" title="数据结构：B+树（横向比较其他数据结构）"></a>数据结构：B+树（横向比较其他数据结构）</h4><ul>
 <li>哈希；单点检索效率高，但是区间检索、排序（order by）很差，也许还会有大数据量的哈希碰撞问题。</li>
@@ -594,39 +650,6 @@
 </ul>
 <p>在InnoDB中，数据和索引文件是合起来储存的，InnoDB 的存储文件有两个，后缀名分别是 .frm 和 .idb，其中 .frm 是表的定义文件，而 idb 是数据文件。</p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0KGhWQPTl870-Et-gpAreg">为了把mysql的索引底层原理讲清楚，我把计算机翻了个底朝天</a></p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834864.png" alt="InnoDB事务行锁"></p>
-<h4 id="Innodb默认隔离级别：可重复读"><a href="#Innodb默认隔离级别：可重复读" class="headerlink" title="Innodb默认隔离级别：可重复读"></a>Innodb默认隔离级别：可重复读</h4><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171834766.png" alt="Innodb默认隔离级别"></p>
-<p><strong>在快照读（单纯的select操作）情况下，mysql通过mvcc（undo回滚日志，只要事务未提交，就会保留undo日志，所以要减少长事务的使用，避免undo日志占据太多空间）来避免幻读。简单讲就是在当前事务开始前未提交的事务，对数据库修改的版本都当前事务都是不可见的。</strong></p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select * from table where id = ?; # 快照读
-select * from table where id = ? lock in share mode; # 加共享锁，即别的事务只能读不能写
-select * from table where id = ? for update; # 加排它锁，即别的事务不能读和写<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><strong>InnoDB行锁是通过给索引上的索引项加锁来实现的，这种行锁实现特点意味着：只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁</strong></p>
-<p>这句话大家可以搜一下，都是你抄我的，我抄你的。那么，这句话本身有两处错误！<br><strong>错误一</strong>:并不是用表锁来实现锁表的操作，而是利用了<code>Next-Key Locks</code>，也可以理解为是用了行锁+间隙锁来实现锁表的操作!</p>
-<p><strong>错误二</strong>:所有文章都不提隔离级别！<br>注意我上面说的，之所以能够锁表，是通过行锁+间隙锁来实现的。那么，<code>RU</code>和<code>RC</code>都不存在间隙锁，这种说法在<code>RU</code>和<code>RC</code>中还能成立么？<br>因此，该说法只在<code>RR</code>和<code>Serializable</code>中是成立的</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/rjzheng/p/9950951.html">select加锁分析</a></p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835706.png" alt="”视图“的概念"></p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835547.png" alt="image-20220414104551031"></p>
-<p>两个核心概念：每个事务都有一个transcation id；数据库每行记录有多个版本，每个版本有row trx_id；当某个事务对行数据操作时，就会：row trx_id = transaction id；给该行数据追加自己的事务id。</p>
-<p>MVCC一致性读的实现：</p>
-<p>简单讲，就是当前事务之前提交的版本，可见；未提交/视图数组创建后提交，不可见。</p>
-<p><strong>可重复读的核心就是一致性读（consistent read）；而事务更新数据的时候，只能用当前读。如果当前的记录的行锁被其他事务占用的话，就需要进入锁等待。</strong>（为什么需要可重复读：当在进行数据校对的时候，不希望新发生的变更影响当前校对，即需要一个数据的静态视图）</p>
-<p><strong>在当前读（select…lock in share mode、select… for update、update/insert/delete）情况下，mysql通过next-key lock来避免幻读。（间隙锁Gap lock和行锁合称next-key lock）</strong></p>
-<ul>
-<li><strong>当前读：行锁+间隙锁（弱于表锁，避免幻读），防止更新操作</strong></li>
-<li><strong>一致性读：在该事务启动前未提交的事务对该事务不可见</strong>；一致性读就是快照读，花里胡哨</li>
-</ul>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835864.png" alt="读锁的概念和区别"></p>
-<ul>
-<li>行锁（Record Lock）：对行记录加锁。</li>
-<li>间隙锁（Gap Lock）：产生幻读的原因是，行锁只能锁住行，但是新插入记录这个动作，要更新的是记 录之间的“间隙”。因此，为了解决幻读问题，InnoDB只好引入新的锁，也就是间隙锁(Gap Lock)，所以只有在 Read Repeatable 、Serializable 隔离级别才有。就是锁定范围空间的数据，假设id有3,4,5，锁定id&gt;3的数据，是指的4，5及后面的数字都会被锁定，因为此时如果不锁定没有的数据，例如当加入了新的数据id=6，就会出现幻读，间隙锁避免了幻读。</li>
-<li>Next-Key Lock ：Record Lock + Gap Lock，锁定一个范围并且锁定记录本身 。</li>
-</ul>
-<p>当前读的实现方式：</p>
-<ul>
-<li>对主键或唯一索引，如果当前读时，where条件全部精确命中(=或者in)，这种场景本身就不会出现幻读，所以只会加行记录锁。</li>
-<li>没有索引的列，当前读操作时，会加全表gap锁，生产环境要注意。（是gap + record）</li>
-<li>非唯一索引列，如果where条件部分命中(&gt;、&lt;、like等)或者全未命中，则会加附近Gap间隙锁。例如，某表数据如下，非唯一索引2,6,9,9,11,15。如下语句要操作非唯一索引列9的数据，gap锁将会锁定的列是(6,11]，该区间内无法插入数据。</li>
-</ul>
 <h4 id="索引-1"><a href="#索引-1" class="headerlink" title="索引"></a>索引</h4><p>定义：一种可以提高数据查询效率的数据结构。</p>
 <p>聚簇索引：主键索引，叶子节点存整行数据</p>
 <p>非聚簇索引：非主键索引，叶子节点存主键，再根据主键去查主键索引拿到行数据（回表）</p>
@@ -788,7 +811,7 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <li>读写分离、分担压力</li>
 <li>高可用、可扩展</li>
 </ol>
-<h5 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="实现原理"></a>实现原理</h5><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835502.png" alt="主从复制实现原理" style="zoom:50%;"></p>
+<h5 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h5><p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212171835502.png" alt="主从复制实现原理" style="zoom:50%;"></p>
 <ol>
 <li>master 服务器会将 SQL 记录通过多 dump 线程写入到 binary log 中。</li>
 <li>slave 服务器开启一个 io thread 线程向服务器发送请求，向 master 服务器请求 binary log。master 服务器在接收到请求之后，根据偏移量将新的 binary log 发送给 slave 服务器。（解耦合）</li>
@@ -823,39 +846,6 @@ select * from table where id = ? for update; # 加排它锁，即别的事务不
 <p>慢SQL</p>
 <p>走索引还是慢</p>
 <p>主从要高可用和最终一致性，怎么实现</p>
-<p>MVCC的缺点</p>
-<p>间隙锁的危害</p>
-<p>最近在复习MySQL的时候，发现对一些概念理解得不够透彻，所以这里再进行一次总结。</p>
-<p>首先，我们不考虑Innodb，而是标准SQL事务隔离级别实现原理：</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624198.png" alt="标准SQL事务隔离级别实现方式" style="zoom:50%;"></p>
-<p>可以看到，在标准SQL事务隔离级别实现下，涉及了大量的读写锁操作。Innodb存储引擎引入了MVCC机制来解决读写冲突。在MVCC机制下，就有了快照读和当前读的概念。</p>
-<h4 id="快照读和当前读-1"><a href="#快照读和当前读-1" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><ul>
-<li>快照读就是读取历史数据，视图的概念；平时常用的select语句就是快照读；普通的select语句不涉及锁操作，也就是别的事务对这个数据加了读写锁也不会影响普通的select语句执行。快照读只存在于读已提交和可重复读两个隔离级别下。读未提交读最新数据，串行化加表锁。</li>
-<li>当前读就是读取当前版本最新的数据；select … in share mode; select for update; insert, delete, update这些操作都是当前读，也就是说，当前“读”的读不仅仅是读操作，也包括在修改数据的写操作中包含的“读”操作。</li>
-</ul>
-<p>默认情况下，MySQL开启的是事务自动提交；而我们平时写的每一句sql语句都是独立的事务：</p>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">begin;
-select * from user;
-commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>而这里我要讨论的问题就是，我们常说的事务隔离级别：读未提交，读已提交，可重复读，串行化，这里面的“读”指的是快照读还是当前读呢，他们又是怎么实现的呢。</p>
-<p>很明显，事务隔离级别的读指的都是快照读，因为前面也说了，当前读永远读的是最新的数据；也就是说，对数据的更新操作，永远是对数据的最新版本进行操作，select in share mode, select for update的当前读也是分别加上读锁和写锁的，也就是当别的事务在更新数据的时候，是没法进行当前读的。因为读读可以，读写，写写不可以。</p>
-<p>那么，这些隔离级别下的快照读又是怎么实现的呢。</p>
-<p>读未提交：</p>
-<p>读已提交：</p>
-<p>可重复读：</p>
-<p>串行化：</p>
-<p>我觉得串行化是最好理解的，就是我在读的时候，直接就是当前读，加上读锁。</p>
-<p>而对于读未提交，也比较好理解，就是我也不加锁，也不需要什么快照、视图，我就直接读，数据是啥样就啥样，</p>
-<p>对于读已提交，则是在每一次读的时候，生成快照；</p>
-<p>对于可重复读，则是在事务开启的时候生成快照，这样保证在整个事务期间可重复读，对于读已提交和可重复读这种ReadView生成方式叫多版本控制。</p>
-<p>那么我们常说的可重复读产生的幻读又是什么意思呢。我们要理解这个的需要抛开innodb的实现来谈。</p>
-<p>这里主要指的是当前读，而不是快照读，因为前面已经提交，快照读肯定是一致的视图。</p>
-<p>读未提交会出现脏读问题，因为别的事务回滚了。</p>
-<p>读已提交会出现不可重复读的问题，因为别的事务操作了数据。</p>
-<p>可重复读会出现幻读的现象，因为它只锁住了对应的数据。</p>
-<p>那么innodb是怎么解决可重复读的幻读问题呢？record lock 、gap lock组成next-key lock</p>
-<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271624461.png" alt="Innodb事务隔离级别实现方式"></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000025156465">深入理解MySQL中事务隔离级别的实现原理</a></p>
 
                 
             </div>
@@ -1095,23 +1085,24 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/09/16/ji-yu-redis-de-poi-sou-suo/">
+                <a href="/2022/07/12/linux-ji-chu/">
                     <div class="card-image">
                         
-                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271603218.png" class="responsive-img" alt="基于Redis的POI搜索">
                         
-                        <span class="card-title">基于Redis的POI搜索</span>
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Linux基础">
+                        
+                        <span class="card-title">Linux基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis是一个使用ANSIC编写的开源、支持网络、基于内存、分布式、可选持久性的键值对存储数据库，本文主要对redis的基础知识进行总结，并分析redis中geo函数的实现原理并给出简单的实践示例。
+                            Linux基础知识，持续更新中。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-16
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-12
                         </span>
                         <span class="publish-author">
                             
@@ -1121,10 +1112,6 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
                                     技术
                                 </a>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/" class="post-category">
-                                    研发
-                                </a>
-                            
                             
                         </span>
                     </div>
@@ -1132,12 +1119,8 @@ commit;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></s
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%BA%90%E7%A0%81/">
-                        <span class="chip bg-color">源码</span>
-                    </a>
-                    
-                    <a href="/tags/redis/">
-                        <span class="chip bg-color">redis</span>
+                    <a href="/tags/linux/">
+                        <span class="chip bg-color">linux</span>
                     </a>
                     
                 </div>
@@ -1608,23 +1591,6 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 

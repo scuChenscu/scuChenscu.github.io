@@ -472,14 +472,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    18 分
                 </div>
                 
 
@@ -635,6 +635,17 @@
 </ol>
 <p>如果资源充足的话，可以对消息队列进行扩容</p>
 <p>扩容，限流，降级，熔断；四大法宝，哈哈哈哈哈</p>
+<h4 id="Kafka集群-1"><a href="#Kafka集群-1" class="headerlink" title="Kafka集群"></a>Kafka集群</h4><p>下面讲的是最基础的Kafka集群</p>
+<p>Kafka集群有2个可用区（AZ，通常就是指机房），2个可用区对称部署节点，每个可用区2个节点，共 4 个节点；对于每个topic的partition1 个主分区，两个从分区，共3 份数据：1 份在主分区，1 份同可用区的从分区，  1份在另一个可用区的从分区；</p>
+<p>Zookeeper作为集群配置中心和仲裁中心，有3个可用区，2 个可用区在上述2 个机房，1 个可用区在其他机房；</p>
+<h5 id="生产者原理"><a href="#生产者原理" class="headerlink" title="生产者原理"></a>生产者原理</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">producer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 异步调用</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>producer.send() // 底层是异步执行，send发送到本地的缓冲就返回。sdk后台会起线程，把缓冲区里面的消息分类，对应的topic和分区，分好类后打包成batch（batch决定吞吐量，一个是batch size，一个是linger.ms就是多少ms发送一次或者多少条消息发送一次，包越大吞吐量越大，但是端到端的时延也越大）；Sender再真正去发送消息；send()需要一个回调函数，oncomplete方法通知消息发送结果</p>
+<p>（1）sender获取Metadata<br>（2）sender更新metadata<br>（3）计算发送分区<br>（4）加入本地缓存<br>（5）获取ready的数据发送<br>（6）实际发送数据</p>
+<p>在创建生产者实例时，会先从集群的一个broker获取metadata；metadata主要包括topic,topic对应的分区信息、分区所在的broker ip信息</p>
+<h5 id="消费者原理"><a href="#消费者原理" class="headerlink" title="消费者原理"></a>消费者原理</h5><p>consumer.poll() // 消费者组，每组多个消费者（提高消费能力，组内的消费者干同一件事，比如消费同一个topic的消息，但是一个组内的消费者不会重复消费同一条消息，通常是根据topic的分区数来设定组内消费者数），组与组之间消费不影响；<br>（1）加入消费者组<br>（2）获取metadata<br>（3）更新metadata<br>（4）</p>
+<h5 id="端到端丢数据场景"><a href="#端到端丢数据场景" class="headerlink" title="端到端丢数据场景"></a>端到端丢数据场景</h5><p>生产端<br>同步发送/异步回调确认，失败时做业务重试或者标记（这里主要考虑异步回调无限重试，同步的话性能太低了，即认可集群的可用性，回调函数中打印日志）<br>ack=all，所有副本同步成功<br>无限重试<br>设置缓冲区足够大</p>
+<p>服务端<br>副本数 &gt;=3，min.insync.replicas=2（起码要是2，因为虽然配置了副本数为3，但是可能某个节点crash了，如果配置太高，可能会导致服务不可用了，这是一个在数据可靠性和系统可用性之间的权衡）<br>unclean.leader,election.enable=false，不允许脏选<br>保存时间大于业务允许时间，避免消息超时被删除</p>
+<p>消费端<br>auto.offset.commit = false<br>确认消息处理完成后提交offset<br>isolution.level = read_uncommitted（为什么是读已提交）</p>
 
                 
             </div>
@@ -1383,23 +1394,6 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
