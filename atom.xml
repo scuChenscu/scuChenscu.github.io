@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-06-08T16:56:45.047Z</updated>
+  <updated>2023-07-31T17:02:25.419Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>算法集锦</title>
+    <link href="http://example.com/2023/07/31/suan-fa-ji-jin/"/>
+    <id>http://example.com/2023/07/31/suan-fa-ji-jin/</id>
+    <published>2023-07-30T16:34:42.000Z</published>
+    <updated>2023-07-31T17:02:25.419Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;二分查找&quot;&gt;&lt;a href=&quot;#二分查找&quot; class=&quot;headerlink&quot; title=&quot;二分查找&quot;&gt;&lt;/a&gt;二分查找&lt;/h3&gt;&lt;h4 id=&quot;704-二分查找&quot;&gt;&lt;a href=&quot;#704-二分查找&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="http://example.com/categories/leetcode/"/>
+    
+    
+    <category term="leetcode" scheme="http://example.com/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
     <title>2023年暑期实习面试历程</title>
     <link href="http://example.com/2023/06/06/2023-nian-shu-qi-shi-xi-mian-shi-li-cheng/"/>
     <id>http://example.com/2023/06/06/2023-nian-shu-qi-shi-xi-mian-shi-li-cheng/</id>
     <published>2023-06-05T16:54:01.000Z</published>
-    <updated>2023-06-08T16:56:45.047Z</updated>
+    <updated>2023-08-17T13:58:32.789Z</updated>
     
     
       
@@ -298,6 +323,57 @@
   </entry>
   
   <entry>
+    <title>文字下乡</title>
+    <link href="http://example.com/2023/02/13/wen-zi-xia-xiang/"/>
+    <id>http://example.com/2023/02/13/wen-zi-xia-xiang/</id>
+    <published>2023-02-12T18:16:05.000Z</published>
+    <updated>2023-06-18T18:24:17.004Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​        读了费孝通《乡土中国》的《文字下乡》篇章。觉得很有道理，文字为了下乡而下乡是没有意义的。对于土生土长的村民们来说，文字并没有什么特别的价值和必要性。&lt;/p&gt;
+&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>天性</title>
+    <link href="http://example.com/2023/02/08/tian-xing/"/>
+    <id>http://example.com/2023/02/08/tian-xing/</id>
+    <published>2023-02-07T18:04:47.000Z</published>
+    <updated>2023-06-18T18:15:01.019Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
     <title>《围城》</title>
     <link href="http://example.com/2023/02/03/wei-cheng/"/>
     <id>http://example.com/2023/02/03/wei-cheng/</id>
@@ -476,88 +552,6 @@
     <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
     
     <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>成长：痛苦与学习</title>
-    <link href="http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/"/>
-    <id>http://example.com/2023/01/06/cheng-chang-tong-ku-yu-xue-xi/</id>
-    <published>2023-01-06T15:10:25.000Z</published>
-    <updated>2023-05-27T06:57:58.507Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GAP模型</title>
-    <link href="http://example.com/2023/01/06/gap-mo-xing/"/>
-    <id>http://example.com/2023/01/06/gap-mo-xing/</id>
-    <published>2023-01-06T13:53:50.000Z</published>
-    <updated>2023-05-27T06:37:41.976Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近在调研知识图谱分割算法，看到了这篇论文&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="算法" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="深度学习" scheme="http://example.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>H厂实习期间需求开发总结</title>
-    <link href="http://example.com/2023/01/01/h-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/"/>
-    <id>http://example.com/2023/01/01/h-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/</id>
-    <published>2023-01-01T07:15:31.000Z</published>
-    <updated>2023-05-29T17:50:31.258Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;H厂实习期间负责的需求开发工作：在开发过程中用到了一些设计模式和线程池技术。&lt;/p&gt;
-&lt;h2 id=&quot;项目背景&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    <category term="多线程" scheme="http://example.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   

@@ -310,6 +310,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('不好意思，不给看，谢谢！')).toString(CryptoJS.enc.Hex)) {
+                alert('Thank you!');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -793,23 +806,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/02/03/wei-cheng/">
+                <a href="/2023/02/13/wen-zi-xia-xiang/">
                     <div class="card-image">
                         
-                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202306032351289.png" class="responsive-img" alt="《围城》">
                         
-                        <span class="card-title">《围城》</span>
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="文字下乡">
+                        
+                        <span class="card-title">文字下乡</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            二读《围城》。
+                            读《文字下乡》。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-13
                             </span>
                         <span class="publish-author">
                             
@@ -825,10 +839,6 @@
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%80%9D%E8%80%83/">
-                        <span class="chip bg-color">思考</span>
-                    </a>
                     
                     <a href="/tags/%E9%98%85%E8%AF%BB/">
                         <span class="chip bg-color">阅读</span>
@@ -1250,6 +1260,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 

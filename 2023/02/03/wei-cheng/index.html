@@ -310,6 +310,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('不好意思，不给看，谢谢！')).toString(CryptoJS.enc.Hex)) {
+                alert('Thank you!');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -744,23 +757,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/27/ci-sha-qi-shi-tuan-chang/">
+                <a href="/2023/02/08/tian-xing/">
                     <div class="card-image">
                         
-                        <img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305271403202.jpeg" class="responsive-img" alt="《刺杀骑士团长》">
                         
-                        <span class="card-title">《刺杀骑士团长》</span>
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="天性">
+                        
+                        <span class="card-title">天性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            日本作家村上春树所著的一部长篇小说。
+                            胡思乱想。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-27
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-08
                         </span>
                         <span class="publish-author">
                             
@@ -777,8 +791,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%98%85%E8%AF%BB/">
-                        <span class="chip bg-color">阅读</span>
+                    <a href="/tags/%E6%80%9D%E8%80%83/">
+                        <span class="chip bg-color">思考</span>
                     </a>
                     
                 </div>
@@ -1245,6 +1259,23 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
