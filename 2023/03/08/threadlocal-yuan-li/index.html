@@ -489,7 +489,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.6k
                 </div>
                 
 
@@ -560,7 +560,7 @@ t2<span class="token punctuation">.</span><span class="token function">start</sp
     myObject <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>这就绝对线程安全了。</p>
+<p>这就绝对线程安全了。（其实主要是线程池复用线程）</p>
 <p>通过上面的研究发现，好像并不需要ThreadLocal类，我们来看看文档：</p>
 <p>最开始那段话我就不翻译了，总结一下ThreadLocal的作用就是为每个线程提供一份变量副本，这个副本存的东西呢跟线程紧密相关；按我肤浅的理解，有点像那种context（好像也不能叫context，像我以前开发微信小程序里面的page周期，有些data就只作用于当前周期，page创建，data初始化；page结束，data跟着销毁；就不太像是面向对象编程的概念），贯穿整个线程周期，线程需要了就直接从ThreadLocal中取，线程结束了就把它删了，代码注释里面给到了ThreadLocal的的使用方法：</p>
 <p>在需要为每个线程提供变量副本的类里面定义ThreadLocal类型的变量ThreadId，每个线程调用ThreadId的get()方法都会返回唯一的threadId；说实话，我没太看懂这段代码，ThreadId的成员变量threadId不应该是一个固定的值嘛，为什么会每次都调用initialValue()方法呢？先不管这个，我们先来看ThreadLocal类的get()方法是怎么实现的。</p>
@@ -646,7 +646,7 @@ t2<span class="token punctuation">.</span><span class="token function">start</sp
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303172136327.png" alt="弱引用"></p>
 <p>为什么key要使用弱引用呢？</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303172144902.png" alt="ThreadLocal引用关系"></p>
-<p>我们可以看到，对于ThreadLocal对象的引用主要有两个，一个是栈上的引用，一个是ThreadLocalMap的key引用；如果栈上使用完ThreadLocal对象被回收了，即栈上对ThreadLocal对象的引用不存在，这个时候ThreadLocal对象应该要被回收了（因为已经无法被访问到了，我们是通过ThreadLocal.get()方法来访问到线程的ThreadLocal对象，引用没了说明该对象不不会再被访问了），如果key对ThreadLocal对象是强引用，将会导致ThreadLocal对象无法被回收，造成内存泄露；</p>
+<p>我们可以看到，对于ThreadLocal对象的引用主要有两个，一个是栈上的引用，一个是ThreadLocalMap的key引用；如果栈上使用完ThreadLocal对象被回收了，即栈上对ThreadLocal对象的引用不存在，这个时候ThreadLocal对象应该要被回收了（因为已经无法被访问到了，我们是通过ThreadLocal.get()方法来访问到线程的ThreadLocal对象，引用没了说明该对象不不会再被访问了），如果key对ThreadLocal对象是强引用，将会导致ThreadLocal对象无法被回收，造成内存泄漏；</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303172204017.png" alt="ThreadLocal引用关系"></p>
 <p>好了，当ThreadLocal对象被回收之后，ThreadLocalMap的key变为了null，但是如果线程还在，ThreadLocalMap就在，ThreadLocalMap关于该ThreadLocal对象的entry也在，value还在，所以还是会造成value内存泄漏（如果线程被回收就没有问题，如果复用线程就会有问题）；所以要在使用完ThreadLocal对象后主要调用remove()方法。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303172205174.png" alt="ThreadLocal引用关系"></p>
@@ -658,6 +658,11 @@ t2<span class="token punctuation">.</span><span class="token function">start</sp
 <p>《码出高效》里面提到set()和get()方法的功能和ThreadLocal的价值；但是我没有理解set()和get()方法是怎么实现的？</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202303172214850.png" alt="ThreadLocal的作用"></p>
 <p>我又去仔细看了一遍源码：ThreadLocalMap的实现和hashMap还是有点区别的：代码这里就不贴了，因为还没有详细看，但是确实是有移除null的操作；</p>
+<p>强引用：永不回收；</p>
+<p>软引用：内存不足回收；</p>
+<p>弱引用：仅存在弱引用会回收；</p>
+<p>虚引用：</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1354351">https://cloud.tencent.com/developer/article/1354351</a></p>
 
                 
             </div>

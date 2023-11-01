@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-07-31T17:02:25.419Z</updated>
+  <updated>2023-11-01T12:30:43.711Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,216 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>《研究生毕业设计》</title>
+    <link href="http://example.com/2023/11/01/yan-jiu-sheng-bi-ye-she-ji/"/>
+    <id>http://example.com/2023/11/01/yan-jiu-sheng-bi-ye-she-ji/</id>
+    <published>2023-11-01T07:27:16.000Z</published>
+    <updated>2023-11-01T12:30:43.711Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;11.1&lt;/p&gt;
+&lt;p&gt;今天围绕：图计算引擎、tinkerpop、graph找了几篇论文，共 11 篇；&lt;/p&gt;
+&lt;p&gt;打算先看相关度比较高的两篇：《&lt;strong&gt;Research on Improved General Property Graphs Query</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>《费曼学习法》</title>
+    <link href="http://example.com/2023/10/28/fei-man-xue-xi-fa/"/>
+    <id>http://example.com/2023/10/28/fei-man-xue-xi-fa/</id>
+    <published>2023-10-27T17:14:31.000Z</published>
+    <updated>2023-10-29T15:47:43.063Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​        10.27，跟自己说结束秋招， 11 月开始做毕设。打完游戏时间尚早，遂上《极客时间》看了一些Java 的课程，开始思考起一些问题：如果我选择了阿里云，那么以后大概率是要转Go，而我也比较看好云的方向，那之前所学的 Java</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java的闭包</title>
+    <link href="http://example.com/2023/10/20/java-de-bi-bao/"/>
+    <id>http://example.com/2023/10/20/java-de-bi-bao/</id>
+    <published>2023-10-20T15:44:32.000Z</published>
+    <updated>2023-10-20T16:13:01.319Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;lambda表达式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;匿名函数，如果一个接口只有一个抽象方法，那么就可以写成匿名函数的形式&lt;/li&gt;
+&lt;li&gt;闭包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;闭包：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;函数内部的函数，可以访问函数的局部变量，但是要求局部变量必须为</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java的日志</title>
+    <link href="http://example.com/2023/10/20/java-de-ri-zhi/"/>
+    <id>http://example.com/2023/10/20/java-de-ri-zhi/</id>
+    <published>2023-10-20T13:40:49.000Z</published>
+    <updated>2023-10-20T13:45:00.188Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;为什么要专门写一篇博客来讲 Java 的日志，因为 Java 日志是比较复杂的，有什么日志门面、日志实现；使用了 SPI</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Spring</title>
+    <link href="http://example.com/2023/10/18/spring/"/>
+    <id>http://example.com/2023/10/18/spring/</id>
+    <published>2023-10-18T05:57:24.000Z</published>
+    <updated>2023-10-18T16:29:43.126Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;Spring工作原理&quot;&gt;&lt;a href=&quot;#Spring工作原理&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式</title>
+    <link href="http://example.com/2023/10/09/she-ji-mo-shi/"/>
+    <id>http://example.com/2023/10/09/she-ji-mo-shi/</id>
+    <published>2023-10-09T14:19:15.000Z</published>
+    <updated>2023-10-19T16:18:02.795Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;记住一句话：当你的代码里面出现冗余，那就是没有做好设计。&lt;/p&gt;
+&lt;h4 id=&quot;什么是设计模式&quot;&gt;&lt;a href=&quot;#什么是设计模式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JVM性能调优工具</title>
+    <link href="http://example.com/2023/09/28/jvm-xing-neng-diao-you-gong-ju/"/>
+    <id>http://example.com/2023/09/28/jvm-xing-neng-diao-you-gong-ju/</id>
+    <published>2023-09-28T06:34:25.000Z</published>
+    <updated>2023-09-28T06:42:49.572Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;jps&quot;&gt;&lt;a href=&quot;#jps&quot; class=&quot;headerlink&quot; title=&quot;jps&quot;&gt;&lt;/a&gt;jps&lt;/h4&gt;&lt;p&gt;查看 java 进程，类似 ps -ef | grep java，可以检测死锁&lt;/p&gt;
+&lt;h4 id=&quot;jstack&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java的锁</title>
+    <link href="http://example.com/2023/09/17/java-de-suo/"/>
+    <id>http://example.com/2023/09/17/java-de-suo/</id>
+    <published>2023-09-17T14:51:00.000Z</published>
+    <updated>2023-10-20T13:40:13.748Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202309172251295.png&quot; alt=&quot;image-20230917225141214&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>笔试记录</title>
+    <link href="http://example.com/2023/08/28/bi-shi-ji-lu/"/>
+    <id>http://example.com/2023/08/28/bi-shi-ji-lu/</id>
+    <published>2023-08-27T16:50:08.000Z</published>
+    <updated>2023-09-20T13:43:08.739Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;莉莉丝笔试&lt;/p&gt;
+&lt;p&gt;第二题：括号类型[],()；给出一个字符串，判断需要插入多少个括号使其匹配；&lt;/p&gt;
+&lt;p&gt;第三题：数组长度n，操作次数k，每次操作可以对一个数字+ 1 或者- 1，求最多重复元素次数；&lt;/p&gt;
+&lt;p&gt;帆软：&lt;/p&gt;
+&lt;p&gt;字符串 A 变成字符串</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>算法集锦</title>
     <link href="http://example.com/2023/07/31/suan-fa-ji-jin/"/>
     <id>http://example.com/2023/07/31/suan-fa-ji-jin/</id>
     <published>2023-07-30T16:34:42.000Z</published>
-    <updated>2023-07-31T17:02:25.419Z</updated>
+    <updated>2023-08-21T16:46:25.510Z</updated>
     
     
       
@@ -76,7 +281,7 @@
     <link href="http://example.com/2023/05/30/m-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/"/>
     <id>http://example.com/2023/05/30/m-han-shi-xi-qi-jian-xu-qiu-kai-fa-zong-jie/</id>
     <published>2023-05-29T17:43:48.000Z</published>
-    <updated>2023-06-03T07:44:00.123Z</updated>
+    <updated>2023-10-19T16:55:20.340Z</updated>
     
     
       
@@ -242,7 +447,7 @@
     <link href="http://example.com/2023/03/08/threadlocal-yuan-li/"/>
     <id>http://example.com/2023/03/08/threadlocal-yuan-li/</id>
     <published>2023-03-08T15:53:41.000Z</published>
-    <updated>2023-05-27T07:56:16.355Z</updated>
+    <updated>2023-10-18T16:27:44.976Z</updated>
     
     
       
@@ -273,7 +478,7 @@
     <link href="http://example.com/2023/03/04/java-duo-xian-cheng/"/>
     <id>http://example.com/2023/03/04/java-duo-xian-cheng/</id>
     <published>2023-03-04T12:31:38.000Z</published>
-    <updated>2023-05-27T08:40:20.121Z</updated>
+    <updated>2023-10-20T13:06:16.217Z</updated>
     
     
       
@@ -319,239 +524,6 @@
     
     
     <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文字下乡</title>
-    <link href="http://example.com/2023/02/13/wen-zi-xia-xiang/"/>
-    <id>http://example.com/2023/02/13/wen-zi-xia-xiang/</id>
-    <published>2023-02-12T18:16:05.000Z</published>
-    <updated>2023-06-18T18:24:17.004Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​        读了费孝通《乡土中国》的《文字下乡》篇章。觉得很有道理，文字为了下乡而下乡是没有意义的。对于土生土长的村民们来说，文字并没有什么特别的价值和必要性。&lt;/p&gt;
-&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>天性</title>
-    <link href="http://example.com/2023/02/08/tian-xing/"/>
-    <id>http://example.com/2023/02/08/tian-xing/</id>
-    <published>2023-02-07T18:04:47.000Z</published>
-    <updated>2023-06-18T18:15:01.019Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《围城》</title>
-    <link href="http://example.com/2023/02/03/wei-cheng/"/>
-    <id>http://example.com/2023/02/03/wei-cheng/</id>
-    <published>2023-02-03T15:47:12.000Z</published>
-    <updated>2023-06-03T16:03:26.337Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《无证之罪》</title>
-    <link href="http://example.com/2023/01/27/wu-zheng-zhi-zui/"/>
-    <id>http://example.com/2023/01/27/wu-zheng-zhi-zui/</id>
-    <published>2023-01-26T16:30:41.000Z</published>
-    <updated>2023-05-27T06:21:34.135Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《四个春天》</title>
-    <link href="http://example.com/2023/01/21/si-ge-chun-tian/"/>
-    <id>http://example.com/2023/01/21/si-ge-chun-tian/</id>
-    <published>2023-01-20T18:33:19.000Z</published>
-    <updated>2023-05-27T05:24:59.528Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202305270052376.jpeg&quot; alt=&quot;过去&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阶段</title>
-    <link href="http://example.com/2023/01/21/jie-duan/"/>
-    <id>http://example.com/2023/01/21/jie-duan/</id>
-    <published>2023-01-20T18:05:52.000Z</published>
-    <updated>2023-05-27T06:32:55.973Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​        小时候，从记事起，感觉自己是世界的中心，所以的人和事都是围绕着自己发展，我是这个世界唯一具有真正思想的生物，别人都是为了取悦我、服务我而存在。&lt;/p&gt;
-&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《无人生还》</title>
-    <link href="http://example.com/2023/01/11/wu-ren-sheng-huan/"/>
-    <id>http://example.com/2023/01/11/wu-ren-sheng-huan/</id>
-    <published>2023-01-11T14:06:29.000Z</published>
-    <updated>2023-05-27T06:27:08.943Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​        《无人生还》是一本推理小说，讲的是十个人在一个孤岛上死光光，最终靠着凶手的自述还原杀人过程。我对这个杀人过程的合理性是不太认可的，觉得太勉强，而且凶手还得将十个人的死亡场景对应上那首童谣，更是难上加难。&lt;/p&gt;
-&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>梦</title>
-    <link href="http://example.com/2023/01/10/meng/"/>
-    <id>http://example.com/2023/01/10/meng/</id>
-    <published>2023-01-09T16:46:18.000Z</published>
-    <updated>2023-05-27T07:15:15.266Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​        昨夜做了一个梦，梦到一个叫“阳庠岛”的地方，梦里好像有个不太相熟、也谈不上好看的女生，情节已经忘却。今儿搜了一下这个岛，发现不存在，在广东倒是有一个东庠岛。Anyway，权当记录一下吧，毕竟能够记起梦境已经实属不易了。       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="梦" scheme="http://example.com/tags/%E6%A2%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>五台山游记</title>
-    <link href="http://example.com/2023/01/08/wu-tai-shan-you-ji/"/>
-    <id>http://example.com/2023/01/08/wu-tai-shan-you-ji/</id>
-    <published>2023-01-08T04:37:16.000Z</published>
-    <updated>2023-05-27T05:51:02.980Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202301081242809.png&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="思考" scheme="http://example.com/tags/%E6%80%9D%E8%80%83/"/>
-    
-    <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
     
   </entry>
   

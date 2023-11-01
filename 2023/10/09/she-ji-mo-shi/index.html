@@ -1,0 +1,1365 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="设计模式, 杂记">
+    <meta name="description" content="让那暴风，柔和地吹。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>设计模式 | 杂记</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="杂记" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">杂记</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">杂记</div>
+        <div class="logo-desc">
+            
+            让那暴风，柔和地吹。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('不好意思，不给看，谢谢！')).toString(CryptoJS.enc.Hex)) {
+                alert('Thank you!');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">设计模式</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-10-09
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    14 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>记住一句话：当你的代码里面出现冗余，那就是没有做好设计。</p>
+<h4 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h4><p>解决某一类问题的套路/方法；通常情况下我们直接去摁看设计模式的话，效果是很差的，我们更多地是要在具体的项目实践中，尤其是真正的项目，而不是练手的项目，你自己被真正的业务需求给恶心到了，你就会明白设计模式的重要性；而且设计模式也是从实践中提炼出来了。我用过的一些设计模式都是在实际开发中，发现把某些部分抽象一下、拆分一下，整个代码迭代扩展/测试起来变得方便很多，然后再去调研一下，自己用的某种设计模式的变体，或者说阉割版。</p>
+<p>总结一句话就是，纸上得来终觉浅，绝知此事须躬行</p>
+<h4 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h4><p>设计模式通常是表现类和类、类和接口之间的关系，所以我们要画图，画图就用到 UML，统一建模语言，关系主要包含：继承（三角形实线，子类指向父类）、实现（三角形虚线，实现类指向接口）、聚合（箭头被持有实线指向菱形持有）、关联（实现箭头，A 某种行为 B，如使用、创造、通知等行为）；除了以上4 个之外，还有泛化（就是继承）、组合等关系，但我看《图解设计模式》这本书，好像前 34种就够用了，这里就不展开了。</p>
+<p>下面这张图包含了基本的关系，但是有些画的不太对，比如大雁和雁群的聚合关系。</p>
+<p>我们常说的组合和聚合的区别，组合：不可独立存在，聚合：可以独立存在</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310111522916.jpg" alt="img" style="zoom:50%;"></p>
+<p>掌握 UML 的好处就是，你看设计模式比较好懂，便于理解和记忆，毕竟图片比文字印象深刻多了。</p>
+<p>除了 UML，我们还有一些时序图（系统各个模块/方法之间的调用顺序），状态图（比如写 Java 的同学会经常看到 Java 线程状态转换图），活动图（就是开始、结束、各种分支条件判断），泳道图（把不同的角色划分为不同的泳道，每个泳道有自己的职责，彼此之间可能存在交互）</p>
+<h4 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h4><p>设计模式主要分为 3 大类：</p>
+<ul>
+<li>创建型模式：</li>
+<li>结构型模式</li>
+<li>行为型模式</li>
+</ul>
+<h4 id=""><a href="#" class="headerlink" title=" "></a> </h4><h4 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h4><p>迭代器模式的作用就是不需要关注对象集合的实现方式，只要实现了迭代器接口，底层数据结构变化不影响迭代访问，如从[]数组变为ArrayList；迭代器遍历访问的逻辑不需要改动；</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310111601846.png" alt="img" style="zoom:50%;"></p>
+<ul>
+<li>Aggreate接口包含iterator方法用来创建迭代器</li>
+<li>Iterator接口包含遍历需要用到的hasNext和next方法</li>
+<li>ConcreteAggreate就是具体的集合类，实现Aggreate接口中的iterator方法，如下</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Iterator</span> <span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">BookShelfIterator</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>ConcreteIterator类构造方法接收ConcreteAggreate作为成员变量，实现hasNext和next方法遍历ConcreteAggreate，但是我看真正的迭代器实现，好像还有 remove 方法。而hasNext和next方法的实现依赖ConcreteAggreate，如hasNext的判断依赖Aggreate的size/length；next的获取依赖Aggreate的get(index)方法</li>
+</ul>
+<p>以上就是迭代器模式的实现，如果ConcreteAggreate的数据结构发生了改变，我们需要做的就是去ConcreteAggreate的size/length和get(index)方法。这种实现的好处是：通过引入iterator，对于ConcreteAggreate的调用方，是不需要感知ConcreteAggreate的数据结构变更的，达到复用/最小修改的效果。</p>
+<p>疑问：</p>
+<ul>
+<li>为什么要引入ConcreteIterator？ConcreteAggreate直接完成ConcreteIterator的工作不可行吗？好像这样的话，就需要用内部类来实现了。因为你肯定是要实现Iterator接口的，就看在哪里实现而已。</li>
+<li>为什么要引入Iterator？而不是直接使用ConcreteIterator？我的理解是（1）Aggreate和Iterator是顶级接口，不只是服务于ConcreteAggreate，而是为所有可遍历对象提供Iterator，所以引入Iterator是必要的；（2）依赖于抽象而不是具体，低耦合；</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>明显需要的资源更多了，简单的遍历多了好几个接口和类对象，多层调用效率肯定也有所下降</li>
+<li>不易理解，迭代器没有直接的for循环来的容易理解：next，hasNext概念</li>
+</ul>
+<h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4><p>适配器模式主要作用是兼容，client调用 target，target 想复用已有类的能力，那么就可以在中间加一个适配器，target 调用adpater，adpater再去调用已有类的能力；兼容，复用有利于快速定位问题，因为问题大概率不会出现在已有的类里面。</p>
+<p>适配器老是记不住，现在记住了，核心的一点是，client 直接使用的是适配器。</p>
+<p>适配器模式有两种：</p>
+<ul>
+<li>类适配器（继承）</li>
+<li>对象适配器（委托）</li>
+</ul>
+<h5 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h5><p>它们老是喜欢拿电压来举例，我感觉也不是很好理解；适配说白了就是一个中间转换器，client 想调用 A， 但我现在有的是 B，那就中间加个适配器（实现 A，调用 B）；即适配 B 类</p>
+<p>继承的好处是，他不仅可以提高 client 想要的 A 能力，同时也具备了原本的 B 能力</p>
+<p>另外就是当 A 是一个接口的时候，我们可以用继承来干。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310112101312.png" alt="img" style="zoom:50%;"></p>
+<h5 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h5><p>如果 A 是一个抽象类的话，我们就不能使用类适配器了，因为 Java 不允许多继承；就要用对象适配器。就是把 B 作为适配器的成员变量（对象），调用 A 的时候调用 B 的方法；但是适配器不具备原本 B 的能力。感觉也有点类似代理模式，只不过是代理模式需要在前后进行一些操作，这里的话不需要。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310112102524.png" alt="img" style="zoom:50%;"></p>
+<p>什么时候需要用到适配器模式</p>
+<ul>
+<li>想复用现成的类，但又不能直接用；那就套个适配器；</li>
+<li>版本升级兼容：比如我想把api全部升级到 2.0，但是还有一些程序在用 1.0 的接口，那我就加个适配器，把原本调用 1.0接口转换到调用 2.0；</li>
+<li>适配器模式完美契合了对修改关闭、对扩展开放的设计原则</li>
+<li>我愿把适配器模式称为嫁接艺术</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>适配器越来越多，直接完犊子了，还不如重构；</li>
+<li>感觉就是适配器模式是一种权宜之计，如果良好的设计应该是不太需要用到适配器模式的；</li>
+</ul>
+<h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><p>就是定义了一套模板，有一些相关的抽象方法和一些具体执行这些抽象方法的流程方法，然后用户去实现抽象方法就行；感觉这个设计模式比较简单和通用，像 JDBCTemplate，spring封装了从加载驱动，创建连接，执行sql，获取结果集，释放连接等，我们只需要去实现具体sql语句就行。</p>
+<p>抽象类的作用是确定好处理的流程；抽象方法的执行顺序由抽象类提供方法实现。</p>
+<p>感觉模版方法模式都不用怎么讲，有过一点抽象思维的人应该都用过；</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310112113280.png" alt="img" style="zoom:50%;"></p>
+<p>为什么要叫模版方法呢，就是因为有个templateMethod方法去调用其他抽象方法，子类去实现调用；说白了就是流程定好了，你在我的流程内爱咋咋滴都行。</p>
+<p>这种设计模式感觉用在 SPI（Service Provider Interface）比较多，通用化逻辑处理，子类具体化处理实现；</p>
+<p>这里也简单讲一讲 SPI，通常情况下，我们实现一套功能，然后对外提供接口；SPI 则是我定义好一系列的接口规范，怎么调用这些接口，让服务提供者去实现这些接口，像我们常见的数据库驱动/日志就是这么实现的。</p>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><p>模版方法模式是规定处理流程，子类实现具体处理逻辑；工方法模式则是用来创建实例，就是定义好创建实例的流程，调用后得到一个实例；</p>
+<p>这个时候就有小可爱会问了，我直接调用类的构造方法不就可以得到一个实例了吗，干嘛要这么麻烦；对此，我的理解是：其实你也可以把构造方法当成一种工厂方法模式，因为创建一个实例要经过：（1）类不在我就双亲委派；走一遍类加载过程啦（2）分配内存，什么指针碰撞啦，预分配啦；（3）赋默认值；（4）引用指向，赋值啦（过程记不清了，可以去看《码出高效》）</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310112137549.png" alt="image-20231011213731515"></p>
+<p>你看，上面这一大坨步骤都不用你来做，你给几个参数就得到了一个实例，那工厂是谁？JVM！我瞎说的。</p>
+<p>另一种理解是，在实际业务中，我门创建实例有时候不仅仅是拿到这个实例，可能还会把该实例注册到其他地方，加入到某个容器之类的操作；那么用工厂方法模式的话，这些事情就可以封装起来交给工厂去做，我们只关注我们需要的实例以及接下来如何使用这个实例，其他事情我们不需要感知。这，就是服务到位，客户要啥给啥，不要让客户多做他不care的事儿，以客户为中心！技术源于生活。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310131742657.png" alt="image-20231013174229622" style="zoom:50%;"></p>
+<p>到这里聪明的小伙伴可能会意识到，创建实例也要一系列步骤，那岂不是，那岂不是～没错，工厂方法模式套娃了模版方法模式，因为创建实例的流程也是可以编排的嘛。</p>
+<p>再换一种有趣的方法来理解，你要写 10 遍 “接美团sp”，没有模版，我们是不是得徒手写，如果我整点活字印刷术，是不是直接起飞。这就是工厂方法模式。</p>
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><p>不讲了，我会写最帅气的volatile + double check的单例</p>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><p>原型模式，就是通过复制/拷贝的方式创建实例。</p>
+<p>为什么需要原型模式？</p>
+<ul>
+<li>复制/拷贝，我们不需要知道具体的内容，直接clone就好；解耦框架和生成的实例，就是生成实例的框架不依赖具体的类；就是你给我啥，我还你啥，不关心你是啥。</li>
+<li>创建实例的参数/过程太复杂，难以通过类来生成。</li>
+<li>书里还谈到了一点，对象种类繁多，无法整合到一个类中时，可以用原型模式，但是我还不理解是什么意思。</li>
+</ul>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310131541399.png" alt="image-20231013154132355" style="zoom:50%;"></p>
+<p>说实话，原型模式的实现不太复杂，但是还是不太理解原型模式的意义和应用场景，后面再慢慢去悟吧。</p>
+<ul>
+<li>client维护一个map结构来register相关的实例；然后通过调用create方法，create来自Prototype，ConreatePrototype实现了相应clone方法来复制对象。</li>
+</ul>
+<p>这里要注意的是，实例要实现clone方法（该方法在Object，cloneable只是一个标记接口），不然会抛出异常。原型模式的特点在于生成实例不依赖类。</p>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><p>这个是用的比较多的设计模式了。但是我看着看着，它好像又跟我平时的用法不太一样，看来还是理解的不够深刻。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310131740222.png" alt="image-20231013174034172" style="zoom:50%;"></p>
+<p>有没有觉得这个图跟模版方法模式有点像。 director 的construct调用 builder 的方法，执行一整套builder的流程，跟模版方法模式的templateMethod执行一整套流程很类似；用哪个builder类来初始化director，他就执行哪个builder的流程。</p>
+<p>疑问：</p>
+<ul>
+<li>应用场景跟模版方法模式有什么区别；</li>
+<li>我们通常创建实例用的builder跟这个是什么关系；</li>
+</ul>
+<p>我的理解，builder的本质应该是把一个复杂的对象，拆分成各个独立的部分，然后将他们组装起来。</p>
+<h4 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h4><p>很抽象，不看。</p>
+<h4 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h4><p>将类的功能层次结构与实现层次结构分离。</p>
+<p>功能层次结构：就是父类功能不够用了，我整个子类继承和扩展父类的能力；</p>
+<p>实现层次结构：就是子类实现父类的功能，增加新的实现</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310132015640.png" alt="image-20231013201530595" style="zoom:50%;"></p>
+<p>顶级接口包含实现；refinedAbstraction是功能的扩展；新增功能增加refinedAbstraction即可；Implementor是抽象类，你可以看到设计模式中大量使用了依赖抽象而不是依赖实现。</p>
+<p>所以，当我们使用基本功能，这是通过ConcreteImplementor来初始化Abstraction；需要用到扩展功能，则是用ConcreteImplementor来初始化RefinedAbstraction；</p>
+<p>疑问：</p>
+<ul>
+<li>为什么Abstraction和Implementor是一种委托关系；而不是继承关系？委托是弱关联，只有在真正实例化Abstraction时，两者才建立联系。</li>
+<li>桥接模式的作用是啥？前面提到的分离，到底是为了啥？我的理解是这样的，功能和实现分离，我想增加新的实现，那我就增加ConcreteImplementor，在初始化Abstraction时替换impl就好；我想增加新的功能；那我就增加refinedAbstraction，直接调用就好，impl还是按需传入了；就是扩展不需要修改。</li>
+<li>那么如果我们把这一整块耦合在一起，会怎么样？当我增加一个新功能，在Implementor加个默认实现，还是在某个ConcreteImplementor？当我增加新的子类，应该从哪里出发？我感觉这个需要在我们的实际开发中很常见，桥接模式应该好好掌握一下子。</li>
+</ul>
+<h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><p>策略模式应该是比较简单的设计模式了。1 （）1 = ？根据不同场景（）传入具体的计算策略。发现《图解设计模式》这本书喜欢举一些复杂的例子，讲一大堆跟设计模式无关的话。</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310132055442.png" alt="image-20231013205500395" style="zoom:50%;"></p>
+<ul>
+<li>Context就是上下文，就是使用strategy的类；contextMethod里面会用到strategy；两者之间还是委托关系；感觉策略模式比较好懂，不需要过多解释。</li>
+</ul>
+<h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><p>组合模式是把一组对象当成一个对象，有点类似套娃，比如  1+ （1+ 2），我们可以把（1+2）看成一个操作数；亦或是文件夹下还有文件夹/文件；这就是组合模式；所以它又叫部分整体模式；一种递归/树形结构；</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202310132123941.png" alt="image-20231013212346902" style="zoom:50%;"></p>
+<ul>
+<li>以上，Leaf可以理解为文件，Composite可以理解为文件夹；两者都是继承Component；要注意对于add/getChild等方法，Leaf是不支持，所以通常在父类我们是以抛出异常，而不是抽象方法来实现。</li>
+<li>要注意到，在使用组合模式时，其Leaf和Composite的声明都是实现类，而不是接口，违反了依赖倒置原则。并且在实际应用时，我们不会使用到Component，而是直接使用实现类，Component的作用是保持一致性，比如在Composite的add方法传入的Component类型；是我肤浅的理解，错了当我没说。</li>
+<li>组合模式的递归结构真的很帅，以前没有好好掌握真是可惜了。</li>
+</ul>
+<h4 id="六大设计原则"><a href="#六大设计原则" class="headerlink" title="六大设计原则"></a>六大设计原则</h4><ul>
+<li>单一原则</li>
+<li>接口隔离原则：我感觉这个就是单一原则的补充，反正你一个接口就实现一个功能，别揉在一起；</li>
+<li>依赖倒置原则：不依赖实现，依赖抽象</li>
+<li>开闭原则：修改关闭，扩展开放</li>
+<li>里氏代换原则：就是子类必须具备父类的能力，才能去继承父类；否则两者不应该是继承关系；</li>
+<li>迪米特原则：最少知识原则，类与类的交换，不需要知道的，那就不用知道；没必要直接交互的，那就通过第三方；</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">肥肥大大只丶</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2023/10/09/she-ji-mo-shi/">http://example.com/2023/10/09/she-ji-mo-shi/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">肥肥大大只丶</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/10/18/spring/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Spring">
+                        
+                        <span class="card-title">Spring</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            肥肥大大只丶
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/09/28/jvm-xing-neng-diao-you-gong-ju/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="JVM性能调优工具">
+                        
+                        <span class="card-title">JVM性能调优工具</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            肥肥大大只丶
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">肥肥大大只丶</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/scuChenscu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2376584476@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2376584476" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2376584476" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

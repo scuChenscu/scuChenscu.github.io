@@ -485,7 +485,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5k
+                    5.2k
                 </div>
                 
 
@@ -541,6 +541,8 @@
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212392.png" alt="Kafka架构" style="zoom:50%;"></p>
 <p>如下图所示，许多个的brokers组成一个kafka集群，每一个 Topic 被分为多个 Partitions，即物理分区；出于负载均衡考虑，同一个 Topic 的 Partitions 分别存储于 Kafka 集群的多个 broker 上，不同的broker会作为不同 Topic 的 Partitions的leader，Producer 可以通过随机或者 hash 等方式，将消息平均发送到多个 partition 上，以实现负载均衡。</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212551.png" alt="kafka架构" style="zoom:67%;"></p>
+<p>简单总结：一个topic被划分为多个partition，producer 通过roundbin算法将消息投递到不同的partition；</p>
+<p>通常partition会有副本，每个 broker 有一个主分区，其他 broker 为副本；比如 3 个broker，他们数据是一模一样的，但是brokerA负责topic的part1，…以此类推；那么假设 3 个 broker，就有 3 个主分区，consumer group 最好就是有 3 个consumer，每个consumer消费1 个 partition 的消息；</p>
 <h4 id="Kafka读写机制"><a href="#Kafka读写机制" class="headerlink" title="Kafka读写机制"></a>Kafka读写机制</h4><h5 id="Topic和Partitions"><a href="#Topic和Partitions" class="headerlink" title="Topic和Partitions"></a>Topic和Partitions</h5><p>Kafka将 topic 划分成多个 partition，每个 partition 在存储层面是 append log 文件。任何发布到此 partition 的消息都会被追加到log文件的尾部，每条消息在文件中的位置称为 offset（偏移量），offset 为一个 long 型的数字，它唯一标记一条消息。 Kafka 机制中，producer push 来的消息是追加（append）到 partition 中的，这是一种顺序写磁盘的机制，效率远高于随机写内存，如下图所示：</p>
 <p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202212161212709.png" alt="顺序写" style="zoom: 33%;"></p>
 <p>Kafka会根据一定的算法将partition均匀分布到不同的 broker（服务器）上，当 producer 发布消息时，producer 客户端也会根据一定的算法选定目标 partition，将消息推送到目标partition，目标partition再将消息同步到其他brokers相应的partition，partiton 机制可以极大地提高吞吐量，并且使得系统具备良好的水平扩展能力。</p>

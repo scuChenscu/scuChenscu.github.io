@@ -485,14 +485,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    7.8k
+                    8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    27 分
+                    28 分
                 </div>
                 
 
@@ -856,6 +856,7 @@
 </li>
 <li>数据库表优化<br>1)表的字段尽可能用NOT NULL<br>2)字段长度固定的表查询会更快<br>3)把数据库的大表按时间或一些标志分成小表<br>4)将表水平拆分或垂直拆分</li>
 </ol>
+<h4 id="char和varchar的区别"><a href="#char和varchar的区别" class="headerlink" title="char和varchar的区别"></a>char和varchar的区别</h4><p>MySQL是一行数据共享空间，默认最大65535字节，2^16-1 = 65535；为什么不是65536？好奇怪，好像是有个 1～2 个字节来表示长度，2 个字节可以表示的最大长度就是65535。列数最大是 4096；varchar(n)，在MySQL5.0 之后，n表示字符数；对于不同的编码，每个字符占的字节数不同；char是定长，取值范围 0～255，用空格来填充，取数据需要trim()</p>
 <p>慢SQL</p>
 <p>走索引还是慢</p>
 <p>主从要高可用和最终一致性，怎么实现</p>
