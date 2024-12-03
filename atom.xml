@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-11-01T12:30:43.711Z</updated>
+  <updated>2024-12-03T17:33:53.875Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,106 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>《重温往日游记，仍然沉重待我整理》</title>
+    <link href="http://example.com/2024/11/25/chong-wen-wang-ri-you-ji-reng-ran-chen-chong-dai-wo-zheng-li/"/>
+    <id>http://example.com/2024/11/25/chong-wen-wang-ri-you-ji-reng-ran-chen-chong-dai-wo-zheng-li/</id>
+    <published>2024-11-25T14:05:49.000Z</published>
+    <updated>2024-12-03T17:33:53.875Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;序言&quot;&gt;&lt;a href=&quot;#序言&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="旅行" scheme="http://example.com/tags/%E6%97%85%E8%A1%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《我的2023》</title>
+    <link href="http://example.com/2023/12/29/wo-de-2023/"/>
+    <id>http://example.com/2023/12/29/wo-de-2023/</id>
+    <published>2023-12-29T04:29:33.000Z</published>
+    <updated>2023-12-29T09:29:35.451Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;​        在2023年的最后一个工作日，回顾过去的一年。&lt;/p&gt;
+&lt;p&gt;​        似乎对中国人来说，时间总是很紧张，错过了某个黄金窗口，就再无机会。&lt;/p&gt;
+&lt;p&gt;​       </summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>《毕设：11月6日-11月12日周报》</title>
+    <link href="http://example.com/2023/11/12/bi-she-11-yue-6-ri-11-yue-12-ri-zhou-bao/"/>
+    <id>http://example.com/2023/11/12/bi-she-11-yue-6-ri-11-yue-12-ri-zhou-bao/</id>
+    <published>2023-11-12T05:09:00.000Z</published>
+    <updated>2023-11-12T05:44:36.016Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h4&gt;&lt;p&gt;这周因为某些事情，进度比较少。主要是看了两篇论文和搭建一个图数据库服务。&lt;/p&gt;
+&lt;h4 id=&quot;论文阅读&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>《毕设：11月2日-11月5日周报》</title>
+    <link href="http://example.com/2023/11/05/bi-she-11-yue-2-ri-11-yue-5-ri-zhou-bao/"/>
+    <id>http://example.com/2023/11/05/bi-she-11-yue-2-ri-11-yue-5-ri-zhou-bao/</id>
+    <published>2023-11-05T05:09:27.000Z</published>
+    <updated>2023-11-05T08:26:07.669Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h4 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h4&gt;&lt;p&gt;本周主要是根据自己的方向：Tinkerpop、图计算引擎，在谷歌学术上检索 2019</summary>
+        
+      
+    
+    
+    
+    <category term="研发" scheme="http://example.com/categories/%E7%A0%94%E5%8F%91/"/>
+    
+    
+    <category term="图计算引擎" scheme="http://example.com/tags/%E5%9B%BE%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/"/>
+    
+  </entry>
+  
+  <entry>
     <title>《研究生毕业设计》</title>
     <link href="http://example.com/2023/11/01/yan-jiu-sheng-bi-ye-she-ji/"/>
     <id>http://example.com/2023/11/01/yan-jiu-sheng-bi-ye-she-ji/</id>
     <published>2023-11-01T07:27:16.000Z</published>
-    <updated>2023-11-01T12:30:43.711Z</updated>
+    <updated>2023-12-23T09:33:45.962Z</updated>
     
     
       
@@ -355,11 +450,11 @@
     <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
     
     
-    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
     <category term="Java" scheme="http://example.com/tags/Java/"/>
     
     <category term="源码" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81/"/>
+    
+    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
@@ -395,7 +490,7 @@
     <link href="http://example.com/2023/05/21/hexo-jiao-cheng/"/>
     <id>http://example.com/2023/05/21/hexo-jiao-cheng/</id>
     <published>2023-05-21T07:49:25.000Z</published>
-    <updated>2023-05-27T09:17:01.658Z</updated>
+    <updated>2023-11-05T05:12:38.995Z</updated>
     
     
       
@@ -412,118 +507,6 @@
     
     
     <category term="hexo" scheme="http://example.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IO多路复用</title>
-    <link href="http://example.com/2023/03/18/io-duo-lu-fu-yong/"/>
-    <id>http://example.com/2023/03/18/io-duo-lu-fu-yong/</id>
-    <published>2023-03-18T08:54:00.000Z</published>
-    <updated>2023-05-27T08:23:11.495Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/crazymakercircle/p/10225159.html&quot;&gt;Java</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="IO" scheme="http://example.com/tags/IO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ThreadLocal原理</title>
-    <link href="http://example.com/2023/03/08/threadlocal-yuan-li/"/>
-    <id>http://example.com/2023/03/08/threadlocal-yuan-li/</id>
-    <published>2023-03-08T15:53:41.000Z</published>
-    <updated>2023-10-18T16:27:44.976Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;先通俗得讲，ThreadLocal是个什么东西&lt;/p&gt;
-&lt;p&gt;有没有某种对象，可以支持统一的初始值，然后每个线程又能够独立修改值，彼此之间相互不影响。&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-java&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-    <category term="源码" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java多线程</title>
-    <link href="http://example.com/2023/03/04/java-duo-xian-cheng/"/>
-    <id>http://example.com/2023/03/04/java-duo-xian-cheng/</id>
-    <published>2023-03-04T12:31:38.000Z</published>
-    <updated>2023-10-20T13:06:16.217Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Java线程&quot;&gt;&lt;a href=&quot;#Java线程&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="研发" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/%E7%A0%94%E5%8F%91/"/>
-    
-    
-    <category term="多线程" scheme="http://example.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《刺杀骑士团长》</title>
-    <link href="http://example.com/2023/02/27/ci-sha-qi-shi-tuan-chang/"/>
-    <id>http://example.com/2023/02/27/ci-sha-qi-shi-tuan-chang/</id>
-    <published>2023-02-27T06:01:07.000Z</published>
-    <updated>2023-05-27T06:03:54.384Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;​       </summary>
-        
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="阅读" scheme="http://example.com/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   

@@ -580,14 +580,14 @@ mjx-container[display="true"] + br {
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    6.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    23 分
                 </div>
                 
 
@@ -671,6 +671,157 @@ mjx-container[display="true"] + br {
 <p>第一个就是多个不同的p；第二个是相同的p重复m次，第 3 个是逆转路径，大概就是，A 的爸爸是 B，B 的儿子是 A 的意思；反向查询；最后一个就是不包含了。</p>
 <p>好，今天的论文就看到这里。</p>
 <p>收获：对gremlin语法的理解更加深入了吧，但是论文没有太多涉及tinkerpop的部分，感觉这个还是得去看官网了；但是对于整个图查询的过程理解要比以前清晰一些了。结合之前学的设计模式和今天论文提到的一些词法解析，可以去思考一下怎么定义查询接口。主要还是得把查询语句进行一步步地拆分，实现解析器；</p>
+<p>11.2</p>
+<p>今天打算读一读《The Gremlin Graph Traversal Machine and Language》，还不确定，先看一下摘要</p>
+<p>简单看了一下摘要，大概就是从数学的角度来解释语言，通过阅读应该会对语言的理解更加深刻。阅读前，先提出几个问题：</p>
+<ol>
+<li>gremlin的实现原理是怎么样的？为什么要这样实现，好处是什么，如何应用？核心还是理解遍历的原理，如果能力支持，再去思考一下为什么要这样做；核心就 T 在 G 和遍历上移动，直到结果；</li>
+<li>gremlin在tinkerpop的运用，如果想去优化，可以从哪方面入手？就是tinkerpop对 Gremlin 的支持还存在哪些不足；没有提到，但是讲了很多关于遍历、策略；以及一些策略可以优化到的steps</li>
+<li>本论文对 Gremlin 的解释能否回答上一篇论文提到的gremlin方程；对这个方程的理解更清楚了，但还是不够。</li>
+</ol>
+<h4 id="The-Gremlin-Graph-Traversal-Machine-and-Language"><a href="#The-Gremlin-Graph-Traversal-Machine-and-Language" class="headerlink" title="The Gremlin Graph Traversal Machine and Language"></a>The Gremlin Graph Traversal Machine and Language</h4><p>摘要</p>
+<p>gremlin是一个图遍历机（graph traversal machine）和语言；主要组成：graph G； traversal machine <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 778 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A8" d="M340 622Q338 623 335 625T331 629T325 631T314 634T298 635T274 636T239 637H212V683H224Q248 680 389 680T554 683H566V637H539Q479 637 464 635T439 622L438 407Q438 192 439 192Q443 193 449 195T474 207T507 232T536 276T557 344Q560 365 562 417T573 493Q587 536 620 544Q627 546 671 546H715L722 540V515Q714 509 708 509Q680 505 671 476T658 392T644 307Q599 177 451 153L438 151V106L439 61Q446 54 451 52T476 48T539 46H566V0H554Q530 3 389 3T224 0H212V46H239Q259 46 273 46T298 47T314 48T325 51T331 54T335 57T340 61V151Q126 178 117 406Q115 503 69 509Q55 509 55 526Q55 541 59 543T86 546H107H120Q150 546 161 543T184 528Q198 514 204 493Q212 472 213 420T226 316T272 230Q287 216 303 207T330 194L339 192Q340 192 340 407V622Z"></path></g></g></g></svg></mjx-container>；一组traversers T；T 根据<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 778 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A8" d="M340 622Q338 623 335 625T331 629T325 631T314 634T298 635T274 636T239 637H212V683H224Q248 680 389 680T554 683H566V637H539Q479 637 464 635T439 622L438 407Q438 192 439 192Q443 193 449 195T474 207T507 232T536 276T557 344Q560 365 562 417T573 493Q587 536 620 544Q627 546 671 546H715L722 540V515Q714 509 708 509Q680 505 671 476T658 392T644 307Q599 177 451 153L438 151V106L439 61Q446 54 451 52T476 48T539 46H566V0H554Q530 3 389 3T224 0H212V46H239Q259 46 273 46T298 47T314 48T325 51T331 54T335 57T340 61V151Q126 178 117 406Q115 503 69 509Q55 509 55 526Q55 541 59 543T86 546H107H120Q150 546 161 543T184 528Q198 514 204 493Q212 472 213 420T226 316T272 230Q287 216 303 207T330 194L339 192Q340 192 340 407V622Z"></path></g></g></g></svg></mjx-container>中的指令在G上移动，计算的结果是所有 T 停止遍历的最终位置；</p>
+<p>Gremlin 支持命令式和声明式查询；可扩展编译器/优化器（这是我论文工作的一部分）；</p>
+<p>介绍</p>
+<p>G 是一个由点和边组成的结构；一个图数据库查询语言支持图遍历或者模式匹配：either  agraph  traversalor  agraphpattern matchperspective；图遍历，T 根据用户提供的指令在图上移动，遍历的结果是终止的 T 的位置；模式匹配：用户创建一个包含变量的子图，所有的图元素绑定到变量作为结果集返回；gremlin支持以上两种；还有：嵌入编程语言，比如 Java 中；用户扩展；根据扩展集编译期重写规则；多机计算集群执行；dfs\bfs\混合顺序执行评估；epresented withinthe graph itself via the theoretical existence of a Universal GremlinMachine，没看懂；</p>
+<p>我来照自己的理解：</p>
+<p>图遍历：就是根据指令，从某个地方出发，所有的 T走到最终地方，返回；就跟 BFS 差不多；</p>
+<p>模式匹配：根据子图的匹配条件，过滤结果集返回；就跟 SQL 语句差不多；</p>
+<p>Graph Traversal Machine</p>
+<p>包含 3 部分：a G、a traversal、 a set T；计算完成条件：T 没了，traversal执行完了或者到终止条件了（结果是并集）；gremlin在多关系、属性、有向图上执行；</p>
+<p>图：</p>
+<p>G = (V, E, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex;" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container>)；关于这个<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex;" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container>的理解：像是一个属性集合；暂且这么理解吧，那关系呢？</p>
+<p>traversal</p>
+<p>steps的函数树；steps有线性 和网状两种排列方式；step是一种映射，从  A traversers -&gt; B traversers；后面跟了一段话不太理解：唯一一组traversers到唯一一组traversers；</p>
+<p>a set of traverserslocated at objects of typeAto a set of traversers located at objectsof typeB：理解到这里为什么是用object：因为可能是边到点，点到点，边到边，点到边；</p>
+<p>gremlin定义了差不多 30 种steps；可以理解为traversal的一组指令集；常用的有 10 种；step属于以下 5 种类型：</p>
+<ul>
+<li>map：在不更改traversers size的情况下，从 A 映射到 B，这我就有点不理解了？为什么会不更改呢？</li>
+<li>flatMap：输出的traversers size不确定；应该是对元素操作后合并；</li>
+<li>filter：过滤；</li>
+<li>sideEffect：就是对traversers执行某些函数操作；通常是针对 G 中的数据结构，可能会出现突变？不太理解，感觉就是修改某些东西的意思；</li>
+<li>branch：把一个traverser 映射为任意数量的嵌套traversal开始steps；就是对每个traverser按照分支条件去执行；</li>
+</ul>
+<p>所有以上steps都可以用flatMap()？？？不太理解这个flatMap()；flat为平外地的意思；</p>
+<p>当你需要将 [[a,b,c],[d,e,f],[x,y,z]] 具有两个级别的数据结构转换为 [a,b,c,d,e,f,x,y,z] 这样单层的数据结构时，就选择使用 flatMap 处理。如果是 [a,b,c,d,e,f,x,y,z] 转换为大写 [A,B,C,D,E,F,X,Y,Z] 这样单层转换，就使用 map 即可。</p>
+<p>traverser</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311021624582.png" alt="image-20231102162416530"></p>
+<p>U：G 中位置；就是在图的哪里</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 778 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A8" d="M340 622Q338 623 335 625T331 629T325 631T314 634T298 635T274 636T239 637H212V683H224Q248 680 389 680T554 683H566V637H539Q479 637 464 635T439 622L438 407Q438 192 439 192Q443 193 449 195T474 207T507 232T536 276T557 344Q560 365 562 417T573 493Q587 536 620 544Q627 546 671 546H715L722 540V515Q714 509 708 509Q680 505 671 476T658 392T644 307Q599 177 451 153L438 151V106L439 61Q446 54 451 52T476 48T539 46H566V0H554Q530 3 389 3T224 0H212V46H239Q259 46 273 46T298 47T314 48T325 51T331 54T335 57T340 61V151Q126 178 117 406Q115 503 69 509Q55 509 55 526Q55 541 59 543T86 546H107H120Q150 546 161 543T184 528Q198 514 204 493Q212 472 213 420T226 316T272 230Q287 216 303 207T330 194L339 192Q340 192 340 407V622Z"></path></g></g></g></svg></mjx-container>：T 中位置；就是在steps的哪里；</p>
+<p>第三个是历史路径，（集合元素），step位置：用来找最短路径，回溯历史位置，访问标记；</p>
+<p>第四个是：等价traverser的数量，为什么要用bulk?</p>
+<p>第五个是：局部变量；</p>
+<p>第 6 个循环体</p>
+<p>这段数学符号还是没有太看懂；</p>
+<p>Graph Traversal Language</p>
+<p>gremlin是一种图遍历语言，需要用户定义Traversal；编程gremlin machine；服啦，一段话没看懂，大概就是什么Gremlin, the language needs tosupportfunction compositionandfunction types，教我们怎么用gremlin；循环路径是否会重复访问？</p>
+<p>11.3</p>
+<p>又重新看了一下gremlin的官方文档，只能说常看常新，但是感觉看这不太利于写论文，所以打算先搁置了，还是去读一些别人实现的论文，照葫芦画瓢比较好；</p>
+<p>今天打算看两篇难度系数比较低的：《基于图查询系统的图计算引擎》、《Graph_Learning_A_Survey》</p>
+<p>先看个综述：《Graph_Learning_A_Survey》，看看摘要，再回来确定学习的目标；</p>
+<p>好吧，看了一下，是从机器学习、深度学习的角度来研究graph，不太符合，直接下一篇：《基于图查询系统的图计算引擎》</p>
+<p>看了一下摘要：他是把图计算和图查询合并到一个系统，然后通过一些索引/拉取模式等手段来提高性能；但是感觉他们是针对分布式系统，而我是针对单机的；</p>
+<p>问题：</p>
+<ul>
+<li>图查询和图计算有什么区别；根据论文中的解释，图查询系统就是直接检索图中的点/边；图计算就是要通过遍历的方式才能找到对应的数据；</li>
+<li>索引是怎么建立的； 将hash和稀疏压缩矩阵结合在一起；同时支持查询和计算；</li>
+<li>单机和分布式的主要区别在哪些，是否有借鉴的意义；区别就是采用割边和割点的方式，将节点放到不同的机器上，然后论文要pull的方式更新信息；不是我要研究的重点，就不仔细看了。</li>
+</ul>
+<p>看完了，怎么说的；感觉他的索引建立的工作量很小；</p>
+<p>通常的图查询建立索引是：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311031613046.png" alt="image-20231103161324992"></p>
+<p>就是根据 顶点，边类型，边方向 建立 hash 作为key，value是对应的顶点list；这对单个顶点的访问非常高效</p>
+<p>图计算的话，使用压缩矩阵</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311031616172.png" alt="image-20231103161656125"></p>
+<p>每个顶点序号对应它在顶点索引数组的下标；值表示表示出边；这种结构可以快速找到一个顶点的所有领居顶点；</p>
+<p>论文实现：</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311031620118.png" alt="image-20231103162057074"></p>
+<p>原本的hash索引还在，但是value 是要根据每个顶点来聚合在一起； </p>
+<p>感觉今天的工作不到位，再读一篇：</p>
+<p>发现读到一篇亚马孙的文档，搁那吹他们的图数据库有多屌，叫海王星；不重要；换一篇：</p>
+<p>《Labeled property graphs: SQL or NoSQL?》，看题目就很好理解，带标签的属性图，该用 SQL 还是 NoSQL；这篇文章是 19 年提出的，主要讨论针对现在的 RDF 和属性图，该用那种查询语言；但是这个更像一个测试报告，就把 SQL、NoSQL测了一遍，没什么大的搜获；</p>
+<p>《Synergistic Graph and SQL Analytics Inside IBM Db2》</p>
+<p>这篇是跟我课题最相关的论文，他也是基于tinkerpop来实现，并且在某种特定数据集上进行测试；还没有看完，明天的目标就是看完 + 总结这几篇论文；并且他的引用有很多图数据库，找几个经典的来对比一下；还有别忘了填表。</p>
+<p>11.6</p>
+<p>看论文前，一定要明确目标，不然就是瞎看</p>
+<p>Research on SPARQL Semantic Query Technology Based on Knowledge Hybrid Storage，2021 年的文章</p>
+<p>看题目的意思就是用 SPARQL 实现在知识混合存储上语义查询；</p>
+<ol>
+<li>sparql不是本来就是应用在 RDF 上的吗，RDF 不就是语义吗？两者还不一样？</li>
+<li>摘要中提到的在 RDF 和属性图之间建立 bridge，将sparql转gremlin，怎么实现的；这不是有相应的插件/工具实现了吗</li>
+</ol>
+<p>论文涉及大量的 SPARQL 语法，不太好看懂；需要先去看一下 SPARQL 和 RDF</p>
+<p>大概就是建立SPARQL跟 Gremlin 之间的映射；（没有看的价值，直接看下面一篇）</p>
+<p>Two for One – Querying Property Graph Databases usingSPARQL viaGremlinator</p>
+<p>11.7</p>
+<p>昨天看了Two for One – Querying Property Graph Databases usingSPARQL via Gremlinator，因为头疼没有继续，发现他引用了一篇A Stitch in Time Saves Nine – SPARQLQuerying of Property Graphs using GremlinTraversals；感觉两篇本质上是一样的，换了一个题目，主要都是讲Gremlinator怎么把 SPARQL  转 Gremlin；</p>
+<ol>
+<li>为什么要SPARQL转 Gremlin，底层存储是什么，是因为 SPARQL  用在 RDF，然后现在想用在属性图吗，属性图的底层存储通常是什么呢？</li>
+<li>Gremlinator实现原理；我的课题需不需要用 SPARQL 来查询，因为 Gremlin 是无法直接使用的；如果不用 SPARQL，那就要设计一种怎么样的接口呢？</li>
+</ol>
+<p>摘要：</p>
+<p>还是讲知识图谱主要用 SPARQL 的 RDF 和 Gremlin 的属性图；</p>
+<p>为什么要实现Gremlinator？因为大多数都是用的 SPARQL，这玩意可以降低学习成本；</p>
+<p>为什么Gremlin 更加适合局部性查询？</p>
+<p>看了这些论文都很抽象，决定搞个 Janusgraph玩玩</p>
+<p>Janusgraph</p>
+<p><a target="_blank" rel="noopener" href="https://docs.janusgraph.org/getting-started/installation/">https://docs.janusgraph.org/getting-started/installation/</a></p>
+<p>我们在容器里面跑，先跑起来再说，大有可为（容器太复杂，搞不来）</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311081602343.png" alt="image-20231108160251107"></p>
+<p>安装全套服务，报错超时</p>
+<p>-v 查看</p>
+<p>stack太小</p>
+<p><img src="https://babe-song.oss-cn-hangzhou.aliyuncs.com/images/202311081603822.png" alt="image-20231108160336778"></p>
+<p>但是找不到它相关的配置文件，很头疼</p>
+<p>改成 0.64，然后配置 JVM 参数，出现以下问题，下面就是按照解决方案替换jar包</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68315912/how-to-start-cassandra-on-a-m1-macbook">https://stackoverflow.com/questions/68315912/how-to-start-cassandra-on-a-m1-macbook</a></p>
+<p>JNA，就是 Java native access，就是 Java 调用c语言</p>
+<p>这一步解决之后，就是修改相关的 JVM 参数了，网上的博客都讲是将Xss参数的值修改了就行，但是我看了脚本文件根本没有相关的值，然后通过阅读脚本问题，我直接将Xss加到 OPTS 里面就 OK，三个服务都要加，这吃的资源也太多了。</p>
+<p>11.9</p>
+<p>今天的目标是研究一下这几个服务的原理，看看storage backend和index backend的原理；感觉用 Gremlin console 不太方便，搞个 MAVEN 项目来测试；</p>
+<p>12.12</p>
+<p>今天的目标是看懂janusgraph的整体框架，我们的毕设就在他的基础上去魔改，魔改的方向主要包括：（1）图分区算法的实现；（2）查询过程优化；</p>
+<p>对于第一点，我们要先针对某个开源的图分区算法进行修改，保证负载均衡和分割率更优；</p>
+<p>对于第二点，可能需要再去研究一下gremlin的优化，感觉挺难的，但是大方向就是这两个吧；</p>
+<ol>
+<li>阅读 janusGraph官方文档，学习整体思想；再找到分区存储这块的实现；</li>
+<li>研究分区存储实现；（找一些开源的分区存储还有数据集）；</li>
+<li>找一个应用场景，去魔改 Gremlin 查询过程；</li>
+</ol>
+<p>应用程序可以通过两种方式与JanusGraph交互：</p>
+<ul>
+<li><strong>嵌入式：</strong> 将JanusGraph嵌入到自己的图Gremlin查询应用中，与自己的应用公用同一JVM。<br> 查询执行时，JanusGraph的缓存和事务处理都在与应用程序相同的JVM中进行，当数据模型大时，很容易OOM，并且耦合性太高，生产上一般不这么搞。</li>
+<li><strong>服务式：</strong> JanusGraph单独运行在一个或一组服务器上，对外提供服务。（推荐的模式）<br> 客户端通过向服务器提交Gremlin查询，与远程JanusGraph实例进行交互。</li>
+</ul>
+<p>所以我们的服务也是这样；</p>
+<ul>
+<li><h3 id="4-数据存储"><a href="#4-数据存储" class="headerlink" title="4. 数据存储"></a>4. 数据存储</h3><p>图数据可以存储在：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fcassandra.apache.org%2F">Apache Cassandra</a> - 注重在AP上</li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fhbase.apache.org%2F">Apache HBase</a> - 注重在CP上</li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fcloud.google.com%2Fbigtable">Google Cloud Bigtable</a></li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fdatabase%2Fberkeleydb%2Foverview%2Findex-093405.html">Oracle BerkeleyDB</a> - 一般用于单机本地验证</li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fscylladb.com%2F">ScyllaDB</a></li>
+</ul>
+<p>生产中使用最多的是 Cassandra 和 HBase，根据业务特性选型。</p>
+<h3 id="5-检索"><a href="#5-检索" class="headerlink" title="5. 检索"></a>5. 检索</h3><p>全文搜索等高级搜索功能可以通过以下方式支持：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Fwww.elastic.co%2F">Elasticsearch</a> - 使用最多</li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Flucene.apache.org%2Fsolr">Apache Solr</a></li>
+<li><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https%3A%2F%2Flucene.apache.org%2F">Apache Lucene</a></li>
+</ul>
+</li>
+</ul>
+<p>12.13</p>
+<p>我们要实现一个图计算引擎的话，只需要去看 janusgraph 的core代码，看他是怎么实现的；</p>
+<p>第一步，学习他的数据模型定义</p>
+<p>12.23</p>
+<p>研究几个图分区算法；主要是都用什么方法实现的；</p>
+<p>NE，HDRF，METIS，FENNEL，DBH，S</p>
+<p>metiss使用python实现：</p>
+<p><a target="_blank" rel="noopener" href="https://metis.readthedocs.io/en/latest/">https://metis.readthedocs.io/en/latest/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yeshang_lady/article/details/123846552">https://blog.csdn.net/yeshang_lady/article/details/123846552</a></p>
+<p>吃完饭找找3个数据集，用metis来分割一下，计算负载均衡和边割率</p>
 
                 
             </div>
@@ -902,39 +1053,49 @@ mjx-container[display="true"] + br {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/11/01/yan-jiu-sheng-bi-ye-she-ji/">
+                <a href="/2023/11/05/bi-she-11-yue-2-ri-11-yue-5-ri-zhou-bao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="《研究生毕业设计》">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="《毕设：11月2日-11月5日周报》">
                         
-                        <span class="card-title">《研究生毕业设计》</span>
+                        <span class="card-title">《毕设：11月2日-11月5日周报》</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            研究生毕设，11 月 2 日- 11 月 5 日周报
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-11-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-05
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            肥肥大大只丶
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%A0%94%E5%8F%91/" class="post-category">
+                                    研发
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%9B%BE%E8%AE%A1%E7%AE%97%E5%BC%95%E6%93%8E/">
+                        <span class="chip bg-color">图计算引擎</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1162,7 +1323,7 @@ mjx-container[display="true"] + br {
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2023</span>
+                <span id="year">2019-2024</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">肥肥大大只丶</a>
