@@ -609,7 +609,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"技术","value":23},{"name":"研发","value":15},{"name":"算法","value":4},{"name":"生活","value":1},{"name":"科普","value":1},{"name":"README","value":1},{"name":"hexo","value":1},{"name":"生活","value":15},{"name":"研发","value":1},{"name":"leetcode","value":1}],
+                data: [{"name":"技术","value":23},{"name":"科普","value":1},{"name":"算法","value":4},{"name":"研发","value":15},{"name":"生活","value":1},{"name":"hexo","value":1},{"name":"生活","value":15},{"name":"研发","value":1},{"name":"README","value":1},{"name":"leetcode","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -633,7 +633,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["思考","Java","阅读","源码","深度学习","设计模式","多线程","高并发","hexo","旅行"]
+                data: ["思考","Java","阅读","源码","深度学习","设计模式","多线程","hexo","高并发","旅行"]
             }
         ],
         yAxis: [
@@ -822,6 +822,18 @@
             
             
             
+            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+                <span class="chip center-align waves-effect waves-light chip-default">设计模式</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                <span class="chip center-align waves-effect waves-light chip-default">多线程</span>
+            </a>
+            
+            
+            
             <a href="/tags/%E9%9D%A2%E8%AF%95/">
                 <span class="chip center-align waves-effect waves-light chip-default">面试</span>
             </a>
@@ -854,32 +866,8 @@
             
             
             
-            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-                <span class="chip center-align waves-effect waves-light chip-default">设计模式</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
-                <span class="chip center-align waves-effect waves-light chip-default">多线程</span>
-            </a>
-            
-            
-            
-            <a href="/tags/README/">
-                <span class="chip center-align waves-effect waves-light chip-default">README</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Kafka/">
-                <span class="chip center-align waves-effect waves-light chip-default">Kafka</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
-                <span class="chip center-align waves-effect waves-light chip-default">高并发</span>
+            <a href="/tags/linux/">
+                <span class="chip center-align waves-effect waves-light chip-default">linux</span>
             </a>
             
             
@@ -896,8 +884,14 @@
             
             
             
-            <a href="/tags/linux/">
-                <span class="chip center-align waves-effect waves-light chip-default">linux</span>
+            <a href="/tags/Kafka/">
+                <span class="chip center-align waves-effect waves-light chip-default">Kafka</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/">
+                <span class="chip center-align waves-effect waves-light chip-default">高并发</span>
             </a>
             
             
@@ -926,14 +920,14 @@
             
             
             
-            <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-                <span class="chip center-align waves-effect waves-light chip-default">神经网络</span>
+            <a href="/tags/kafka/">
+                <span class="chip center-align waves-effect waves-light chip-default">kafka</span>
             </a>
             
             
             
-            <a href="/tags/kafka/">
-                <span class="chip center-align waves-effect waves-light chip-default">kafka</span>
+            <a href="/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                <span class="chip center-align waves-effect waves-light chip-default">神经网络</span>
             </a>
             
             
@@ -952,14 +946,20 @@
             
             
             
-            <a href="/tags/%E6%A2%A6/">
-                <span class="chip center-align waves-effect waves-light chip-default">梦</span>
+            <a href="/tags/README/">
+                <span class="chip center-align waves-effect waves-light chip-default">README</span>
             </a>
             
             
             
             <a href="/tags/redis/">
                 <span class="chip center-align waves-effect waves-light chip-default">redis</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E6%A2%A6/">
+                <span class="chip center-align waves-effect waves-light chip-default">梦</span>
             </a>
             
             
@@ -1312,23 +1312,6 @@ $(function () {
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 </body>
 
